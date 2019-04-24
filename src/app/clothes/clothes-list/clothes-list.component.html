@@ -1,0 +1,8 @@
+<div id="clothes-list">
+   <div class="flexpap">
+      <div class="flexenf" *ngFor="let clothe of clothes">
+         <div class="titre"> {{clothe.name}} </div>
+         <img [src]="clothe.imageUrl" [style.width.px]="100" />
+      </div>
+   </div>
+</div>
