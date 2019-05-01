@@ -1,7 +1,7 @@
 <div id="clothes-list">
   <div>
     <select id="filterSelect">
-      <option value="">-- Choisissez un filtre --</option>
+      <option value=""> --- Choisissez un filtre --- </option>
       <option value="caracteristique">Par caractéristique</option>
       <option value="couleur">Par couleur</option>
       <option value="categorie">Par catégorie</option>
@@ -11,8 +11,9 @@
   </div>
   <div class="flexpap">
     <div class="flexenf" *ngFor="let clothe of clothes">
-      <div class="titre"> {{clothe.name}} </div>
-      <img [src]="clothe.imageUrl" [style.width.px]="100" />
+      <div class="titre"> {{clothe.NOM_VET}} </div>
+      <img *ngIf="clothe.IMG_VET" [src]="clothe.IMG_VET" [style.width.px]="100" />
+      <img *ngIf="!clothe.IMG_VET" src="assets/pictures/tshirt.png" [style.width.px]="100" />
     </div>
   </div>
 </div>

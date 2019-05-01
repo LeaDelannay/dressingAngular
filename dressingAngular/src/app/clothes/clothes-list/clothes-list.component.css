@@ -79,9 +79,12 @@ body {
 #filterSelect {
   display: block;
   margin: 20px auto;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 10px;
+  padding: 8px;
   box-shadow: 10px 10px 19px -9px rgba(92, 92, 92, 1);
   background-color: #e8eeed;
   border: #4DE8BE;
+  outline: none;
+  text-align: center;
+  text-align-last: center;
 }

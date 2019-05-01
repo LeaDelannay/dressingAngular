@@ -12,27 +12,17 @@ var connex = mysql.createConnection({
   password: ""
 });
 
-
-/* pool.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-}); */
-/* connex.on('connect', ()=>{
-   console.log("Connecté à la base de données");
-}); */
-
-
-
 //CLOTHES
-//LECTURE DE CLOTHES EN BASE DE DONNEES - ALL
+//LISTE DE TOUS LES VETEMENTS EN BASE DE DONNEES - ALL
 module.exports.readClothes = function(fct){
-   connex.query('SELECT nom_vet FROM vetement', (err, results)=>{
+   connex.query('SELECT * FROM vetement ORDER BY NOM_VET ASC', (err, results)=>{
       if(err){
          console.error(err);
          fct(err, null);
+         connex.end();
          return;
       }
-      fct(null, results.rows);
-      console.log(results.rows);
+      fct(null, results);
+      console.log(results);
    });
 }
