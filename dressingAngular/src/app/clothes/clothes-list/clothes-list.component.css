@@ -1,71 +1,87 @@
-body{
-   background-color: #f4f4f4e3;
-}
-.flexpap{
-   display: flex;
-   flex-wrap: wrap;
-   margin-top: 20px;
-   font-family: 'Roboto Slab', serif;
-}
-.flexenf{
-   flex:20%;
-   margin: 10px;
-   font-family: 'Roboto Slab', serif;
-   font-size:75%;
-   background-color: #fff;
-   border-radius: 5px;
-   padding: 10px;
-   box-shadow: 10px 10px 19px -9px rgba(92,92,92,1);
-}
-.flexenf:last-child{
-   margin-right: 20px;
-}
-.titre{
-   text-align: center;
-   font-family: 'Roboto Slab', serif;
-   font-size:150%;
-   font-weight: bolder;
+body {
+  background-color: #f4f4f4e3;
 }
 
-#voile{
-   position: fixed;
-   width: 100vw;
-   height: 100vh;
-   background-color: #FFBD5588;
-   display: none;
-   top:0;
-   left:0;
+.flexpap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  font-family: 'Roboto Slab', serif;
 }
-#bloc{
-   width: 700px;
-   background-color: transparent;
-   display: none;
-   margin: 10% auto 0px;
-   padding: 30px;
-   height: auto;
+
+.flexenf {
+  flex: 20%;
+  margin: 10px;
+  font-family: 'Roboto Slab', serif;
+  font-size: 75%;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 10px 10px 19px -9px rgba(92, 92, 92, 1);
 }
-#bloc>div>input{
-   background-color: #4DE8BE;
-   border: #4DE8BE;
-   color: white;
-   border-radius: 15px;
-   padding: 8px;
-   width: 80px;
-   margin: 30px auto;
-   display: block;
-   outline: none;
+
+.flexenf:last-child {
+  margin-right: 20px;
+}
+
+.titre {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 195%;
+  font-weight: bolder;
+}
+
+#voile {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFBD5588;
+  display: none;
+  top: 0;
+  left: 0;
+}
+
+#bloc {
+  width: 700px;
+  background-color: transparent;
+  display: none;
+  margin: 10% auto 0px;
+  padding: 30px;
+  height: auto;
+}
+
+#bloc>div>input {
+  background-color: #4DE8BE;
+  border: #4DE8BE;
+  color: white;
+  border-radius: 15px;
+  padding: 8px;
+  width: 80px;
+  margin: 30px auto;
+  display: block;
+  outline: none;
 }
 
 /* FAIT EN SORTE QUE LA DIV PERE PRENNE EN COMPTE LE BOUTON FLOAT */
-#buttonX::after{
-   display: block;
-   content: "";
-   clear: both;
+#buttonX::after {
+  display: block;
+  content: "";
+  clear: both;
 }
 
 
 /* Angular */
-.flexenf img{
-   display: block;
-   margin: 0 auto;
+.flexenf img {
+  display: block;
+  margin: 0 auto;
+}
+
+#filterSelect {
+  display: block;
+  margin: 20px auto;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 10px 10px 19px -9px rgba(92, 92, 92, 1);
+  background-color: #e8eeed;
+  border: #4DE8BE;
 }
