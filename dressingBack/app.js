@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var clothesRouter = require('./routes/clothes');
 
 var app = express();
 
@@ -19,8 +20,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//paramétrage permettant d'éviter l'erreur CORS lorsque Angular tente d'accéder à NodeJs
+app.use(function(req, res, next){
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   res.header("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,OPTIONS");
+   next();
+});
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/clothes', clothesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
