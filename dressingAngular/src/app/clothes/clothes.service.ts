@@ -18,4 +18,9 @@ export class ClothesService {
       return this.http.get<Clothe[]>(`${this.baseUrl}/clothes`);
    }
 
+   //récupère la liste de toutes les caracteristiques en base de données
+   public getAllCaracteristiques(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.baseUrl}/caracteristiques`);
+   }
+
 }

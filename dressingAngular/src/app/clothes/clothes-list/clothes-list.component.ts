@@ -10,6 +10,8 @@ import { ClothesService } from '../clothes.service';
 export class ClothesListComponent implements OnInit {
    
    clothes: Clothe[] = [];
+   caracteristiques: any[] = [];
+   selectedCarac: string = "";
 
    //injection de dépendance de mon service ClothesService
    constructor(private service: ClothesService) { }
@@ -22,6 +24,15 @@ export class ClothesListComponent implements OnInit {
       error =>{
          console.log("Erreur lors de l'appel au service clothes.service -- "+ error);
       });
+
+      this.service.getAllCaracteristiques().subscribe(caractFromService => {
+         this.caracteristiques = caractFromService;
+         console.log(JSON.stringify(caractFromService));
+      },
+      error =>{
+         console.log("Erreur lors de l'appel au service clothes.service -- "+ error);
+      });
    }
+
 
 }

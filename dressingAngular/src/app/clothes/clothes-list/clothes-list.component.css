@@ -31,7 +31,7 @@ body {
   font-weight: bolder;
 }
 
-#voile {
+/* #voile {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -60,7 +60,7 @@ body {
   margin: 30px auto;
   display: block;
   outline: none;
-}
+} */
 
 /* FAIT EN SORTE QUE LA DIV PERE PRENNE EN COMPTE LE BOUTON FLOAT */
 #buttonX::after {
@@ -76,7 +76,11 @@ body {
   margin: 0 auto;
 }
 
-#filterSelect {
+#filterSelect,
+#filterDetail {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 18px;
+  font-weight: bold;
   display: block;
   margin: 20px auto;
   border-radius: 10px;
@@ -87,4 +91,5 @@ body {
   outline: none;
   text-align: center;
   text-align-last: center;
+  width: 250px;
 }

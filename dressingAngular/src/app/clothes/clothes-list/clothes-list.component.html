@@ -1,13 +1,24 @@
 <div id="clothes-list">
   <div>
-    <select id="filterSelect">
-      <option value=""> --- Choisissez un filtre --- </option>
-      <option value="caracteristique">Par caractéristique</option>
-      <option value="couleur">Par couleur</option>
-      <option value="categorie">Par catégorie</option>
-      <option value="marque">Par marque</option>
-      <option value="occasion">Par occasion</option>
-    </select>
+    <span>
+      <select id="filterSelect" name="filterSelect" ngModel #filterSelect="ngModel">
+        <option value=""> --- Filtrer --- </option>
+        <option value="caracteristique">Par caractéristique</option>
+        <option value="categorie">Par catégorie</option>
+        <option value="couleur">Par couleur</option>
+        <option value="marque">Par marque</option>
+        <option value="occasion">Par occasion</option>
+      </select>
+    </span>
+    <span>
+      <select id="filterDetail" name="filterDetail" *ngIf="!filterSelect.value">
+        <option value=""> --------------- </option>
+      </select>
+      <select id="filterDetail" name="filterDetail" *ngIf="filterSelect.value == 'caracteristique'">
+        <option *ngIf="!filterSelect.value" value=""> --------------- </option>
+        <option *ngFor="let caract of this.caracteristiques" value="{{caract.ID_CARACT}}" [(ngModel)]="selectedCarac"> {{caract.LIBEL_CARACT}} </option>
+      </select>
+    </span>
   </div>
   <div class="flexpap">
     <div class="flexenf" *ngFor="let clothe of clothes">
