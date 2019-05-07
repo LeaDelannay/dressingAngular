@@ -10,14 +10,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ClothesListComponent } from './clothes/clothes-list/clothes-list.component';
-import { HomepageComponent } from './homepage/homepage.component';
+import { HomepageComponent } from './home/homepage/homepage.component';
+import { ClotheCreateComponent } from './clothes/clothe-create/clothe-create.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       ClothesListComponent,
       NavbarComponent,
-      HomepageComponent
+      HomepageComponent,
+      ClotheCreateComponent
    ],
    imports: [
       BrowserModule,

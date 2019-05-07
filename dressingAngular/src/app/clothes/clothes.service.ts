@@ -29,7 +29,7 @@ export class ClothesService {
    public getAllClothes(): Observable<HttpResponse<Clothe[]>> {
       return this.http.get<Clothe[]>(`${this.baseUrl}/clothes`, {observe: 'response'});
    }
-   
+
    //récupère la liste de toutes les couleurs en base de données
    public getAllColors(): Observable<HttpResponse<any[]>> {
       return this.http.get<any[]>(`${this.baseUrl}/colors`, {observe: 'response'});
@@ -40,14 +40,18 @@ export class ClothesService {
       return this.http.get<any[]>(`${this.baseUrl}/features`, {observe: 'response'});
    }
 
-   //récupère la liste des vetements contenant une caractéristique précise en base de données
-   public getSpecificFeature(selectedFilter:string, selectedOption:string): Observable<HttpResponse<any[]>> {
-      return this.http.get<any[]>(`${this.baseUrl}/${selectedFilter}/${selectedOption}`, {observe: 'response'});
-   }
-
    //récupère la liste de toutes les occasions en base de données
    public getAllOccasions(): Observable<HttpResponse<any[]>> {
       return this.http.get<any[]>(`${this.baseUrl}/occasions`, {observe: 'response'});
    }
 
+   //récupère la liste des vetements contenant un filtre précis en base de données
+   public getSpecificFilter(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/clothes`, {observe: 'response'});
+   }
+   
+   //récupère la liste des vetements contenant filtre et option précis en base de données
+   public getSpecificFilterOpt(selectedFilter:string, selectedOption:string): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/${selectedFilter}/${selectedOption}`, {observe: 'response'});
+   }
 }
