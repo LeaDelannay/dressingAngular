@@ -8,11 +8,11 @@ var dbacc = require('../dbaccess');
    console.log("----> call read all clothes");
    dbacc.readClothes(function(err, data){
       if (err){
-         res.send(500);
+         res.sendStatus(500);
          return;
       }
       if(data == 0 || data == null || data == undefined || data == ""){
-         res.send(500);
+         res.sendStatus(204); //no content
          return;
       }
       res.send(data);

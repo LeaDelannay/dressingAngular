@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Clothe } from './clothe';
@@ -13,14 +13,41 @@ export class ClothesService {
 
    constructor(public http: HttpClient) { }
 
+   //récupère la liste de toutes les marques en base de données
+   //on ajoute l'option {observe:'response'} afin de retourner toute la http response et pas juste le body
+   //pour cela, on ajoute HttpResponse à l'observable : l'observable est typé HttpResponse qui contient lui même un tableau de any
+   public getAllBrands(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/brands`, {observe: 'response'});
+   }
+
+   //récupère la liste de toutes les catégories en base de données
+   public getAllCategories(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/categories`, {observe: 'response'});
+   }
+
    //récupère la liste de tous les vêtements en base de données
-   public getAllClothes(): Observable<Clothe[]> {
-      return this.http.get<Clothe[]>(`${this.baseUrl}/clothes`);
+   public getAllClothes(): Observable<HttpResponse<Clothe[]>> {
+      return this.http.get<Clothe[]>(`${this.baseUrl}/clothes`, {observe: 'response'});
+   }
+   
+   //récupère la liste de toutes les couleurs en base de données
+   public getAllColors(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/colors`, {observe: 'response'});
    }
 
    //récupère la liste de toutes les caracteristiques en base de données
-   public getAllCaracteristiques(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.baseUrl}/caracteristiques`);
+   public getAllFeatures(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/features`, {observe: 'response'});
+   }
+
+   //récupère la liste des vetements contenant une caractéristique précise en base de données
+   public getSpecificFeature(selectedFilter:string, selectedOption:string): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/${selectedFilter}/${selectedOption}`, {observe: 'response'});
+   }
+
+   //récupère la liste de toutes les occasions en base de données
+   public getAllOccasions(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/occasions`, {observe: 'response'});
    }
 
 }

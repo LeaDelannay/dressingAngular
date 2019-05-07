@@ -6,8 +6,13 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+var brandsRouter = require('./routes/brands');
+var categoriesRouter = require('./routes/categories');
 var clothesRouter = require('./routes/clothes');
-var caracteristiquesRouter = require('./routes/caracteristiques');
+var colorsRouter = require('./routes/colors');
+var featuresRouter = require('./routes/features');
+var occasionsRouter = require('./routes/occasions');
 
 var app = express();
 
@@ -31,8 +36,12 @@ app.use(function(req, res, next){
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/brands', brandsRouter);
+app.use('/api/categories', categoriesRouter);
 app.use('/api/clothes', clothesRouter);
-app.use('/api/caracteristiques', caracteristiquesRouter);
+app.use('/api/colors', colorsRouter);
+app.use('/api/features', featuresRouter);
+app.use('/api/occasions', occasionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

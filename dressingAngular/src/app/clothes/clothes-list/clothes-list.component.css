@@ -1,5 +1,6 @@
 body {
   background-color: #f4f4f4e3;
+  font-family: 'Roboto Slab', serif;
 }
 
 .flexpap {
@@ -92,4 +93,9 @@ body {
   text-align: center;
   text-align-last: center;
   width: 250px;
+}
+
+#filterDontExists{
+   text-align: center;
+   margin-top: 70px;
 }
