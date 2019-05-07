@@ -8,7 +8,7 @@ import { ClothesService } from '../clothes.service';
    styleUrls: ['./clothes-list.component.css']
 })
 export class ClothesListComponent implements OnInit {
-   
+
    clothes: Clothe[] = [];
    erreur = null; //Création de la variable erreur pour afficher message d'erreur dans le html
 
@@ -18,9 +18,9 @@ export class ClothesListComponent implements OnInit {
    features: any[] = [];
    occasions: any[] = [];
 
-   _selectedFilter: string = ""; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
+   _selectedFilter: string = "clothes"; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
    _selectedOption: string = ""; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
-   
+
    selectedBrand: string = "";
    selectedCateg: string = "";
    selectedCol: string = "";
@@ -30,30 +30,43 @@ export class ClothesListComponent implements OnInit {
    //injection de dépendance de mon service ClothesService
    constructor(private service: ClothesService) { }
 
-   get selectedFilter():string{
+   get selectedFilter(): string {
       return this._selectedFilter;
    }
-   set selectedFilter(selectedFilter:string){
+   set selectedFilter(selectedFilter: string) {
+      this._selectedOption = "";
       this._selectedFilter = selectedFilter;
-      console.log(this._selectedFilter);
-   }
-   
-   get selectedOption():string{
-      return this._selectedOption;
-   }
-   set selectedOption(selectedOption:string){
-      this._selectedOption = selectedOption;
-      console.log(this._selectedOption);
-
-      this.service.getSpecificFeature(this._selectedFilter, this._selectedOption).subscribe(response => {
+      
+      this.service.getSpecificFilter().subscribe(response => {
          this.clothes = response.body;
          // console.log(JSON.stringify(specificFeatureFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - specificFeature -- "+ error);
-      });
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - specificFilter -- " + error);
+         });
+
+      console.log(this._selectedFilter);
+   }
+
+   get selectedOption(): string {
+      return this._selectedOption;
+   }
+   set selectedOption(selectedOption: string) {
+      this._selectedOption = selectedOption;
+      console.log(this._selectedOption);
+      if(this._selectedOption){
+         this.service.getSpecificFilterOpt(this._selectedFilter, this._selectedOption).subscribe(response => {
+            this.clothes = response.body;
+            // console.log(JSON.stringify(specificFeatureFromService));
+            this.erreur = response.status;
+         },
+            error => {
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - specificFilterOpt -- " + error);
+            });
+      }
    }
 
    ngOnInit() {
@@ -62,62 +75,73 @@ export class ClothesListComponent implements OnInit {
          // console.log(JSON.stringify(brandFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - brands -- "+ error);
-      });
-      
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - brands -- " + error);
+         });
+
       this.service.getAllCategories().subscribe(response => {
          this.categories = response.body;
          // console.log(JSON.stringify(categoryFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - categories -- "+ error);
-      });
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
+         });
 
       this.service.getAllClothes().subscribe(response => {
          this.clothes = response.body;
          // console.log(JSON.stringify(clothesFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - clothes -- "+ error);
-      });
-      
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
+         });
+
       this.service.getAllColors().subscribe(response => {
          this.colors = response.body;
          // console.log(JSON.stringify(colorFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - colors -- "+ error);
-      });
-  
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - colors -- " + error);
+         });
+
       this.service.getAllFeatures().subscribe(response => {
          this.features = response.body;
          // console.log(JSON.stringify(featFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - features -- "+ error);
-      });
-  
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
+         });
+
       this.service.getAllOccasions().subscribe(response => {
          this.occasions = response.body;
          // console.log(JSON.stringify(occasFromService));
          this.erreur = response.status;
       },
-      error =>{
-         this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-         console.log("Erreur lors de l'appel au service clothes.service - occasions -- "+ error);
-      });
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
+         });
 
-   } 
+   }
+
+   /* afficherVetements() {
+      this.service.getAllClothes().subscribe(response => {
+         this.clothes = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
+         });
+   } */
 
 
 }

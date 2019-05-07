@@ -1,8 +1,8 @@
 <div id="clothes-list">
-  <form action="" method="POST">
+  <div>
     <span>
       <select id="filterSelect" name="filterSelect" #filterSelect="ngModel" [(ngModel)]="selectedFilter">
-        <option value=""> --- Filtrer --- </option>
+        <option value="clothes"> --- Filtrer --- </option>
         <option value="features">Par caractéristique</option>
         <option value="categories">Par catégorie</option>
         <option value="colors">Par couleur</option>
@@ -10,8 +10,9 @@
         <option value="occasions">Par occasion</option>
       </select>
     </span>
+
     <span>
-      <select id="filterDetail" name="filterDetail" *ngIf="!filterSelect.value" ngModel #filterDetail="ngModel">
+      <select id="filterDetail" name="filterDetail" *ngIf="filterSelect.value == 'clothes'" #filterDetail="ngModel" [(ngModel)]="selectedOption">
         <option value=""> --------------- </option>
       </select>
       <select id="filterDetail" name="filterDetail" *ngIf="filterSelect.value == 'features'"
@@ -39,12 +40,13 @@
         </option>
       </select>
     </span>
-  </form>
+  </div>
 
   <div *ngIf="[erreur] == 204" id="filterDontExists" class="text-muted">Il n'y a pas de vêtement
     correspondant à cette recherche.</div>
-  <div class="flexpap" *ngIf="!filterSelect.value || [erreur] == 304 || [erreur] == 200">
-    <div class="flexenf" *ngFor="let clothe of clothes">
+
+  <div class="flexpap" *ngIf="[erreur] == 304 || [erreur] == 200">
+    <div class="flexenf" *ngFor="let clothe of this.clothes">
       <div class="titre"> {{clothe.NOM_VET}} </div>
       <img *ngIf="clothe.IMG_VET" [src]="clothe.IMG_VET" [style.width.px]="100" />
       <img *ngIf="!clothe.IMG_VET" src="assets/pictures/tshirt.png" [style.width.px]="100" />
