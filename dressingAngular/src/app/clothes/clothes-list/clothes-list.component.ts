@@ -16,6 +16,7 @@ export class ClothesListComponent implements OnInit {
    categories: any[] = [];
    colors: any[] = [];
    features: any[] = [];
+   notes: any[] = [];
    occasions: any[] = [];
 
    _selectedFilter: string = "clothes"; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
@@ -118,6 +119,16 @@ export class ClothesListComponent implements OnInit {
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
             console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
+         });
+
+      this.service.getAllNotes().subscribe(response => {
+         this.notes = response.body;
+         // console.log(JSON.stringify(occasFromService));
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - notes -- " + error);
          });
 
       this.service.getAllOccasions().subscribe(response => {

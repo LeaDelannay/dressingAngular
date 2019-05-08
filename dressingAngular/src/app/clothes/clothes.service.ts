@@ -40,6 +40,11 @@ export class ClothesService {
       return this.http.get<any[]>(`${this.baseUrl}/features`, {observe: 'response'});
    }
 
+   //récupère la liste de toutes les notes en base de données
+   public getAllNotes(): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/notes`, {observe: 'response'});
+   }
+
    //récupère la liste de toutes les occasions en base de données
    public getAllOccasions(): Observable<HttpResponse<any[]>> {
       return this.http.get<any[]>(`${this.baseUrl}/occasions`, {observe: 'response'});

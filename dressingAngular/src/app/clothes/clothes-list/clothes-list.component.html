@@ -7,6 +7,7 @@
         <option value="categories">Par catégorie</option>
         <option value="colors">Par couleur</option>
         <option value="brands">Par marque</option>
+        <option value="notes">Par note</option>
         <option value="occasions">Par occasion</option>
       </select>
     </span>
@@ -32,6 +33,10 @@
       <select id="filterDetail" name="filterDetail" *ngIf="filterSelect.value == 'brands'" [(ngModel)]="selectedOption">
         <option value=""> --------------- </option>
         <option *ngFor="let brand of this.brands" value="{{brand.ID_MARQUE}}"> {{brand.NOM_MARQUE}} </option>
+      </select>
+      <select id="filterDetail" name="filterDetail" *ngIf="filterSelect.value == 'notes'" [(ngModel)]="selectedOption">
+        <option value=""> --------------- </option>
+        <option *ngFor="let note of this.notes" value="{{note.ID_NOTE}}"> {{note.NUM_NOTE}} </option>
       </select>
       <select id="filterDetail" name="filterDetail" *ngIf="filterSelect.value == 'occasions'"
         [(ngModel)]="selectedOption">

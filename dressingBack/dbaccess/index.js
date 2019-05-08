@@ -149,6 +149,37 @@ module.exports.readSpecificFeature = function(idFeature, fct){
    });
 }
 
+//NOTES
+//LISTE DE TOUTES LES NOTES EN BASE DE DONNEES - ALL
+module.exports.readNotes = function(fct){
+   connex.query('SELECT * FROM note ORDER BY NUM_NOTE ASC', (err, results)=>{
+      if(err){
+         console.error(err);
+         fct(err, null);
+         connex.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
+//LISTE DE TOUS LES VETEMENTS POSSEDANT UNE NOTE SPECIFIQUE
+module.exports.readSpecificNote = function(idNote, fct){
+   var sql = "SELECT * FROM vetement inner join note on vetement.fk_id_note = note.id_note WHERE note.id_note = ? ORDER BY NOM_VET ASC";
+   var inserts = [idNote];
+   connex.query(mysql.format(sql,inserts), (err, results)=>{
+      if(err){
+         console.error(err);
+         fct(err, null);
+         connex.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
 //OCCASIONS
 //LISTE DE TOUTES LES OCCASIONS EN BASE DE DONNEES - ALL
 module.exports.readOccasions = function(fct){

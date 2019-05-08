@@ -1,3 +1,113 @@
-<p>
-  clothe-create works!
-</p>
+<h2>Ajouter un vêtement</h2>
+<form (ngSubmit)="onSubmit(createClotheForm)" #createClotheForm="ngForm">
+  <!-- fonction ngSubmit  -->
+  <div class="row">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
+      <label for="clotheName">Nom&nbsp;: </label><span> *</span>
+      <input type="text" class="form-control" id="clotheName" placeholder="Nom du vêtement" name="clotheName" ngModel
+        #clotheName="ngModel" required>
+      <small *ngIf="clotheName.invalid && clotheName.touched" id="clotheNameEmpty" class="text-muted alert-danger">Vous
+        n'avez pas rempli ce champ</small>
+      <small *ngIf="[erreur] == 500" id="clotheNameExists" class="text-muted">Ce nom de vêtement existe déjà</small>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
+      <label for="clotheCategory">Catégorie&nbsp;: </label><span> *</span>
+      <select class="form-control" id="clotheCategory" name="clotheCategory" ngModel #clotheCategory="ngModel" required>
+        <option value="" selected> ------ Catégorie ------ </option>
+        <option *ngFor="let category of this.categories" value="{{category.ID_CAT}}"> {{category.LIBEL_CAT}} </option>
+        <option value="createCategory" selected> --> Catégorie inexistante dans la liste </option>
+      </select>
+      <small *ngIf="clotheCategory.invalid && clotheCategory.touched" class="text-muted">Vous n'avez pas rempli ce
+        champ</small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
+      <label for="clotheBrand">Marque&nbsp;: </label><span> *</span>
+      <select class="form-control" id="clotheBrand" name="clotheBrand" ngModel #clotheBrand="ngModel" required>
+        <option value="" selected> ------ Marque ------ </option>
+        <option *ngFor="let brand of this.brands" value="{{brand.ID_MARQUE}}"> {{brand.NOM_MARQUE}} </option>
+        <option value="createBrand" selected> --> Marque inexistante dans la liste </option>
+      </select>
+      <small *ngIf="clotheBrand.invalid && clotheBrand.touched" class="text-muted">Vous n'avez pas rempli ce
+        champ</small>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
+      <label for="">Couleurs&nbsp;: </label><span> *</span>
+      <div class="row">
+        <div *ngFor="let color of this.colors" class="col-4 col-md-2">
+          <div class="row">
+            <label class="labelSize col-6 p-0 text-right" for="{{color.LIBEL_COUL}}">{{color.LIBEL_COUL}}&nbsp;:
+            </label>
+            <input type="checkbox" class="form-control col-6 p-0" id="{{color.LIBEL_COUL}}" name="{{color.LIBEL_COUL}}"
+              ngModel #clotheColor="ngModel" value="{{color.ID_COUL}}">
+          </div>
+        </div>
+      </div>
+      <p class="clickToAdd">--> Couleur inexistante dans la liste</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
+      <label for="">Caractéristiques&nbsp;: </label><span> *</span>
+      <div class="row">
+        <div *ngFor="let feature of this.features" class="col-4 col-md-2">
+          <div class="row">
+            <label class="labelSize col-6 p-0 text-right" for="{{feature.LIBEL_CARACT}}">{{feature.LIBEL_CARACT}}&nbsp;:
+            </label>
+            <input type="checkbox" class="form-control col-6 p-0" id="{{feature.LIBEL_CARACT}}"
+              name="{{feature.LIBEL_CARACT}}" ngModel #clotheColor="ngModel" value="{{feature.ID_CARACT}}">
+          </div>
+        </div>
+      </div>
+      <p class="clickToAdd">--> Caractéristique inexistante dans la liste</p>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
+      <label for="">Occasions&nbsp;: </label><span> *</span>
+      <div class="row">
+        <div *ngFor="let occasion of this.occasions" class="col-6 col-md-3">
+          <div class="row">
+            <label class="labelSize col-6 p-0 text-right" for="{{occasion.LIBEL_OCCAS}}">{{occasion.LIBEL_OCCAS}}&nbsp;:
+            </label>
+            <input type="checkbox" class="form-control col-6 p-0" id="{{occasion.LIBEL_OCCAS}}"
+              name="{{occasion.LIBEL_OCCAS}}" ngModel #clotheColor="ngModel" value="{{occasion.ID_OCCAS}}">
+          </div>
+        </div>
+      </div>
+      <p class="clickToAdd">--> Occasion inexistante dans la liste</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
+      <label for="clotheDescr">Description&nbsp;: </label><span> *</span>
+      <textarea rows="1" class="form-control" id="clotheDescr" placeholder="Décris ton vêtement :)" name="clotheDescr" ngModel
+        #clotheDescr="ngModel" required></textarea>
+      <small *ngIf="clotheDescr.invalid && clotheDescr.touched" id="clotheDescrEmpty"
+        class="text-muted alert-danger">Vous
+        n'avez pas rempli ce champ</small>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
+      <label for="clotheNote">Note&nbsp;: </label><span> *</span>
+      <select class="form-control" id="clotheNote" name="clotheNote" ngModel #clotheNote="ngModel" required>
+         <option value="" selected> ------ Note ------ </option>
+         <option *ngFor="let note of this.notes" value="{{note.ID_NOTE}}"> {{note.NUM_NOTE}} </option>
+      </select>
+      <small *ngIf="clotheNote.invalid && clotheNote.touched" class="text-muted">Vous n'avez pas rempli ce
+         champ</small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
+      <label for="clotheImg">Image&nbsp;: </label>
+      <input type="file" accept=".pdf, .png, .gif, .jpg, .raw"class="form-control" id="clotheImg" placeholder="Importer votre photo" name="clotheImg" ngModel
+      #clotheImg="ngModel">
+    </div>
+  </div>
+
+
+
+  <p>* Tous ces champs sont obligatoires. Vous pourrez les modifier ultérieurement.</p>
+  <input type="text" id="idUser" name="idUser" value="XXXX" ngModel #idUser="ngModel" hidden>
+  <button type="submit" class="btn btn-outline-success col-6 offset-3 col-md-4 offset-md-4"
+    [disabled]="createClotheForm.invalid">Enregistrer</button>
+</form>

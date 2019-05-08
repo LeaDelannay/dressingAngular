@@ -12,6 +12,7 @@ var categoriesRouter = require('./routes/categories');
 var clothesRouter = require('./routes/clothes');
 var colorsRouter = require('./routes/colors');
 var featuresRouter = require('./routes/features');
+var notesRouter = require('./routes/notes');
 var occasionsRouter = require('./routes/occasions');
 
 var app = express();
@@ -41,6 +42,7 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/clothes', clothesRouter);
 app.use('/api/colors', colorsRouter);
 app.use('/api/features', featuresRouter);
+app.use('/api/notes', notesRouter);
 app.use('/api/occasions', occasionsRouter);
 
 // catch 404 and forward to error handler
