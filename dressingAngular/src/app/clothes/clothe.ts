@@ -8,7 +8,7 @@ export class Clothe {
    NOM_VET: string;
    IMG_VET: string;
    DESCRIPT_VET: string;
-   ID_CARACT: number;
+   ID_CARACT: any;
    ID_COUL: any;
-   ID_OCCAS: number;
+   ID_OCCAS: any;
 }

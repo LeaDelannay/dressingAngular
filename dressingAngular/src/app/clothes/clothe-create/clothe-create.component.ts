@@ -88,6 +88,16 @@ export class ClotheCreateComponent implements OnInit {
             .filter(color => color.checked)
             .map(color => color.ID_COUL);
    }
+   get selectedFeatures(){
+      return this.features
+            .filter(feature => feature.checked)
+            .map(feature => feature.ID_CARACT);
+   }
+   get selectedOccasions(){
+      return this.occasions
+            .filter(occasion => occasion.checked)
+            .map(occasion => occasion.ID_OCCAS);
+   }
 
    onSubmit(form:NgForm){
       if (form.valid == true) { //Si tous les champs du formulaire sont remplis
@@ -96,11 +106,14 @@ export class ClotheCreateComponent implements OnInit {
          clotheArray.FK_ID_CAT = form.value["clotheCategory"]; 
          clotheArray.FK_ID_MARQUE = form.value["clotheBrand"]; 
          clotheArray.FK_ID_NOTE = form.value["clotheNote"]; 
+
+         
          clotheArray.IMG_VET = form.value["clotheImg"]; 
+
          clotheArray.DESCRIPT_VET = form.value["clotheDescr"]; 
-         clotheArray.ID_CARACT = form.value["clotheFeature"]; //NOK 
+         clotheArray.ID_CARACT = this.selectedFeatures; //NOK 
          clotheArray.ID_COUL = this.selectedColors; //NOK
-         clotheArray.ID_OCCAS = form.value["clotheOccasion"]; //NOK
+         clotheArray.ID_OCCAS = this.selectedOccasions; //NOK
 
          clotheArray.FK_ID_USER = form.value["idUser"]; 
          
