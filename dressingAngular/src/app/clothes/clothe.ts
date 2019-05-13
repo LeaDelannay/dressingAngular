@@ -1,5 +1,5 @@
 //définit la structure d'un vêtement
-export interface Clothe {
+export class Clothe {
    ID_VET: number;
    FK_ID_CAT: number;
    FK_ID_MARQUE: number;
@@ -8,4 +8,7 @@ export interface Clothe {
    NOM_VET: string;
    IMG_VET: string;
    DESCRIPT_VET: string;
+   ID_CARACT: number;
+   ID_COUL: any;
+   ID_OCCAS: number;
 }

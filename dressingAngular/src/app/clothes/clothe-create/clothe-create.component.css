@@ -36,7 +36,8 @@ p{
  }
  input[type="checkbox"]{
    display: inline;
-   font-size: 8px;
+   font-size: 5px;
+   outline: none;
  }
  .labelSize{
     font-size: 15px;
@@ -51,4 +52,8 @@ p{
    text-decoration: underline;
    text-align: left;
 }
+.labelPasImage{
+   font-size: 15px;
+}
+
 /* ***** Formulaire [FIN] ***** */

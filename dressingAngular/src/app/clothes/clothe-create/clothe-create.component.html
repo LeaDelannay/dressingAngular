@@ -40,7 +40,7 @@
             <label class="labelSize col-6 p-0 text-right" for="{{color.LIBEL_COUL}}">{{color.LIBEL_COUL}}&nbsp;:
             </label>
             <input type="checkbox" class="form-control col-6 p-0" id="{{color.LIBEL_COUL}}" name="{{color.LIBEL_COUL}}"
-              ngModel #clotheColor="ngModel" value="{{color.ID_COUL}}">
+              [(ngModel)]="color.checked" value="{{color.ID_COUL}}">
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
             <label class="labelSize col-6 p-0 text-right" for="{{feature.LIBEL_CARACT}}">{{feature.LIBEL_CARACT}}&nbsp;:
             </label>
             <input type="checkbox" class="form-control col-6 p-0" id="{{feature.LIBEL_CARACT}}"
-              name="{{feature.LIBEL_CARACT}}" ngModel #clotheColor="ngModel" value="{{feature.ID_CARACT}}">
+              name="{{feature.LIBEL_CARACT}}" [(ngModel)]="feature.checked" value="{{feature.ID_CARACT}}">
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
             <label class="labelSize col-6 p-0 text-right" for="{{occasion.LIBEL_OCCAS}}">{{occasion.LIBEL_OCCAS}}&nbsp;:
             </label>
             <input type="checkbox" class="form-control col-6 p-0" id="{{occasion.LIBEL_OCCAS}}"
-              name="{{occasion.LIBEL_OCCAS}}" ngModel #clotheColor="ngModel" value="{{occasion.ID_OCCAS}}">
+              name="{{occasion.LIBEL_OCCAS}}" [(ngModel)]="occasion.checked" value="{{occasion.ID_OCCAS}}">
           </div>
         </div>
       </div>
@@ -80,8 +80,8 @@
   <div class="row">
     <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
       <label for="clotheDescr">Description&nbsp;: </label><span> *</span>
-      <textarea rows="1" class="form-control" id="clotheDescr" placeholder="Décris ton vêtement :)" name="clotheDescr" ngModel
-        #clotheDescr="ngModel" required></textarea>
+      <textarea rows="1" class="form-control" id="clotheDescr" placeholder="Décris ton vêtement :)" name="clotheDescr"
+        ngModel #clotheDescr="ngModel" required></textarea>
       <small *ngIf="clotheDescr.invalid && clotheDescr.touched" id="clotheDescrEmpty"
         class="text-muted alert-danger">Vous
         n'avez pas rempli ce champ</small>
@@ -89,18 +89,25 @@
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
       <label for="clotheNote">Note&nbsp;: </label><span> *</span>
       <select class="form-control" id="clotheNote" name="clotheNote" ngModel #clotheNote="ngModel" required>
-         <option value="" selected> ------ Note ------ </option>
-         <option *ngFor="let note of this.notes" value="{{note.ID_NOTE}}"> {{note.NUM_NOTE}} </option>
+        <option value="" selected> ------ Note ------ </option>
+        <option *ngFor="let note of this.notes" value="{{note.ID_NOTE}}"> {{note.NUM_NOTE}} </option>
       </select>
       <small *ngIf="clotheNote.invalid && clotheNote.touched" class="text-muted">Vous n'avez pas rempli ce
-         champ</small>
+        champ</small>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
-      <label for="clotheImg">Image&nbsp;: </label>
-      <input type="file" accept=".pdf, .png, .gif, .jpg, .raw"class="form-control" id="clotheImg" placeholder="Importer votre photo" name="clotheImg" ngModel
-      #clotheImg="ngModel">
+      <div class="row">
+        <label for="clotheImg">Image&nbsp;: </label>
+        <input type="file" accept=".pdf, .png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
+          placeholder="Importer votre photo" name="clotheImg" ngModel #clotheImg="ngModel">
+      </div>
+
+      <div class="row mt-2">
+        <input type="checkbox" value="" id="pasImage" name="pasImage" class="form-control col-1">
+        <label class="col-11 labelPasImage" for="pasImage">Pas de photo à ajouter pour le moment</label>
+      </div>
     </div>
   </div>
 
