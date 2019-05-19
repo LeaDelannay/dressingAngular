@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 import { Clothe } from './clothe';
 
 @Injectable({
@@ -12,6 +11,11 @@ export class ClothesService {
    private baseUrl:string = "http://localhost:3000/api";
 
    constructor(public http: HttpClient) { }
+
+   //Création d'un vêtement - permet d'envoyer les valeurs à enregistrer en base de données
+   public addNewClothe(clothe: Clothe):Observable<HttpResponse<any[]>>{
+      return this.http.post<any[]>(`${this.baseUrl}/clothes`, clothe, {observe: 'response'});
+   }
 
    //récupère la liste de toutes les marques en base de données
    //on ajoute l'option {observe:'response'} afin de retourner toute la http response et pas juste le body

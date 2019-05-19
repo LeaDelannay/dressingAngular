@@ -91,54 +91,62 @@ module.exports.readClothes = function (fct) {
 module.exports.createClothe = function (obj, fct) {
    var idVet;
 
-   var sql1 = "INSERT INTO vetement (fk_id_cat, fk_id_marque, fk_id_note, fk_id_user, nom_vet, img_vet, descript_vet) VALUES(?, ?, ?, ?, ?, ?, ?)";
-   var inserts1 = [obj.fk_id_cat, obj.fk_id_marque, obj.fk_id_note, obj.fk_id_user, obj.nom_vet, obj.img_vet, obj.descript_vet];
+   var sql1 = "INSERT INTO vetement (FK_ID_CAT, FK_ID_MARQUE, FK_ID_NOTE, FK_ID_USER, NOM_VET, IMG_VET, DESCRIPT_VET) VALUES(?, ?, ?, ?, ?, ?, ?)";
+   var inserts1 = [obj.FK_ID_CAT, obj.FK_ID_MARQUE, obj.FK_ID_NOTE, obj.FK_ID_USER, obj.NOM_VET, obj.IMG_VET, obj.DESCRIPT_VET];
 
    // création du vêtement en base de données
-   connection.query(mysql.format(sql1, inserts1), (err, result) => {
+   connection.query(mysql.format(sql1, inserts1), (err, results) => {
       if (err) {
          console.error(err);
          fct(err, null);
          return;
       }
       //récupération de l'id du vêtement créé
-      idVet = result.insertId;
+      idVet = results.insertId;
 
       //création des associations
-      var sql2 = "INSERT INTO vet_caract_assoc (ID_VET, ID_CARACT) VALUES(" + idVet + ", ?)";
-      var inserts2 = [obj.id_caract];
+      var featureArray = obj.ID_CARACT;
+      featureArray.forEach(function (item) {
+         var sql2 = "INSERT INTO vet_caract_assoc (ID_VET, ID_CARACT) VALUES(" + idVet + ", ?)";
+         var inserts2 = [item];
+         console.log("CARACTERISTIQUE" + inserts2);
+         connection.query(mysql.format(sql2, inserts2), (err) => {
+            if (err) {
+               console.error(err);
+               fct(err, null);
+               return;
+            }
+         })
+      });
 
-      connection.query(mysql.format(sql2, inserts2), (err) => {
-         if (err) {
-            console.error(err);
-            fct(err, null);
-            return;
-         }
-
+      var colorArray = obj.ID_COUL;
+      colorArray.forEach(function (item) {
          var sql3 = "INSERT INTO vet_coul_assoc (ID_VET, ID_COUL) VALUES(" + idVet + ", ?)";
-         var inserts3 = [obj.id_coul];
-
+         var inserts3 = [item];
+         console.log("COULEUR" + inserts3);
          connection.query(mysql.format(sql3, inserts3), (err) => {
             if (err) {
                console.error(err);
                fct(err, null);
                return;
             }
-
-            var sql4 = "INSERT INTO vet_occas_assoc (ID_VET, ID_OCCAS) VALUES(" + idVet + ", ?)";
-            var inserts4 = [obj.id_occas];
-
-            connection.query(mysql.format(sql4, inserts4), (err) => {
-               if (err) {
-                  console.error(err);
-                  fct(err, null);
-                  return;
-               }
-               fct(null, 200);
-               connection.end();
-            });
-         });
+         })
       });
+
+      var occasArray = obj.ID_OCCAS;
+      occasArray.forEach(function (item) {
+         var sql4 = "INSERT INTO vet_occas_assoc (ID_VET, ID_OCCAS) VALUES(" + idVet + ", ?)";
+         var inserts4 = [item];
+         console.log("OCCASION" + inserts4);
+         connection.query(mysql.format(sql4, inserts4), (err) => {
+            if (err) {
+               console.error(err);
+               fct(err, null);
+               return;
+            }
+         })
+      });
+      fct(null, results);
    });
 }
 
@@ -159,7 +167,7 @@ module.exports.readColors = function (fct) {
 
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE COULEUR SPECIFIQUE
 module.exports.readSpecificColor = function (idColor, fct) {
-   var sql = "SELECT * FROM vetement inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.id_coul = vet_coul_assoc.id_coul WHERE couleur.ID_COUL = ? ORDER BY NOM_VET ASC";
+   var sql = "SELECT * FROM vetement inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.ID_COUL = vet_coul_assoc.ID_COUL WHERE couleur.ID_COUL = ? ORDER BY NOM_VET ASC";
    var inserts = [idColor];
    connection.query(mysql.format(sql, inserts), (err, results) => {
       if (err) {
@@ -190,7 +198,7 @@ module.exports.readFeatures = function (fct) {
 
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE CARACTERISTIQUE SPECIFIQUE
 module.exports.readSpecificFeature = function (idFeature, fct) {
-   var sql = "SELECT * FROM vetement inner join vet_caract_assoc on vetement.id_vet = vet_caract_assoc.id_vet inner join caracteristique on caracteristique.id_caract = vet_caract_assoc.id_caract WHERE caracteristique.ID_CARACT = ? ORDER BY NOM_VET ASC";
+   var sql = "SELECT * FROM vetement inner join vet_caract_assoc on vetement.id_vet = vet_caract_assoc.id_vet inner join caracteristique on caracteristique.ID_CARACT = vet_caract_assoc.ID_CARACT WHERE caracteristique.ID_CARACT = ? ORDER BY NOM_VET ASC";
    var inserts = [idFeature];
    connection.query(mysql.format(sql, inserts), (err, results) => {
       if (err) {
@@ -221,7 +229,7 @@ module.exports.readNotes = function (fct) {
 
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE NOTE SPECIFIQUE
 module.exports.readSpecificNote = function (idNote, fct) {
-   var sql = "SELECT * FROM vetement inner join note on vetement.fk_id_note = note.id_note WHERE note.id_note = ? ORDER BY NOM_VET ASC";
+   var sql = "SELECT * FROM vetement inner join note on vetement.FK_ID_NOTE = note.id_note WHERE note.id_note = ? ORDER BY NOM_VET ASC";
    var inserts = [idNote];
    connection.query(mysql.format(sql, inserts), (err, results) => {
       if (err) {
@@ -252,7 +260,7 @@ module.exports.readOccasions = function (fct) {
 
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE OCCASION SPECIFIQUE
 module.exports.readSpecificOccas = function (idOccas, fct) {
-   var sql = "SELECT * FROM vetement inner join vet_occas_assoc on vetement.id_vet = vet_occas_assoc.id_vet inner join occasion on occasion.id_occas = vet_occas_assoc.id_occas WHERE occasion.id_occas = ? ORDER BY NOM_VET ASC";
+   var sql = "SELECT * FROM vetement inner join vet_occas_assoc on vetement.id_vet = vet_occas_assoc.id_vet inner join occasion on occasion.ID_OCCAS = vet_occas_assoc.ID_OCCAS WHERE occasion.ID_OCCAS = ? ORDER BY NOM_VET ASC";
    var inserts = [idOccas];
    connection.query(mysql.format(sql, inserts), (err, results) => {
       if (err) {

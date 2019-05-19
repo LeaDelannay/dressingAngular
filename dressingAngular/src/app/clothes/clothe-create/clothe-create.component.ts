@@ -11,6 +11,10 @@ import { Clothe } from '../clothe';
 })
 export class ClotheCreateComponent implements OnInit {
 
+   colorExists = true;
+   featureExists = true;
+   occasionExists = true;
+
    erreur = null;
 
    brands: any[] = [];
@@ -83,6 +87,7 @@ export class ClotheCreateComponent implements OnInit {
 
    }
 
+   // permet de récupérer les valeurs des checkboxes
    get selectedColors(){
       return this.colors
             .filter(color => color.checked)
@@ -99,6 +104,7 @@ export class ClotheCreateComponent implements OnInit {
             .map(occasion => occasion.ID_OCCAS);
    }
 
+
    onSubmit(form:NgForm){
       if (form.valid == true) { //Si tous les champs du formulaire sont remplis
          let clotheArray = new Clothe; //création d'un tableau Json contenant les données attendues par le serveur
@@ -106,30 +112,44 @@ export class ClotheCreateComponent implements OnInit {
          clotheArray.FK_ID_CAT = form.value["clotheCategory"]; 
          clotheArray.FK_ID_MARQUE = form.value["clotheBrand"]; 
          clotheArray.FK_ID_NOTE = form.value["clotheNote"]; 
-
-         
-         clotheArray.IMG_VET = form.value["clotheImg"]; 
-
          clotheArray.DESCRIPT_VET = form.value["clotheDescr"]; 
-         clotheArray.ID_CARACT = this.selectedFeatures; //NOK 
-         clotheArray.ID_COUL = this.selectedColors; //NOK
-         clotheArray.ID_OCCAS = this.selectedOccasions; //NOK
+         clotheArray.ID_CARACT = this.selectedFeatures;
+         clotheArray.ID_COUL = this.selectedColors;
+         clotheArray.ID_OCCAS = this.selectedOccasions;
+         if(form.value["clotheImg"] == ""){
+            clotheArray.IMG_VET = null;
+         }else{
+            clotheArray.IMG_VET = form.value["clotheImg"];
+         }
 
-         clotheArray.FK_ID_USER = form.value["idUser"]; 
+         // clotheArray.FK_ID_USER = form.value["idUser"]; // a implémenter en fonction d'une session
+         // console.log(clotheArray.FK_ID_USER); // a implémenter en fonction d'une session
+         clotheArray.FK_ID_USER = 1; // a implémenter en fonction d'une session - en attendant par défaut : 1
          
-         console.log("Nom:"+clotheArray.NOM_VET);  //ok
-         console.log("Categorie:"+clotheArray.FK_ID_CAT); //ok
-         console.log("Marque:"+clotheArray.FK_ID_MARQUE); //ok
-         console.log("Note:"+clotheArray.FK_ID_NOTE); //ok
-         console.log("Image:"+clotheArray.IMG_VET); //ok - mettre if image alors image sinon si coche alors null
-         console.log("Description:"+clotheArray.DESCRIPT_VET); //ok
-         console.log("Caractéristiques:"+clotheArray.ID_CARACT); //NOK
-         console.log("Couleurs:"+clotheArray.ID_COUL); //NOK
-         console.log("Occasions:"+clotheArray.ID_OCCAS); //NOK
+         console.log(clotheArray);
 
-         console.log(clotheArray.FK_ID_USER); // a implémenter en fonction d'une session
-         // this.router.navigate(['homepage']);
+         this.service.addNewClothe(clotheArray).subscribe(response => { //envoie le tableau au back
+            this.erreur = response.status;
+            console.log("Les requêtes ont bien été enregistrées");
+            this.router.navigate(['homepage']);
+         },
+            error =>{
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log(error); //Affiche le retour du serveur
+               console.log(this.erreur); //Affiche la variable erreur qui a été injectée par error.status
+               console.log(" Les requêtes n'ont pas été enregistrées / Erreur lors de l'appel au service clothes.service - clothes -- " + error);
+          });
       }
+   }
+
+   onClickColor(){
+      this.colorExists = this.colorExists ? false : true;
+   }
+   onClickFeature(){
+      this.featureExists = this.featureExists ? false : true;
+   }
+   onClickOccasion(){
+      this.occasionExists = this.occasionExists ? false : true;
    }
 
 }

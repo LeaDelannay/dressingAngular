@@ -22,8 +22,10 @@ router.get('/', function (req, res, next) {
 
 //CREATE
 router.post('/', function (req, res, next) {
-   console.log("----> " + req.body);
-   if (!req.body.nom_vet) {
+   console.log("req.body ----> " + req.body);
+   var contenuRecuReq = JSON.stringify(req.body);
+   console.log("req.body json.stringify ----> " + contenuRecuReq);
+   if (!req.body.NOM_VET) {
       res.sendStatus(400);
       return;
    }
@@ -32,7 +34,7 @@ router.post('/', function (req, res, next) {
          res.sendStatus(500);
          return;
       }
-      res.sendStatus(data);
+      res.send(data);
    })
 });
 

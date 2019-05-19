@@ -32,7 +32,7 @@
       <small *ngIf="clotheBrand.invalid && clotheBrand.touched" class="text-muted">Vous n'avez pas rempli ce
         champ</small>
     </div>
-    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="colorExists == true">
       <label for="">Couleurs&nbsp;: </label><span> *</span>
       <div class="row">
         <div *ngFor="let color of this.colors" class="col-4 col-md-2">
@@ -44,11 +44,20 @@
           </div>
         </div>
       </div>
-      <p class="clickToAdd">--> Couleur inexistante dans la liste</p>
+      <p class="clickToAdd" (click)="onClickColor()">--> Couleur inexistante dans la liste</p>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="colorExists == false">
+      <label for="colorName">Couleur&nbsp;: </label><span> *</span>
+      <input type="text" class="form-control" id="colorName" placeholder="Nom de la couleur" name="colorName" ngModel
+        #colorName="ngModel" required>
+      <small *ngIf="colorName.invalid && colorName.touched" id="colorNameEmpty" class="text-muted alert-danger">Vous
+        n'avez pas rempli ce champ</small>
+      <small *ngIf="[erreur] == 500" id="colorNameExists" class="text-muted">Ce nom de couleur existe déjà</small>
+      <p class="clickToAdd" (click)="onClickColor()">--> Revenir à la liste des couleurs</p>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1" *ngIf="featureExists == true">
       <label for="">Caractéristiques&nbsp;: </label><span> *</span>
       <div class="row">
         <div *ngFor="let feature of this.features" class="col-4 col-md-2">
@@ -60,9 +69,20 @@
           </div>
         </div>
       </div>
-      <p class="clickToAdd">--> Caractéristique inexistante dans la liste</p>
+      <p class="clickToAdd" (click)="onClickFeature()">--> Caractéristique inexistante dans la liste</p>
     </div>
-    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1">
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1" *ngIf="featureExists == false">
+      <label for="featureName">Caractéristique&nbsp;: </label><span> *</span>
+      <input type="text" class="form-control" id="featureName" placeholder="Nom de la caractéristique"
+        name="featureName" ngModel #featureName="ngModel" required>
+      <small *ngIf="featureName.invalid && featureName.touched" id="featureNameEmpty"
+        class="text-muted alert-danger">Vous
+        n'avez pas rempli ce champ</small>
+      <small *ngIf="[erreur] == 500" id="featureNameExists" class="text-muted">Ce nom de caractéristique existe
+        déjà</small>
+      <p class="clickToAdd" (click)="onClickFeature()">--> Revenir à la liste des caractéristiques</p>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="occasionExists == true">
       <label for="">Occasions&nbsp;: </label><span> *</span>
       <div class="row">
         <div *ngFor="let occasion of this.occasions" class="col-6 col-md-3">
@@ -74,7 +94,18 @@
           </div>
         </div>
       </div>
-      <p class="clickToAdd">--> Occasion inexistante dans la liste</p>
+      <p class="clickToAdd" (click)="onClickOccasion()">--> Occasion inexistante dans la liste</p>
+    </div>
+    <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="occasionExists == false">
+      <label for="occasionName">Occasion&nbsp;: </label><span> *</span>
+      <input type="text" class="form-control" id="occasionName" placeholder="Nom de l'occasion"
+        name="occasionName" ngModel #occasionName="ngModel" required>
+      <small *ngIf="occasionName.invalid && occasionName.touched" id="occasionNameEmpty"
+        class="text-muted alert-danger">Vous
+        n'avez pas rempli ce champ</small>
+      <small *ngIf="[erreur] == 500" id="occasionNameExists" class="text-muted">Ce nom d'occasion existe
+        déjà</small>
+      <p class="clickToAdd" (click)="onClickOccasion()">--> Revenir à la liste des occasions</p>
     </div>
   </div>
   <div class="row">

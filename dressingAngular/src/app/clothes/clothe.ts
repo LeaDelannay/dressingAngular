@@ -6,9 +6,9 @@ export class Clothe {
    FK_ID_NOTE: number;
    FK_ID_USER: number;
    NOM_VET: string;
-   IMG_VET: string;
+   IMG_VET: any;
    DESCRIPT_VET: string;
-   ID_CARACT: any;
-   ID_COUL: any;
-   ID_OCCAS: any;
+   ID_CARACT: any[];
+   ID_COUL: any[];
+   ID_OCCAS: any[];
 }
