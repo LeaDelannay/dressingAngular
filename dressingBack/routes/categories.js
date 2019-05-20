@@ -3,7 +3,7 @@ var router = express.Router();
 
 var dbacc = require('../dbaccess');
 
- //READ ALL
+ //READ ALL CATEGORIES
  router.get('/', function(req, res, next) {
    console.log("----> call read all categories");
    dbacc.readCategories(function(err, data){
@@ -30,6 +30,22 @@ router.get('/:idCategory', function(req, res, next) {
       }
       if(data == 0 || data == null || data == undefined || data == ""){
          res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data);
+   })
+});
+
+//CREATE CATEGORIE
+router.post('/', function (req, res, next) {
+   console.log("req.body ----> " + req.body);
+   if (!req.body.LIBEL_CAT) {
+      res.sendStatus(400);
+      return;
+   }
+   dbacc.createCategory(req.body, function (err, data) {
+      if (err) {
+         res.sendStatus(500);
          return;
       }
       res.send(data);

@@ -36,4 +36,20 @@ router.get('/:idColor', function(req, res, next) {
    })
 });
 
+//CREATE COLOR
+router.post('/', function (req, res, next) {
+   console.log("req.body ----> " + req.body);
+   if (!req.body.LIBEL_COUL) {
+      res.sendStatus(400);
+      return;
+   }
+   dbacc.createColor(req.body, function (err, data) {
+      if (err) {
+         res.sendStatus(500);
+         return;
+      }
+      res.send(data);
+   })
+});
+
 module.exports = router;

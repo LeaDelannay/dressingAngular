@@ -14,6 +14,8 @@ export class ClotheCreateComponent implements OnInit {
    colorExists = true;
    featureExists = true;
    occasionExists = true;
+   brandExists = true;
+   categoryExists = true;
 
    erreur = null;
 
@@ -150,6 +152,12 @@ export class ClotheCreateComponent implements OnInit {
    }
    onClickOccasion(){
       this.occasionExists = this.occasionExists ? false : true;
+   }
+   onClickBrand(){
+      this.brandExists = this.brandExists ? false : true;
+   }
+   onClickCategory(){
+      this.categoryExists = this.categoryExists ? false : true;
    }
 
 }

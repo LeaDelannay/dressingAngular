@@ -3,7 +3,7 @@ var router = express.Router();
 
 var dbacc = require('../dbaccess');
 
-//READ ALL
+//READ ALL CLOTHES
 router.get('/', function (req, res, next) {
    console.log("----> call read all clothes");
    dbacc.readClothes(function (err, data) {
@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 });
 
 
-//CREATE
+//CREATE CLOTHE
 router.post('/', function (req, res, next) {
    console.log("req.body ----> " + req.body);
    var contenuRecuReq = JSON.stringify(req.body);

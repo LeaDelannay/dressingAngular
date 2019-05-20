@@ -3,7 +3,7 @@ var router = express.Router();
 
 var dbacc = require('../dbaccess');
 
- //READ ALL
+ //READ ALL BRANDS
  router.get('/', function(req, res, next) {
    console.log("----> call read all brands");
    dbacc.readBrands(function(err, data){
@@ -30,6 +30,22 @@ router.get('/:idBrand', function(req, res, next) {
       }
       if(data == 0 || data == null || data == undefined || data == ""){
          res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data);
+   })
+});
+
+//CREATE BRAND
+router.post('/', function (req, res, next) {
+   console.log("req.body ----> " + req.body);
+   if (!req.body.NOM_MARQUE) {
+      res.sendStatus(400);
+      return;
+   }
+   dbacc.createBrand(req.body, function (err, data) {
+      if (err) {
+         res.sendStatus(500);
          return;
       }
       res.send(data);

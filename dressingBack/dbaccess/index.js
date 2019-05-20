@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 });
 
 
-//MARQUES
+//DEBUT BRANDS/MARQUES\\
 //LISTE DE TOUTES LES MARQUES EN BASE DE DONNEES - ALL
 module.exports.readBrands = function (fct) {
    connection.query('SELECT * FROM marque ORDER BY NOM_MARQUE ASC', (err, results) => {
@@ -40,8 +40,25 @@ module.exports.readSpecificBrand = function (idBrand, fct) {
       console.log(results);
    });
 }
+//CREATION D'UNE MARQUE EN BASE DE DONNEES
+module.exports.createBrand = function (obj, fct) {
 
-//CATEGORIES
+   var sql = "INSERT INTO marque (NOM_MARQUE) VALUES(?)";
+   var inserts = [obj.NOM_MARQUE];
+
+   // création du vêtement en base de données
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      fct(null, results);
+   });
+}
+//FIN BRANDS/MARQUES\\
+
+//DEBUT CATEGORIES\\
 //LISTE DE TOUTES LES CATEGORIES EN BASE DE DONNEES - ALL
 module.exports.readCategories = function (fct) {
    connection.query('SELECT * FROM categorie ORDER BY LIBEL_CAT ASC', (err, results) => {
@@ -72,7 +89,25 @@ module.exports.readSpecificCategory = function (idCategory, fct) {
    });
 }
 
-//CLOTHES
+//CREATION D'UNE CATEGORIE EN BASE DE DONNEES
+module.exports.createCategory = function (obj, fct) {
+
+   var sql = "INSERT INTO categorie (LIBEL_CAT) VALUES(?)";
+   var inserts = [obj.LIBEL_CAT];
+
+   // création du vêtement en base de données
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      fct(null, results);
+   });
+}
+//FIN CATEGORIES\\
+
+//DEBUT CLOTHES\\
 //LISTE DE TOUS LES VETEMENTS EN BASE DE DONNEES - ALL
 module.exports.readClothes = function (fct) {
    connection.query('SELECT * FROM vetement ORDER BY NOM_VET ASC', (err, results) => {
@@ -149,8 +184,9 @@ module.exports.createClothe = function (obj, fct) {
       fct(null, results);
    });
 }
+//FIN CLOTHES\\
 
-//COULEURS
+//DEBUT COLORS/COULEURS\\
 //LISTE DE TOUTES LES COULEURS EN BASE DE DONNEES - ALL
 module.exports.readColors = function (fct) {
    connection.query('SELECT * FROM couleur ORDER BY LIBEL_COUL ASC', (err, results) => {
@@ -181,7 +217,25 @@ module.exports.readSpecificColor = function (idColor, fct) {
    });
 }
 
-//CARACTERISTIQUES
+//CREATION D'UNE COULEUR EN BASE DE DONNEES
+module.exports.createColor = function (obj, fct) {
+
+   var sql = "INSERT INTO couleur (LIBEL_COUL) VALUES(?)";
+   var inserts = [obj.LIBEL_COUL];
+
+   // création du vêtement en base de données
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      fct(null, results);
+   });
+}
+//FIN COLORS/COULEURS\\
+
+//DEBUT FEATURES/CARACTERISTIQUES\\
 //LISTE DE TOUTES LES CARACTERISTIQUES EN BASE DE DONNEES - ALL
 module.exports.readFeatures = function (fct) {
    connection.query('SELECT * FROM caracteristique ORDER BY LIBEL_CARACT ASC', (err, results) => {
@@ -212,7 +266,25 @@ module.exports.readSpecificFeature = function (idFeature, fct) {
    });
 }
 
-//NOTES
+//CREATION D'UNE CARACTERISTIQUE EN BASE DE DONNEES
+module.exports.createFeature = function (obj, fct) {
+
+   var sql = "INSERT INTO caracteristique (LIBEL_CARACT) VALUES(?)";
+   var inserts = [obj.LIBEL_CARACT];
+
+   // création du vêtement en base de données
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      fct(null, results);
+   });
+}
+//FIN FEATURES/CARACTERISTIQUES\\
+
+//DEBUT NOTES\\
 //LISTE DE TOUTES LES NOTES EN BASE DE DONNEES - ALL
 module.exports.readNotes = function (fct) {
    connection.query('SELECT * FROM note ORDER BY NUM_NOTE ASC', (err, results) => {
@@ -242,8 +314,9 @@ module.exports.readSpecificNote = function (idNote, fct) {
       console.log(results);
    });
 }
+//FIN NOTES\\
 
-//OCCASIONS
+//DEBUT OCCASIONS\\
 //LISTE DE TOUTES LES OCCASIONS EN BASE DE DONNEES - ALL
 module.exports.readOccasions = function (fct) {
    connection.query('SELECT * FROM occasion ORDER BY LIBEL_OCCAS ASC', (err, results) => {
@@ -273,3 +346,21 @@ module.exports.readSpecificOccas = function (idOccas, fct) {
       console.log(results);
    });
 }
+
+//CREATION D'UNE OCCASION EN BASE DE DONNEES
+module.exports.createOccasion = function (obj, fct) {
+
+   var sql = "INSERT INTO occasion (LIBEL_OCCAS) VALUES(?)";
+   var inserts = [obj.LIBEL_OCCAS];
+
+   // création du vêtement en base de données
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      fct(null, results);
+   });
+}
+//FIN OCCASIONS\\
