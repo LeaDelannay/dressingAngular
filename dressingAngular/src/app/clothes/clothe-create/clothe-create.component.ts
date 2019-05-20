@@ -11,20 +11,23 @@ import { Clothe } from '../clothe';
 })
 export class ClotheCreateComponent implements OnInit {
 
-   colorExists = true;
-   featureExists = true;
-   occasionExists = true;
-   brandExists = true;
-   categoryExists = true;
-
+   
    erreur = null;
-
+   
    brands: any[] = [];
    categories: any[] = [];
    colors: any[] = [];
    features: any[] = [];
    notes: any[] = [];
    occasions: any[] = [];
+   
+   colorExists = true;
+   featureExists = true;
+   occasionExists = true;
+   brandExists = true;
+   categoryExists = true;
+
+   newCategory:string = "";
 
    constructor(private service: ClothesService, private router: Router) { }
 
@@ -143,7 +146,7 @@ export class ClotheCreateComponent implements OnInit {
           });
       }
    }
-
+   //au click sur le lien XX inexistant dans la liste/revenir à la liste des XX, permet d'afficher la liste des éléments OU l'input permettant un nouvel ajout
    onClickColor(){
       this.colorExists = this.colorExists ? false : true;
    }
@@ -159,5 +162,11 @@ export class ClotheCreateComponent implements OnInit {
    onClickCategory(){
       this.categoryExists = this.categoryExists ? false : true;
    }
+
+   //au click sur le plus, ajoute l'élément en bdd et recharge la page
+   onSubmitCategorie(){
+      console.log(this.newCategory);
+   }
+
 
 }

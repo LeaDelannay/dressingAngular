@@ -16,7 +16,7 @@
         <option value="" selected> ------ Catégorie ------ </option>
         <option *ngFor="let category of this.categories" value="{{category.ID_CAT}}"> {{category.LIBEL_CAT}} </option>
       </select>
-      <span class="clickToAdd" (click)="onClickCategory()">--> Catégorie inexistante dans la liste</span>&nbsp;&nbsp;
+      <span class="blueLink" (click)="onClickCategory()">--> Catégorie inexistante dans la liste</span>&nbsp;&nbsp;
       <small *ngIf="clotheCategory.invalid && clotheCategory.touched" class="text-muted alert-danger">Vous n'avez pas
         rempli ce
         champ</small>
@@ -30,15 +30,15 @@
       <div class="row">
         <div class="col-11">
           <input type="text" class="form-control" id="categoryName" placeholder="Nom de la catégorie"
-            name="categoryName" ngModel #categoryName="ngModel" required>
+            name="categoryName" ngModel #categoryName="ngModel" required [(ngModel)]="newCategory">
         </div>
         <div class="col-1">
-          <i class="fas fa-plus-circle fa-2x"></i>
+          <i class="fas fa-plus-circle fa-2x" (click)="onSubmitCategorie()"></i>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <span class="clickToAdd" (click)="onClickCategory()">--> Revenir à la liste des catégories</span>&nbsp;&nbsp;
+          <span class="blueLink" (click)="onClickCategory()">--> Revenir à la liste des catégories</span>&nbsp;&nbsp;
           <small *ngIf="categoryName.invalid && categoryName.touched" id="categoryNameEmpty"
             class="text-muted alert-danger">Vous
             n'avez pas rempli ce champ</small>
@@ -55,7 +55,7 @@
         <option value="" selected> ------ Marque ------ </option>
         <option *ngFor="let brand of this.brands" value="{{brand.ID_MARQUE}}"> {{brand.NOM_MARQUE}} </option>
       </select>
-      <span class="clickToAdd" (click)="onClickBrand()">--> Marque inexistante dans la liste</span>&nbsp;&nbsp;
+      <span class="blueLink" (click)="onClickBrand()">--> Marque inexistante dans la liste</span>&nbsp;&nbsp;
       <small *ngIf="clotheBrand.invalid && clotheBrand.touched" class="text-muted alert-danger">Vous n'avez pas rempli
         ce
         champ</small>
@@ -77,7 +77,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <span class="clickToAdd" (click)="onClickBrand()">--> Revenir à la liste des marques</span>&nbsp;&nbsp;
+          <span class="blueLink" (click)="onClickBrand()">--> Revenir à la liste des marques</span>&nbsp;&nbsp;
           <small *ngIf="brandName.invalid && brandName.touched" id="brandNameEmpty" class="text-muted alert-danger">Vous
             n'avez pas rempli ce champ</small>
           <small *ngIf="[erreur] == 500" id="brandNameExists" class="text-muted">Ce nom de marque existe déjà</small>
@@ -96,7 +96,7 @@
           </div>
         </div>
       </div>
-      <span class="clickToAdd" (click)="onClickColor()">--> Couleur inexistante dans la liste</span>&nbsp;&nbsp;
+      <span class="blueLink" (click)="onClickColor()">--> Couleur inexistante dans la liste</span>&nbsp;&nbsp;
     </div>
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="colorExists == false">
       <div class="row">
@@ -115,7 +115,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <span class="clickToAdd" (click)="onClickColor()">--> Revenir à la liste des couleurs</span>&nbsp;&nbsp;
+          <span class="blueLink" (click)="onClickColor()">--> Revenir à la liste des couleurs</span>&nbsp;&nbsp;
           <small *ngIf="colorName.invalid && colorName.touched" id="colorNameEmpty" class="text-muted alert-danger">Vous
             n'avez pas rempli ce champ</small>
           <small *ngIf="[erreur] == 500" id="colorNameExists" class="text-muted">Ce nom de couleur existe déjà</small>
@@ -136,7 +136,7 @@
           </div>
         </div>
       </div>
-      <span class="clickToAdd" (click)="onClickFeature()">--> Caractéristique inexistante dans la
+      <span class="blueLink" (click)="onClickFeature()">--> Caractéristique inexistante dans la
         liste</span>&nbsp;&nbsp;
     </div>
     <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1" *ngIf="featureExists == false">
@@ -156,7 +156,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <span class="clickToAdd" (click)="onClickFeature()">--> Revenir à la liste des
+          <span class="blueLink" (click)="onClickFeature()">--> Revenir à la liste des
             caractéristiques</span>&nbsp;&nbsp;
           <small *ngIf="featureName.invalid && featureName.touched" id="featureNameEmpty"
             class="text-muted alert-danger">Vous n'avez pas rempli ce champ</small>
@@ -177,7 +177,7 @@
           </div>
         </div>
       </div>
-      <span class="clickToAdd" (click)="onClickOccasion()">--> Occasion inexistante dans la liste</span>&nbsp;&nbsp;
+      <span class="blueLink" (click)="onClickOccasion()">--> Occasion inexistante dans la liste</span>&nbsp;&nbsp;
     </div>
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="occasionExists == false">
       <div class="row">
@@ -196,7 +196,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <span class="clickToAdd" (click)="onClickOccasion()">--> Revenir à la liste des occasions</span>&nbsp;&nbsp;
+          <span class="blueLink" (click)="onClickOccasion()">--> Revenir à la liste des occasions</span>&nbsp;&nbsp;
           <small *ngIf="occasionName.invalid && occasionName.touched" id="occasionNameEmpty"
             class="text-muted alert-danger">Vous n'avez pas rempli ce champ</small>
           <small *ngIf="[erreur] == 500" id="occasionNameExists" class="text-muted">Ce nom d'occasion existe
