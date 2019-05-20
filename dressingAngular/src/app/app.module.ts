@@ -8,26 +8,24 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { ClothesListComponent } from './clothes/clothes-list/clothes-list.component';
+import { SharedModule } from './shared/shared.module';
+import { ClothesModule } from './clothes/clothes.module';
 import { HomepageComponent } from './home/homepage/homepage.component';
-import { ClotheCreateComponent } from './clothes/clothe-create/clothe-create.component';
 
 @NgModule({
    declarations: [
       AppComponent,
-      ClothesListComponent,
-      NavbarComponent,
-      HomepageComponent,
-      ClotheCreateComponent
+      HomepageComponent
    ],
    imports: [
       BrowserModule,
-      AppRoutingModule, /* Routes */
       FormsModule, /* Formulaires */
       HttpClientModule, /* Pour se connecter au serveur */
       NgbModule,
-      ReactiveFormsModule
+      SharedModule,
+      ReactiveFormsModule,
+      ClothesModule,
+      AppRoutingModule /* Routes */
    ],
    providers: [],
    bootstrap: [AppComponent]

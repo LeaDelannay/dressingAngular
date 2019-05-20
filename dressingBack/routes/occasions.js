@@ -3,7 +3,7 @@ var router = express.Router();
 
 var dbacc = require('../dbaccess');
 
- //READ ALL
+ //READ ALL OCCASIONS
  router.get('/', function(req, res, next) {
    console.log("----> call read all occasions");
    dbacc.readOccasions(function(err, data){
@@ -30,6 +30,22 @@ router.get('/:idOccas', function(req, res, next) {
       }
       if(data == 0 || data == null || data == undefined || data == ""){
         res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data);
+   })
+});
+
+//CREATE OCCASION
+router.post('/', function (req, res, next) {
+   console.log("req.body ----> " + req.body);
+   if (!req.body.LIBEL_OCCAS) {
+      res.sendStatus(400);
+      return;
+   }
+   dbacc.createOccasion(req.body, function (err, data) {
+      if (err) {
+         res.sendStatus(500);
          return;
       }
       res.send(data);

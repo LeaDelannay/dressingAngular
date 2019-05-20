@@ -55,5 +55,7 @@ p{
 .labelPasImage{
    font-size: 15px;
 }
-
+.fa-plus-circle{
+   color: #4DE8BE !important;
+}
 /* ***** Formulaire [FIN] ***** */
