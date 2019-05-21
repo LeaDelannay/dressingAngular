@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; /* Import des routes */
-import { ClothesListComponent } from './clothes/clothes-list/clothes-list.component';
+import { ClothesListComponent, ClotheCreateComponent } from './clothes';
 import { HomepageComponent } from './home/homepage/homepage.component';
-import { ClotheCreateComponent } from './clothes/clothe-create/clothe-create.component';
 
 const routes: Routes = [
    /* Toutes les routes des composants */
@@ -16,7 +15,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {enableTracing : true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

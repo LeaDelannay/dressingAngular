@@ -11,4 +11,10 @@ export class Clothe {
    ID_CARACT: any[];
    ID_COUL: any[];
    ID_OCCAS: any[];
+
+   NOM_MARQUE: string;
+   LIBEL_CAT: string;
+   LIBEL_COUL: string;
+   LIBEL_CARACT: string;
+   LIBEL_OCCAS: string;
 }

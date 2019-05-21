@@ -12,6 +12,10 @@ import { ClotheCreateComponent } from './clothe-create/clothe-create.component';
   imports: [
     CommonModule,
     FormsModule
+  ],
+  exports: [
+   ClothesListComponent,
+   ClotheCreateComponent
   ]
 })
 export class ClothesModule { }

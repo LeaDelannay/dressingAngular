@@ -12,9 +12,35 @@ export class ClothesService {
 
    constructor(public http: HttpClient) { }
 
+   //création
+   //Création d'une marque - permet d'envoyer les valeurs à enregistrer en base de données
+   public addNewBrand(brand: any):Observable<HttpResponse<any[]>>{
+      return this.http.post<any[]>(`${this.baseUrl}/brands`, brand, {observe: 'response'});
+   }
+
+   //Création d'une catégorie - permet d'envoyer les valeurs à enregistrer en base de données
+   public addNewCategory(category: any):Observable<HttpResponse<any[]>>{
+      return this.http.post<any[]>(`${this.baseUrl}/categories`, category, {observe: 'response'});
+   }
+   
    //Création d'un vêtement - permet d'envoyer les valeurs à enregistrer en base de données
    public addNewClothe(clothe: Clothe):Observable<HttpResponse<any[]>>{
       return this.http.post<any[]>(`${this.baseUrl}/clothes`, clothe, {observe: 'response'});
+   }
+
+   //Création d'une couleur - permet d'envoyer les valeurs à enregistrer en base de données
+   public addNewColor(color: any):Observable<HttpResponse<any[]>>{
+      return this.http.post<any[]>(`${this.baseUrl}/colors`, color, {observe: 'response'});
+   }
+
+   //Création d'une caractéristique/feature - permet d'envoyer les valeurs à enregistrer en base de données
+   public addNewFeature(feature: any):Observable<HttpResponse<any[]>>{
+      return this.http.post<any[]>(`${this.baseUrl}/features`, feature, {observe: 'response'});
+   }
+
+   //Création d'une occasion - permet d'envoyer les valeurs à enregistrer en base de données
+   public addNewOccasion(occasion: any):Observable<HttpResponse<any[]>>{
+      return this.http.post<any[]>(`${this.baseUrl}/occasions`, occasion, {observe: 'response'});
    }
 
    //récupère la liste de toutes les marques en base de données
