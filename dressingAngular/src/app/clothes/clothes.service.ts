@@ -89,4 +89,9 @@ export class ClothesService {
    public getSpecificFilterOpt(selectedFilter:string, selectedOption:string): Observable<HttpResponse<any[]>> {
       return this.http.get<any[]>(`${this.baseUrl}/${selectedFilter}/${selectedOption}`, {observe: 'response'});
    }
+
+   //liste des noms de vêtements en base de données
+   public getAllClothesName(): Observable<HttpResponse<Clothe[]>> {
+      return this.http.get<Clothe[]>(`${this.baseUrl}/clothes/clothename`, {observe: 'response'});
+   }
 }

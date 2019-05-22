@@ -4,8 +4,8 @@
   <div class="row">
     <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
       <label for="clotheName">Nom&nbsp;: </label><span> *</span>
-      <input type="text" class="form-control" id="clotheName" placeholder="Nom du vêtement" name="clotheName" ngModel
-        #clotheName="ngModel" required>
+      <input type="text" class="form-control" id="clotheName" placeholder="Nom du vêtement" name="clotheName" [(ngModel)]="varClotheNameExists"
+        #clotheName="ngModel" required (keyup)="clotheNameExists()">
       <small *ngIf="clotheName.invalid && clotheName.touched" id="clotheNameEmpty" class="text-muted alert-danger">Vous
         n'avez pas rempli ce champ</small>
       <small *ngIf="[erreur] == 500" id="clotheNameExists" class="text-muted">Ce nom de vêtement existe déjà</small>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-11">
+        <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="categoryName" placeholder="Nom de la catégorie"
             name="categoryName" ngModel #categoryName="ngModel" required [(ngModel)]="newCategory">
         </div>
@@ -67,9 +67,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-11">
+        <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="brandName" placeholder="Nom de la marque" name="brandName" ngModel
-            #brandName="ngModel" required>
+            #brandName="ngModel" required [(ngModel)]="newBrand">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitBrand()"></i>
@@ -87,7 +87,7 @@
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="colorExists == true">
       <label for="">Couleurs&nbsp;: </label><span> *</span>
       <div class="row">
-        <div *ngFor="let color of this.colors" class="col-4 col-md-2">
+        <div *ngFor="let color of this.colors" class="col-4 col-lg-3">
           <div class="row">
             <label class="labelSize col-6 p-0 text-right" for="{{color.LIBEL_COUL}}">{{color.LIBEL_COUL}}&nbsp;:
             </label>
@@ -105,9 +105,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-11">
+        <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="colorName" placeholder="Nom de la couleur" name="colorName"
-            ngModel #colorName="ngModel" required>
+            ngModel #colorName="ngModel" required [(ngModel)]="newColor">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitColor()"></i>
@@ -127,7 +127,7 @@
     <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1" *ngIf="featureExists == true">
       <label for="">Caractéristiques&nbsp;: </label><span> *</span>
       <div class="row">
-        <div *ngFor="let feature of this.features" class="col-4 col-md-2">
+        <div *ngFor="let feature of this.features" class="col-4 col-lg-3">
           <div class="row">
             <label class="labelSize col-6 p-0 text-right" for="{{feature.LIBEL_CARACT}}">{{feature.LIBEL_CARACT}}&nbsp;:
             </label>
@@ -146,9 +146,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-11">
+        <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="featureName" placeholder="Nom de la caractéristique"
-            name="featureName" ngModel #featureName="ngModel" required>
+            name="featureName" ngModel #featureName="ngModel" required [(ngModel)]="newFeature">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitFeature()"></i>
@@ -168,7 +168,7 @@
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="occasionExists == true">
       <label for="">Occasions&nbsp;: </label><span> *</span>
       <div class="row">
-        <div *ngFor="let occasion of this.occasions" class="col-6 col-md-3">
+        <div *ngFor="let occasion of this.occasions" class="col-6 col-xl-4">
           <div class="row">
             <label class="labelSize col-6 p-0 text-right" for="{{occasion.LIBEL_OCCAS}}">{{occasion.LIBEL_OCCAS}}&nbsp;:
             </label>
@@ -186,9 +186,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-11">
+        <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="occasionName" placeholder="Nom de l'occasion" name="occasionName"
-            ngModel #occasionName="ngModel" required>
+            ngModel #occasionName="ngModel" required [(ngModel)]="newOccasion">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitOccasion()"></i>

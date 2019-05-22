@@ -122,6 +122,20 @@ module.exports.readClothes = function (fct) {
    });
 }
 
+//LISTE DE TOUS LES NOMS DE VETEMENTS EN BASE DE DONNEES - ALL
+module.exports.readClothesNames = function (fct) {
+   connection.query('SELECT NOM_VET FROM vetement ORDER BY NOM_VET ASC', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
 //CREATION D'UN VETEMENT EN BASE DE DONNEES
 module.exports.createClothe = function (obj, fct) {
    var idVet;

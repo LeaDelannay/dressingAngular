@@ -21,17 +21,21 @@ export class ClotheCreateComponent implements OnInit {
    notes: any[] = [];
    occasions: any[] = [];
 
+   brandExists = true;
+   categoryExists = true;
    colorExists = true;
    featureExists = true;
    occasionExists = true;
-   brandExists = true;
-   categoryExists = true;
 
    newBrand: string = "";
    newCategory: string = "";
    newColor: string = "";
    newFeature: string = "";
    newOccasion: string = "";
+
+   varClotheNameExists: string = "";
+   clotheNameJson: any[] = [];
+
 
    constructor(private service: ClothesService, private router: Router) { }
 
@@ -94,6 +98,15 @@ export class ClotheCreateComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
          });
 
+      //récupère tous les noms des vêtements (objet)
+      this.service.getAllClothesName().subscribe(response => {
+         this.clotheNameJson = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
+         });
    }
 
    // permet de récupérer les valeurs des checkboxes
@@ -180,10 +193,10 @@ export class ClotheCreateComponent implements OnInit {
             this.brands = response.body;
             this.erreur = response.status;
          },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - brands -- " + error);
-         });
+            error => {
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - brands -- " + error);
+            });
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
@@ -192,10 +205,10 @@ export class ClotheCreateComponent implements OnInit {
             console.log("La requête n'a pas été enregistrée / Erreur lors de l'appel au service clothes.service - brand -- " + error);
          });
       //recharge les éléments du select
-      
+
       this.brandExists = true;
    }
-   
+
    onSubmitCategorie() {
       console.log(this.newCategory);
       let categoryArray = new Clothe;
@@ -208,10 +221,10 @@ export class ClotheCreateComponent implements OnInit {
             this.categories = response.body;
             this.erreur = response.status;
          },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
-         });
+            error => {
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
+            });
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
@@ -224,7 +237,7 @@ export class ClotheCreateComponent implements OnInit {
       this.categoryExists = true;
    }
 
-   onSubmitColor(){
+   onSubmitColor() {
       console.log(this.newColor);
       let coloryArray = new Clothe;
       coloryArray.LIBEL_COUL = this.newColor;
@@ -236,10 +249,10 @@ export class ClotheCreateComponent implements OnInit {
             this.colors = response.body;
             this.erreur = response.status;
          },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - colors -- " + error);
-         });
+            error => {
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - colors -- " + error);
+            });
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
@@ -252,7 +265,7 @@ export class ClotheCreateComponent implements OnInit {
       this.colorExists = true;
    }
 
-   onSubmitFeature(){
+   onSubmitFeature() {
       console.log(this.newFeature);
       let featureArray = new Clothe;
       featureArray.LIBEL_CARACT = this.newFeature;
@@ -264,10 +277,10 @@ export class ClotheCreateComponent implements OnInit {
             this.features = response.body;
             this.erreur = response.status;
          },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
-         });
+            error => {
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
+            });
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
@@ -280,7 +293,7 @@ export class ClotheCreateComponent implements OnInit {
       this.featureExists = true;
    }
 
-   onSubmitOccasion(){
+   onSubmitOccasion() {
       console.log(this.newOccasion);
       let occasionArray = new Clothe;
       occasionArray.LIBEL_OCCAS = this.newOccasion;
@@ -292,10 +305,10 @@ export class ClotheCreateComponent implements OnInit {
             this.occasions = response.body;
             this.erreur = response.status;
          },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
-         });
+            error => {
+               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
+            });
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
@@ -306,6 +319,31 @@ export class ClotheCreateComponent implements OnInit {
       //recharge les éléments du select
 
       this.occasionExists = true;
+   }
+
+   clotheNameExists() {
+      if (this.varClotheNameExists.length >= 3) {
+         console.log(this.varClotheNameExists);
+         console.log(this.clotheNameJson);
+         // console.log(this.clotheNameList);
+
+
+         // this.clotheNameJson.forEach(function(){
+         //    if(this.varClotheNameExists == this.clotheNameJson){
+         //       console.log("Nom déjà existant");
+            
+         //    }
+         // });
+
+         // console.log(clotheNameList.indexOf(this.varClotheNameExists));
+
+         //vVOIR INDEX OF ??
+         // VOIR Array.find or Array.filter or Array.forEach
+         //https://stackoverflow.com/questions/36419195/get-index-from-a-json-object-with-value/36419269
+
+
+
+      }
    }
 
 }
