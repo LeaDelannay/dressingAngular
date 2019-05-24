@@ -1,4 +1,4 @@
-<h2>Ajouter un vêtement</h2>
+<h2>Comment se déshabiller</h2>
 <form (ngSubmit)="onSubmit(createClotheForm)" #createClotheForm="ngForm">
   <!-- fonction ngSubmit  -->
   <div class="row">
@@ -16,7 +16,7 @@
         <option value="" selected> ------ Catégorie ------ </option>
         <option *ngFor="let category of this.categories" value="{{category.ID_CAT}}"> {{category.LIBEL_CAT}} </option>
       </select>
-      <span class="blueLink" (click)="onClickCategory()">--> Catégorie inexistante dans la liste</span>&nbsp;&nbsp;
+      <span class="blueLink" (click)="onClickCategory()">--> Catégorie qui n'exise pas car Roro ne l'a pas dit à Leyley dans la liste</span>&nbsp;&nbsp;
       <small *ngIf="clotheCategory.invalid && clotheCategory.touched" class="text-muted alert-danger">Vous n'avez pas
         rempli ce
         champ</small>
