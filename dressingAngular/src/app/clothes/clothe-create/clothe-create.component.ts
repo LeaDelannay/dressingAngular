@@ -3,6 +3,8 @@ import { ClothesService } from '../clothes.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Clothe } from '../clothe';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
    selector: 'app-clothe-create',
@@ -37,7 +39,7 @@ export class ClotheCreateComponent implements OnInit {
    clotheNameJson: any[] = [];
 
 
-   constructor(private service: ClothesService, private router: Router) { }
+   constructor(private service: ClothesService, private router: Router, private http: HttpClient) { }
 
    ngOnInit() {
       this.service.getAllBrands().subscribe(response => {
@@ -107,6 +109,15 @@ export class ClotheCreateComponent implements OnInit {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
             console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
          });
+
+
+
+         //upload d'images 
+         this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false;};
+         this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+            console.log('ImageUpload:uploaded:', item, status, response);
+            alert("Fichier bien téléchargé"); //fichier bien téléchargé
+         }
    }
 
    // permet de récupérer les valeurs des checkboxes
@@ -142,6 +153,7 @@ export class ClotheCreateComponent implements OnInit {
             clotheArray.IMG_VET = null;
          } else {
             clotheArray.IMG_VET = form.value["clotheImg"];
+            //mettre le nom de l'image pour aller chercher en bdd ? mettre le lien vers l'image sur le serveur !
          }
 
          // clotheArray.FK_ID_USER = form.value["idUser"]; // a implémenter en fonction d'une session
@@ -345,5 +357,18 @@ export class ClotheCreateComponent implements OnInit {
 
       }
    }
+
+   URL = 'http://localhost:3000/upload';
+   public uploader:FileUploader = new FileUploader({url:this.URL});
+
+   public zoneText:string;
+   public urlImage:string;
+
+   title = 'frontupdownfile';
+
+   onClickBtImg(){
+      this.urlImage = this.URL + this.zoneText.replace(/'/g, "\\'"); //permet d'échapper les quotes en bdd
+   }
+
 
 }

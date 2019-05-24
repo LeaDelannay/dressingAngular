@@ -229,7 +229,17 @@
       <div class="row">
         <label for="clotheImg">Image&nbsp;: </label>
         <input type="file" accept=".pdf, .png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
-          placeholder="Importer votre photo" name="clotheImg" ngModel #clotheImg="ngModel">
+          placeholder="Importer votre photo" name="clotheImg" ngModel #clotheImg="ngModel" ng2FileSelect [uploader]="uploader">
+          <button class="btn btn-info" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button>
+      </div>
+      <hr>
+      <div>
+         <p>Saisisser le nom de l'image</p>
+         <input type="text" placeholder="Saisir nom d'image" [(ngModel)]="zoneText" />
+         <button class="btn btn-info" type="button" (click)="onClickBtImg()">Afficher image</button>
+         <div style="margin-top:25px">
+            <img [src]="urlImage" alt="" />
+         </div>
       </div>
 
       <!-- <div class="row mt-2">
