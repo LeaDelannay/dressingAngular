@@ -42,12 +42,7 @@ export class ClotheCreateComponent implements OnInit {
    URL = 'http://localhost:3000/api/upload';
    public uploader:FileUploader = new FileUploader({url:this.URL});
 
-   public zoneText:string;
-   public urlImage:string;
-
-   title = 'frontupdownfile';
-
-   constructor(private service: ClothesService, private router: Router, private http: HttpClient) { }
+   constructor(private service: ClothesService, private router: Router) { }
 
    ngOnInit() {
       this.service.getAllBrands().subscribe(response => {
@@ -143,11 +138,6 @@ export class ClotheCreateComponent implements OnInit {
       return this.occasions
          .filter(occasion => occasion.checked)
          .map(occasion => occasion.ID_OCCAS);
-   }
-
-   //afficher l'image uploadée
-   onClickBtImg(){
-      this.urlImage = this.URL + this.zoneText.replace(/'/g, "\\'"); //permet d'échapper les quotes en bdd
    }
 
    onSubmit(form: NgForm) {

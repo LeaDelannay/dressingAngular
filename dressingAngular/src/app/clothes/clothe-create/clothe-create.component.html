@@ -232,20 +232,6 @@
           placeholder="Importer votre photo" name="clotheImg" ngModel #clotheImg="ngModel" ng2FileSelect [uploader]="uploader">
           <button class="btn btn-info" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button>
       </div>
-      <hr>
-      <div>
-         <p>Saisisser le nom de l'image</p>
-         <input type="text" placeholder="Saisir nom d'image" [(ngModel)]="zoneText" />
-         <button class="btn btn-info" type="button" (click)="onClickBtImg()">Afficher image</button>
-         <div style="margin-top:25px">
-            <img [src]="urlImage" alt="" />
-         </div>
-      </div>
-
-      <!-- <div class="row mt-2">
-        <input type="checkbox" value="" id="pasImage" name="pasImage" class="form-control col-1">
-        <label class="col-11 labelPasImage" for="pasImage">Pas de photo à ajouter pour le moment</label>
-      </div> -->
     </div>
   </div>
 
