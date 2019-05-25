@@ -16,7 +16,7 @@ var colorsRouter = require('./routes/colors');
 var featuresRouter = require('./routes/features');
 var notesRouter = require('./routes/notes');
 var occasionsRouter = require('./routes/occasions');
-var uplRouter = require('./routes/upl.js'); //upload
+var uploadRouter = require('./routes/upload.js'); //upload images
 
 var app = express();
 
@@ -29,6 +29,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(fileUpload());
 
 //paramétrage permettant d'éviter l'erreur CORS lorsque Angular tente d'accéder à NodeJs
 app.use(function(req, res, next){
@@ -47,7 +49,7 @@ app.use('/api/colors', colorsRouter);
 app.use('/api/features', featuresRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/occasions', occasionsRouter);
-app.use('/api/upload', uplRouter); //upload
+app.use('/api/upload', uploadRouter); //upload
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

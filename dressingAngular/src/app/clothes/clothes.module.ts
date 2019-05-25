@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClothesListComponent } from './clothes-list/clothes-list.component';
 import { ClotheCreateComponent } from './clothe-create/clothe-create.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ClotheCreateComponent } from './clothe-create/clothe-create.component';
    ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
   ],
   exports: [
    ClothesListComponent,

@@ -38,6 +38,14 @@ export class ClotheCreateComponent implements OnInit {
    varClotheNameExists: string = "";
    clotheNameJson: any[] = [];
 
+   //Upload d'images
+   URL = 'http://localhost:3000/api/upload';
+   public uploader:FileUploader = new FileUploader({url:this.URL});
+
+   public zoneText:string;
+   public urlImage:string;
+
+   title = 'frontupdownfile';
 
    constructor(private service: ClothesService, private router: Router, private http: HttpClient) { }
 
@@ -112,7 +120,7 @@ export class ClotheCreateComponent implements OnInit {
 
 
 
-         //upload d'images 
+         //uploader une image
          this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false;};
          this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
             console.log('ImageUpload:uploaded:', item, status, response);
@@ -137,6 +145,10 @@ export class ClotheCreateComponent implements OnInit {
          .map(occasion => occasion.ID_OCCAS);
    }
 
+   //afficher l'image uploadée
+   onClickBtImg(){
+      this.urlImage = this.URL + this.zoneText.replace(/'/g, "\\'"); //permet d'échapper les quotes en bdd
+   }
 
    onSubmit(form: NgForm) {
       if (form.valid == true) { //Si tous les champs du formulaire sont remplis
@@ -356,18 +368,6 @@ export class ClotheCreateComponent implements OnInit {
 
 
       }
-   }
-
-   URL = 'http://localhost:3000/upload';
-   public uploader:FileUploader = new FileUploader({url:this.URL});
-
-   public zoneText:string;
-   public urlImage:string;
-
-   title = 'frontupdownfile';
-
-   onClickBtImg(){
-      this.urlImage = this.URL + this.zoneText.replace(/'/g, "\\'"); //permet d'échapper les quotes en bdd
    }
 
 

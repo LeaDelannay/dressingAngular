@@ -228,7 +228,7 @@
     <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
       <div class="row">
         <label for="clotheImg">Image&nbsp;: </label>
-        <input type="file" accept=".pdf, .png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
+        <input type="file" accept=".png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
           placeholder="Importer votre photo" name="clotheImg" ngModel #clotheImg="ngModel" ng2FileSelect [uploader]="uploader">
           <button class="btn btn-info" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button>
       </div>

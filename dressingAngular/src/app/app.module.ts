@@ -11,7 +11,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/shared.module';
 import { ClothesModule } from './clothes/clothes.module';
 import { HomepageComponent } from './home/homepage/homepage.component';
-import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
    declarations: [
@@ -26,7 +25,6 @@ import { FileUploadModule } from 'ng2-file-upload';
       SharedModule,
       ReactiveFormsModule,
       ClothesModule,
-      FileUploadModule,
       AppRoutingModule /* Routes */
    ],
    providers: [],
