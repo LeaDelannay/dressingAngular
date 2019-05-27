@@ -40,7 +40,7 @@ export class ClotheCreateComponent implements OnInit {
    //Upload d'images
    URL = 'http://localhost:3000/api/upload';
    public uploader:FileUploader = new FileUploader({url:this.URL});
-   public clotheImg:string;
+   public clotheImg:any;
 
    constructor(private service: ClothesService, private router: Router) { }
 
@@ -154,7 +154,8 @@ export class ClotheCreateComponent implements OnInit {
          if (this.clotheImg == "" || this.clotheImg == undefined) {
             clotheArray.IMG_VET = null;
          } else {
-            let nomFichier = this.clotheImg.match('[a-zA-Z0-9_-]*\..*$');
+            // let nomFichier = this.clotheImg.match('[a-zA-Z0-9_-]*\..*$');
+            let nomFichier = this.clotheImg.replace(/^.*(\\|\/|\:)/, '');
             console.log(nomFichier);
             clotheArray.IMG_VET = this.URL+'/'+nomFichier;
             //mettre le nom de l'image pour aller chercher en bdd ? mettre le lien vers l'image sur le serveur !
@@ -339,26 +340,15 @@ export class ClotheCreateComponent implements OnInit {
 
    clotheNameExists() {
       if (this.varClotheNameExists.length >= 3) {
-         console.log(this.varClotheNameExists);
-         console.log(this.clotheNameJson);
-         // console.log(this.clotheNameList);
+         // console.log(this.varClotheNameExists); //récupère la saisie dans l'input
+         // console.log(this.clotheNameJson); //affiche le tableau json de tous les noms
 
-
-         // this.clotheNameJson.forEach(function(){
-         //    if(this.varClotheNameExists == this.clotheNameJson){
-         //       console.log("Nom déjà existant");
-            
-         //    }
-         // });
-
-         // console.log(clotheNameList.indexOf(this.varClotheNameExists));
-
-         //vVOIR INDEX OF ??
-         // VOIR Array.find or Array.filter or Array.forEach
-         //https://stackoverflow.com/questions/36419195/get-index-from-a-json-object-with-value/36419269
-
-
-
+         for(let elementVet of this.clotheNameJson){
+            // console.log(elementVet.NOM_VET);
+            if(elementVet.NOM_VET === this.varClotheNameExists){
+               console.log("Existe déjà");
+            }
+         }
       }
    }
 
