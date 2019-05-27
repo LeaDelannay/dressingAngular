@@ -1,4 +1,5 @@
 <h2>Comment se déshabiller</h2>
+<!-- <h2>Ajouter un vêtement</h2> -->
 <form (ngSubmit)="onSubmit(createClotheForm)" #createClotheForm="ngForm">
   <!-- fonction ngSubmit  -->
   <div class="row">
@@ -16,7 +17,8 @@
         <option value="" selected> ------ Catégorie ------ </option>
         <option *ngFor="let category of this.categories" value="{{category.ID_CAT}}"> {{category.LIBEL_CAT}} </option>
       </select>
-      <span class="blueLink" (click)="onClickCategory()">--> Catégorie qui n'exise pas car Roro ne l'a pas dit à Leyley dans la liste</span>&nbsp;&nbsp;
+      <span class="blueLink" (click)="onClickCategory()">--> Catégorie inexistante dans la liste</span>&nbsp;&nbsp;
+      <!-- <span class="blueLink" (click)="onClickCategory()">Catégorie qui n'exise pas car Roro ne l'a pas dit à Leyley dans la liste</span>&nbsp;&nbsp; -->
       <small *ngIf="clotheCategory.invalid && clotheCategory.touched" class="text-muted alert-danger">Vous n'avez pas
         rempli ce
         champ</small>
@@ -227,10 +229,11 @@
   <div class="row">
     <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
       <div class="row">
-        <label for="clotheImg">Image&nbsp;: </label>
+        <div class="col-6"><label for="clotheImg">Image&nbsp;: </label>
         <input type="file" accept=".png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
-          placeholder="Importer votre photo" name="clotheImg" ngModel #clotheImg="ngModel" ng2FileSelect [uploader]="uploader">
-          <button class="btn btn-info" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button>
+        placeholder="Importer votre photo" name="clotheImg" [(ngModel)]="clotheImg" ng2FileSelect [uploader]="uploader">
+        <button class="btn btn-info" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button></div>
+        <div class="col-6"></div>
       </div>
     </div>
   </div>

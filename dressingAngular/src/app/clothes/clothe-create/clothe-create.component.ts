@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Clothe } from '../clothe';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
    selector: 'app-clothe-create',
@@ -41,6 +40,7 @@ export class ClotheCreateComponent implements OnInit {
    //Upload d'images
    URL = 'http://localhost:3000/api/upload';
    public uploader:FileUploader = new FileUploader({url:this.URL});
+   public clotheImg:string;
 
    constructor(private service: ClothesService, private router: Router) { }
 
@@ -151,10 +151,12 @@ export class ClotheCreateComponent implements OnInit {
          clotheArray.ID_CARACT = this.selectedFeatures;
          clotheArray.ID_COUL = this.selectedColors;
          clotheArray.ID_OCCAS = this.selectedOccasions;
-         if (form.value["clotheImg"] == "") {
+         if (this.clotheImg == "" || this.clotheImg == undefined) {
             clotheArray.IMG_VET = null;
          } else {
-            clotheArray.IMG_VET = form.value["clotheImg"];
+            let nomFichier = this.clotheImg.match('[a-zA-Z0-9_-]*\..*$');
+            console.log(nomFichier);
+            clotheArray.IMG_VET = this.URL+'/'+nomFichier;
             //mettre le nom de l'image pour aller chercher en bdd ? mettre le lien vers l'image sur le serveur !
          }
 
