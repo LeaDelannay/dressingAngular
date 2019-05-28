@@ -6,10 +6,10 @@
     <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
       <label for="clotheName">Nom&nbsp;: </label><span> *</span>
       <input type="text" class="form-control" id="clotheName" placeholder="Nom du vêtement" name="clotheName" [(ngModel)]="varClotheNameExists"
-        #clotheName="ngModel" required (keyup)="clotheNameExists()">
+        #clotheName="ngModel" required (keyup)="fctClotheNameExists()">
       <small *ngIf="clotheName.invalid && clotheName.touched" id="clotheNameEmpty" class="text-muted alert-danger">Vous
         n'avez pas rempli ce champ</small>
-      <small *ngIf="[erreur] == 500" id="clotheNameExists" class="text-muted">Ce nom de vêtement existe déjà</small>
+      <small *ngIf="clotheNameExists == true" id="clotheNameExists" class="text-muted">Ce nom de vêtement existe déjà</small>
     </div>
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="categoryExists == true">
       <label for="clotheCategory">Catégorie&nbsp;: </label><span> *</span>

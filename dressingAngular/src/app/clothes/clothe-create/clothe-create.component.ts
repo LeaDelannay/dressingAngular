@@ -28,6 +28,13 @@ export class ClotheCreateComponent implements OnInit {
    featureExists = true;
    occasionExists = true;
 
+   brandNameExists = false;
+   categoryNameExists = false;
+   clotheNameExists = false;
+   colorNameExists = false;
+   featureNameExists = false;
+   occasionNameExists = false;
+
    newBrand: string = "";
    newCategory: string = "";
    newColor: string = "";
@@ -338,15 +345,14 @@ export class ClotheCreateComponent implements OnInit {
       this.occasionExists = true;
    }
 
-   clotheNameExists() {
-      if (this.varClotheNameExists.length >= 3) {
+   fctClotheNameExists() {
+      if (this.varClotheNameExists.length >= 4) {
          // console.log(this.varClotheNameExists); //récupère la saisie dans l'input
          // console.log(this.clotheNameJson); //affiche le tableau json de tous les noms
-
          for(let elementVet of this.clotheNameJson){
-            // console.log(elementVet.NOM_VET);
             if(elementVet.NOM_VET === this.varClotheNameExists){
-               console.log("Existe déjà");
+               console.log("existe déjà");
+               this.clotheNameExists = true;
             }
          }
       }
