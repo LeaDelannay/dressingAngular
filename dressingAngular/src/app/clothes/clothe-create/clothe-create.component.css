@@ -58,4 +58,13 @@ p{
 .fa-plus-circle{
    color: #4DE8BE !important;
 }
+.image{
+   max-width: 500px;
+   max-height: 500px;
+   display: block;
+   margin: 0 auto;
+   padding: 5px;
+   border: solid 2px gray;
+   border-radius: 5px;
+}
 /* ***** Formulaire [FIN] ***** */

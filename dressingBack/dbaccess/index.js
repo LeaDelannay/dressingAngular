@@ -73,6 +73,20 @@ module.exports.readCategories = function (fct) {
    });
 }
 
+//LISTE DE TOUS LES NOMS DE CATEGORIES EN BASE DE DONNEES - ALL
+module.exports.readCategoriesNames = function (fct) {
+   connection.query('SELECT LIBEL_CAT FROM categorie ORDER BY LIBEL_CAT ASC', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE CATEGORIE SPECIFIQUE
 module.exports.readSpecificCategory = function (idCategory, fct) {
    var sql = "SELECT * FROM vetement inner join categorie on vetement.FK_ID_CAT = categorie.ID_CAT WHERE categorie.ID_CAT = ? ORDER BY NOM_VET ASC";

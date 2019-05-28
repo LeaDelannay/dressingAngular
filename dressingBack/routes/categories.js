@@ -3,16 +3,16 @@ var router = express.Router();
 
 var dbacc = require('../dbaccess');
 
- //READ ALL CATEGORIES
- router.get('/', function(req, res, next) {
-   console.log("----> call read all categories");
-   dbacc.readCategories(function(err, data){
-      if (err){
+//READ ALL CATEGORIES NAME
+router.get('/categoryname/', function (req, res, next) {
+   console.log("----> call read all category name");
+   dbacc.readCategoriesNames(function (err, data) {
+      if (err) {
          res.sendStatus(500);
          return;
       }
-      if(data == 0 || data == null || data == undefined || data == ""){
-         res.sendStatus(204);
+      if (data == 0 || data == null || data == undefined || data == "") {
+         res.sendStatus(204); //no content
          return;
       }
       res.send(data);
@@ -30,6 +30,22 @@ router.get('/:idCategory', function(req, res, next) {
       }
       if(data == 0 || data == null || data == undefined || data == ""){
          res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data);
+   })
+});
+
+ //READ ALL CATEGORIES
+ router.get('/', function(req, res, next) {
+   console.log("----> call read all categories");
+   dbacc.readCategories(function(err, data){
+      if (err){
+         res.sendStatus(500);
+         return;
+      }
+      if(data == 0 || data == null || data == undefined || data == ""){
+         res.sendStatus(204);
          return;
       }
       res.send(data);

@@ -5,11 +5,12 @@
   <div class="row">
     <div class="form-group col-10 offset-1 col-md-4 offset-md-1 p1">
       <label for="clotheName">Nom&nbsp;: </label><span> *</span>
-      <input type="text" class="form-control" id="clotheName" placeholder="Nom du vêtement" name="clotheName" [(ngModel)]="varClotheNameExists"
-        #clotheName="ngModel" required (keyup)="fctClotheNameExists()">
+      <input type="text" class="form-control" id="clotheName" placeholder="Nom du vêtement" name="clotheName"
+        [(ngModel)]="newClothe" #clotheName="ngModel" required (keyup)="fctClotheNameExists()">
       <small *ngIf="clotheName.invalid && clotheName.touched" id="clotheNameEmpty" class="text-muted alert-danger">Vous
         n'avez pas rempli ce champ</small>
-      <small *ngIf="clotheNameExists == true" id="clotheNameExists" class="text-muted">Ce nom de vêtement existe déjà</small>
+      <small *ngIf="clotheNameExists == true" id="clotheNameExists" class="text-muted">Ce nom de vêtement existe
+        déjà</small>
     </div>
     <div class="form-group col-10 offset-1 col-md-4 offset-md-2 p1" *ngIf="categoryExists == true">
       <label for="clotheCategory">Catégorie&nbsp;: </label><span> *</span>
@@ -32,7 +33,9 @@
       <div class="row">
         <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="categoryName" placeholder="Nom de la catégorie"
-            name="categoryName" ngModel #categoryName="ngModel" required [(ngModel)]="newCategory">
+            name="categoryName" [(ngModel)]="newCategory" #categoryName="ngModel" required (keyup)="fctCategoryNameExists()">
+            <small *ngIf="categoryNameExists == true" id="categoryNameExists" class="text-muted">Ce nom de catégorie existe
+               déjà</small>
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitCategorie()"></i>
@@ -228,13 +231,16 @@
   </div>
   <div class="row">
     <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
-      <div class="row">
-        <div class="col-6"><label for="clotheImg">Image&nbsp;: </label>
-        <input type="file" accept=".png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
+      <label for="clotheImg">Image&nbsp;: </label>
+      <input type="file" accept=".png, .gif, .jpg, .raw" class="form-control" id="clotheImg"
         placeholder="Importer votre photo" name="clotheImg" [(ngModel)]="clotheImg" ng2FileSelect [uploader]="uploader">
-        <button class="btn btn-info" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button></div>
-        <div class="col-6"></div>
-      </div>
+      <button class="btn btn-info" type="button" (click)="uploader.uploadAll()"
+        [disabled]="!uploader.getNotUploadedItems().length">Télécharger l'image</button>
+    </div>
+  </div>
+  <div class="row">
+   <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
+      <img [src]="urlImage" alt="urlImage" class="image" />
     </div>
   </div>
 
@@ -243,5 +249,5 @@
   <p>* Tous ces champs sont obligatoires. Vous pourrez les modifier ultérieurement.</p>
   <input type="text" id="idUser" name="idUser" value="XXXX" ngModel #idUser="ngModel" hidden>
   <button type="submit" class="btn btn-outline-success col-6 offset-3 col-md-4 offset-md-4"
-    [disabled]="createClotheForm.invalid">Enregistrer</button>
+    [disabled]="createClotheForm.invalid || clotheNameExists == true">Enregistrer</button>
 </form>

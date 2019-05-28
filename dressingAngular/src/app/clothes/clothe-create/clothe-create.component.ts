@@ -15,6 +15,7 @@ export class ClotheCreateComponent implements OnInit {
 
    erreur = null;
 
+   //servent à l'ajout des éléments manquants en base de données
    brands: any[] = [];
    categories: any[] = [];
    colors: any[] = [];
@@ -22,12 +23,14 @@ export class ClotheCreateComponent implements OnInit {
    notes: any[] = [];
    occasions: any[] = [];
 
+   // ngIf - sert côté front pour recharger la liste des éléments une fois le nouvel élément enregistré en bdd
    brandExists = true;
    categoryExists = true;
    colorExists = true;
    featureExists = true;
    occasionExists = true;
 
+   // ngIf - sert côté front pour l'affichage de la phrase indiquant que le nom saisi existe déjà en bdd
    brandNameExists = false;
    categoryNameExists = false;
    clotheNameExists = false;
@@ -35,19 +38,23 @@ export class ClotheCreateComponent implements OnInit {
    featureNameExists = false;
    occasionNameExists = false;
 
+   // récupère la valeur saisie dans l'input pour ensuite le passer à la bdd via une fonction
    newBrand: string = "";
    newCategory: string = "";
+   newClothe: string = "";
    newColor: string = "";
    newFeature: string = "";
    newOccasion: string = "";
 
-   varClotheNameExists: string = "";
+   //récupère la liste des noms en bdd - sert à vérifier si le nom saisi dans l'input existe en bdd
+   categoryNameJson: any[] = [];
    clotheNameJson: any[] = [];
 
    //Upload d'images
    URL = 'http://localhost:3000/api/upload';
-   public uploader:FileUploader = new FileUploader({url:this.URL});
-   public clotheImg:any;
+   public uploader: FileUploader = new FileUploader({ url: this.URL });
+   public clotheImg: any;
+   public urlImage: string = "assets/pictures/tshirt.png";
 
    constructor(private service: ClothesService, private router: Router) { }
 
@@ -110,9 +117,9 @@ export class ClotheCreateComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
          });
 
-      //récupère tous les noms des vêtements (objet)
-      this.service.getAllClothesName().subscribe(response => {
-         this.clotheNameJson = response.body;
+      //récupère tous les noms des catégories (objet Json)
+      this.service.getAllCategoriesName().subscribe(response => {
+         this.categoryNameJson = response.body;
          this.erreur = response.status;
       },
          error => {
@@ -120,14 +127,25 @@ export class ClotheCreateComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
          });
 
+      //récupère tous les noms des vêtements (objet Json)
+      this.service.getAllClothesName().subscribe(response => {
+         this.clotheNameJson = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
+         });
 
 
-         //uploader une image
-         this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false;};
-         this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-            console.log('ImageUpload:uploaded:', item, status, response);
-            alert("Fichier bien téléchargé"); //fichier bien téléchargé
-         }
+
+      //uploader une image
+      this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+      this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+         console.log('ImageUpload:uploaded:', item, status, response);
+         this.urlImage = this.URL + "/" + this.clotheImg.replace(/^.*(\\|\/|\:)/, '');
+         alert("Fichier bien téléchargé"); //fichier bien téléchargé
+      }
    }
 
    // permet de récupérer les valeurs des checkboxes
@@ -164,8 +182,7 @@ export class ClotheCreateComponent implements OnInit {
             // let nomFichier = this.clotheImg.match('[a-zA-Z0-9_-]*\..*$');
             let nomFichier = this.clotheImg.replace(/^.*(\\|\/|\:)/, '');
             console.log(nomFichier);
-            clotheArray.IMG_VET = this.URL+'/'+nomFichier;
-            //mettre le nom de l'image pour aller chercher en bdd ? mettre le lien vers l'image sur le serveur !
+            clotheArray.IMG_VET = this.URL + '/' + nomFichier;
          }
 
          // clotheArray.FK_ID_USER = form.value["idUser"]; // a implémenter en fonction d'une session
@@ -188,6 +205,12 @@ export class ClotheCreateComponent implements OnInit {
       }
    }
    //au click sur le lien XX inexistant dans la liste/revenir à la liste des XX, permet d'afficher la liste des éléments OU l'input permettant un nouvel ajout
+   onClickBrand() {
+      this.brandExists = this.brandExists ? false : true;
+   }
+   onClickCategory() {
+      this.categoryExists = this.categoryExists ? false : true;
+   }
    onClickColor() {
       this.colorExists = this.colorExists ? false : true;
    }
@@ -196,12 +219,6 @@ export class ClotheCreateComponent implements OnInit {
    }
    onClickOccasion() {
       this.occasionExists = this.occasionExists ? false : true;
-   }
-   onClickBrand() {
-      this.brandExists = this.brandExists ? false : true;
-   }
-   onClickCategory() {
-      this.categoryExists = this.categoryExists ? false : true;
    }
 
    //au click sur le plus, ajoute l'élément en bdd et recharge la page
@@ -345,18 +362,33 @@ export class ClotheCreateComponent implements OnInit {
       this.occasionExists = true;
    }
 
+   fctCategoryNameExists() {
+      if (this.newCategory.length >= 3) {
+         console.log(this.newCategory); //récupère la saisie dans l'input
+         console.log(this.categoryNameJson); //affiche le tableau json de tous les noms
+         for (let elementCat of this.categoryNameJson) {
+            if (elementCat.LIBEL_CAT === this.newCategory) {
+               console.log("Cette catégorie existe déjà");
+               this.categoryNameExists = true;
+            }
+         }
+      }
+   }
+
    fctClotheNameExists() {
-      if (this.varClotheNameExists.length >= 4) {
-         // console.log(this.varClotheNameExists); //récupère la saisie dans l'input
+      if (this.newClothe.length >= 4) {
+         // console.log(this.newClothe); //récupère la saisie dans l'input
          // console.log(this.clotheNameJson); //affiche le tableau json de tous les noms
-         for(let elementVet of this.clotheNameJson){
-            if(elementVet.NOM_VET === this.varClotheNameExists){
-               console.log("existe déjà");
+         for (let elementVet of this.clotheNameJson) {
+            if (elementVet.NOM_VET === this.newClothe) {
+               console.log("Ce nom de vêtement existe déjà");
                this.clotheNameExists = true;
             }
          }
       }
    }
+
+
 
 
 }
