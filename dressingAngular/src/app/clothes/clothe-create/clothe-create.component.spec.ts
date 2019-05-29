@@ -23,6 +23,16 @@ describe('ClotheCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should test new brand', () => {
+     component.newBrand = "fvffff"; //définir des valeurs en dur pour vérifier que ça fait bien ce que je veux
+     //définir un traitement
+    expect(component.newBrand).toBe('fvffff'); //tester si fonctionne ou pas
+
+  });
+
+  //TESTER QUE MON SERVEUR RENVOIE BIEN DES ERREURS
+
+  
   // tous les champs du formulaire s'affichent au chargement de la page
 
   // le select catégorie affiche l'intégralité des catégories disponibles en base de données

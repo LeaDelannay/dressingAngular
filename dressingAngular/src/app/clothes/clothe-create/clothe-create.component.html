@@ -256,5 +256,5 @@
   <p>* Tous ces champs sont obligatoires. Vous pourrez les modifier ultérieurement.</p>
   <input type="text" id="idUser" name="idUser" value="XXXX" ngModel #idUser="ngModel" hidden>
   <button type="submit" class="btn btn-outline-success col-6 offset-3 col-md-4 offset-md-4"
-    [disabled]="createClotheForm.invalid || clotheNameExists == true">Enregistrer</button>
+    [disabled]="createClotheForm.invalid || !colors  || !features  || !occasions || brandNameExists == true || categoryNameExists == true || clotheNameExists == true || colorNameExists == true || featureNameExists == true || occasionNameExists == true">Enregistrer</button>
 </form>

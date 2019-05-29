@@ -416,6 +416,9 @@ export class ClotheCreateComponent implements OnInit {
             if (elementBrand.NOM_MARQUE === this.newBrand) {
                console.log("Cette marque existe déjà");
                this.brandNameExists = true;
+               break;
+            }else{
+               this.brandNameExists = false;
             }
          }
       }
@@ -429,6 +432,9 @@ export class ClotheCreateComponent implements OnInit {
             if (elementCat.LIBEL_CAT === this.newCategory) {
                console.log("Cette catégorie existe déjà");
                this.categoryNameExists = true;
+               break;
+            }else{
+               this.categoryNameExists = false;
             }
          }
       }
@@ -442,6 +448,9 @@ export class ClotheCreateComponent implements OnInit {
             if (elementVet.NOM_VET === this.newClothe) {
                console.log("Ce nom de vêtement existe déjà");
                this.clotheNameExists = true;
+               break;
+            }else{
+               this.clotheNameExists = false;
             }
          }
       }
@@ -455,6 +464,9 @@ export class ClotheCreateComponent implements OnInit {
             if (elementCol.LIBEL_COUL === this.newColor) {
                console.log("Ce nom de couleur existe déjà");
                this.colorNameExists = true;
+               break;
+            }else{
+               this.colorNameExists = false;
             }
          }
       }
@@ -468,6 +480,9 @@ export class ClotheCreateComponent implements OnInit {
             if (elementFeat.LIBEL_CARACT === this.newFeature) {
                console.log("Ce nom de caractéristique existe déjà");
                this.featureNameExists = true;
+               break;
+            }else{
+               this.featureNameExists = false;
             }
          }
       }
@@ -481,6 +496,9 @@ export class ClotheCreateComponent implements OnInit {
             if (elementOccas.LIBEL_OCCAS === this.newOccasion) {
                console.log("Ce nom d'occasion existe déjà");
                this.occasionNameExists = true;
+               break;
+            }else{
+               this.occasionNameExists = false;
             }
          }
       }
