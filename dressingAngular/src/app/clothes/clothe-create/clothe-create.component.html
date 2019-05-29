@@ -33,9 +33,9 @@
       <div class="row">
         <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="categoryName" placeholder="Nom de la catégorie"
-            name="categoryName" [(ngModel)]="newCategory" #categoryName="ngModel" required (keyup)="fctCategoryNameExists()">
-            <small *ngIf="categoryNameExists == true" id="categoryNameExists" class="text-muted">Ce nom de catégorie existe
-               déjà</small>
+            name="categoryName" [(ngModel)]="newCategory" #categoryName="ngModel" required
+            (keyup)="fctCategoryNameExists()">
+
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitCategorie()"></i>
@@ -47,7 +47,8 @@
           <small *ngIf="categoryName.invalid && categoryName.touched" id="categoryNameEmpty"
             class="text-muted alert-danger">Vous
             n'avez pas rempli ce champ</small>
-          <small *ngIf="[erreur] == 500" id="categoryNameExists" class="text-muted">Ce nom de catégorie existe
+          <small *ngIf="categoryNameExists == true" id="categoryNameExists" class="text-muted">Ce nom de catégorie
+            existe
             déjà</small>
         </div>
       </div>
@@ -74,7 +75,7 @@
       <div class="row">
         <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="brandName" placeholder="Nom de la marque" name="brandName" ngModel
-            #brandName="ngModel" required [(ngModel)]="newBrand">
+            #brandName="ngModel" required [(ngModel)]="newBrand" (keyup)="fctBrandNameExists()">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitBrand()"></i>
@@ -85,7 +86,8 @@
           <span class="blueLink" (click)="onClickBrand()">--> Revenir à la liste des marques</span>&nbsp;&nbsp;
           <small *ngIf="brandName.invalid && brandName.touched" id="brandNameEmpty" class="text-muted alert-danger">Vous
             n'avez pas rempli ce champ</small>
-          <small *ngIf="[erreur] == 500" id="brandNameExists" class="text-muted">Ce nom de marque existe déjà</small>
+          <small *ngIf="brandNameExists == true" id="brandNameExists" class="text-muted">Ce nom de marque existe
+            déjà</small>
         </div>
       </div>
     </div>
@@ -112,7 +114,7 @@
       <div class="row">
         <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="colorName" placeholder="Nom de la couleur" name="colorName"
-            ngModel #colorName="ngModel" required [(ngModel)]="newColor">
+            ngModel #colorName="ngModel" required [(ngModel)]="newColor" (keyup)="fctColorNameExists()">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitColor()"></i>
@@ -123,7 +125,9 @@
           <span class="blueLink" (click)="onClickColor()">--> Revenir à la liste des couleurs</span>&nbsp;&nbsp;
           <small *ngIf="colorName.invalid && colorName.touched" id="colorNameEmpty" class="text-muted alert-danger">Vous
             n'avez pas rempli ce champ</small>
-          <small *ngIf="[erreur] == 500" id="colorNameExists" class="text-muted">Ce nom de couleur existe déjà</small>
+          <small *ngIf="colorNameExists == true" id="colorNameExists" class="text-muted">Ce nom de couleur
+            existe
+            déjà</small>
         </div>
       </div>
     </div>
@@ -153,7 +157,8 @@
       <div class="row">
         <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="featureName" placeholder="Nom de la caractéristique"
-            name="featureName" ngModel #featureName="ngModel" required [(ngModel)]="newFeature">
+            name="featureName" ngModel #featureName="ngModel" required [(ngModel)]="newFeature"
+            (keyup)="fctFeatureNameExists()">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitFeature()"></i>
@@ -165,7 +170,8 @@
             caractéristiques</span>&nbsp;&nbsp;
           <small *ngIf="featureName.invalid && featureName.touched" id="featureNameEmpty"
             class="text-muted alert-danger">Vous n'avez pas rempli ce champ</small>
-          <small *ngIf="[erreur] == 500" id="featureNameExists" class="text-muted">Ce nom de caractéristique existe
+          <small *ngIf="featureNameExists == true" id="featureNameExists" class="text-muted">Ce nom de caractéristique
+            existe
             déjà</small>
         </div>
       </div>
@@ -193,7 +199,7 @@
       <div class="row">
         <div class="col-10 col-xl-11">
           <input type="text" class="form-control" id="occasionName" placeholder="Nom de l'occasion" name="occasionName"
-            ngModel #occasionName="ngModel" required [(ngModel)]="newOccasion">
+            ngModel #occasionName="ngModel" required [(ngModel)]="newOccasion" (keyup)="fctOccasionNameExists()">
         </div>
         <div class="col-1">
           <i class="fas fa-plus-circle fa-2x" (click)="onSubmitOccasion()"></i>
@@ -204,7 +210,8 @@
           <span class="blueLink" (click)="onClickOccasion()">--> Revenir à la liste des occasions</span>&nbsp;&nbsp;
           <small *ngIf="occasionName.invalid && occasionName.touched" id="occasionNameEmpty"
             class="text-muted alert-danger">Vous n'avez pas rempli ce champ</small>
-          <small *ngIf="[erreur] == 500" id="occasionNameExists" class="text-muted">Ce nom d'occasion existe
+          <small *ngIf="occasionNameExists == true" id="occasionNameExists" class="text-muted">Ce nom d'occasion
+            existe
             déjà</small>
         </div>
       </div>
@@ -239,7 +246,7 @@
     </div>
   </div>
   <div class="row">
-   <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
+    <div class="form-group col-10 offset-1 col-md-6 offset-md-3 p1">
       <img [src]="urlImage" alt="urlImage" class="image" />
     </div>
   </div>

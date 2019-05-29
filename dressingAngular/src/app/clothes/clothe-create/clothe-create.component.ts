@@ -47,8 +47,12 @@ export class ClotheCreateComponent implements OnInit {
    newOccasion: string = "";
 
    //récupère la liste des noms en bdd - sert à vérifier si le nom saisi dans l'input existe en bdd
+   brandNameJson: any[] = [];
    categoryNameJson: any[] = [];
    clotheNameJson: any[] = [];
+   colorNameJson: any[] = [];
+   featureNameJson: any[] = [];
+   occasionNameJson: any[] = [];
 
    //Upload d'images
    URL = 'http://localhost:3000/api/upload';
@@ -117,6 +121,17 @@ export class ClotheCreateComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
          });
 
+
+      //récupère tous les noms des marques (objet Json)
+      this.service.getAllBrandsName().subscribe(response => {
+         this.brandNameJson = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - brands/brandname -- " + error);
+         });
+
       //récupère tous les noms des catégories (objet Json)
       this.service.getAllCategoriesName().subscribe(response => {
          this.categoryNameJson = response.body;
@@ -124,7 +139,7 @@ export class ClotheCreateComponent implements OnInit {
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
+            console.log("Erreur lors de l'appel au service clothes.service - categories/categoryname -- " + error);
          });
 
       //récupère tous les noms des vêtements (objet Json)
@@ -134,7 +149,37 @@ export class ClotheCreateComponent implements OnInit {
       },
          error => {
             this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
+            console.log("Erreur lors de l'appel au service clothes.service - clothes/clothename -- " + error);
+         });
+
+      //récupère tous les noms des couleurs (objet Json)
+      this.service.getAllColorsName().subscribe(response => {
+         this.colorNameJson = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - colors/colorname -- " + error);
+         });
+
+      //récupère tous les noms des caractéristiques (objet Json)
+      this.service.getAllFeaturesName().subscribe(response => {
+         this.featureNameJson = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - features/featurename -- " + error);
+         });
+
+      //récupère tous les noms des occasion (objet Json)
+      this.service.getAllOccasionsName().subscribe(response => {
+         this.occasionNameJson = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - occasions/occasionname -- " + error);
          });
 
 
@@ -362,6 +407,20 @@ export class ClotheCreateComponent implements OnInit {
       this.occasionExists = true;
    }
 
+   //fonctions permettant de vérifier l'unicité des noms
+   fctBrandNameExists() {
+      if (this.newBrand.length >= 3) {
+         console.log(this.newBrand); //récupère la saisie dans l'input
+         console.log(this.brandNameJson); //affiche le tableau json de tous les noms
+         for (let elementBrand of this.brandNameJson) {
+            if (elementBrand.NOM_MARQUE === this.newBrand) {
+               console.log("Cette marque existe déjà");
+               this.brandNameExists = true;
+            }
+         }
+      }
+   }
+
    fctCategoryNameExists() {
       if (this.newCategory.length >= 3) {
          console.log(this.newCategory); //récupère la saisie dans l'input
@@ -376,13 +435,52 @@ export class ClotheCreateComponent implements OnInit {
    }
 
    fctClotheNameExists() {
-      if (this.newClothe.length >= 4) {
+      if (this.newClothe.length >= 3) {
          // console.log(this.newClothe); //récupère la saisie dans l'input
          // console.log(this.clotheNameJson); //affiche le tableau json de tous les noms
          for (let elementVet of this.clotheNameJson) {
             if (elementVet.NOM_VET === this.newClothe) {
                console.log("Ce nom de vêtement existe déjà");
                this.clotheNameExists = true;
+            }
+         }
+      }
+   }
+
+   fctColorNameExists() {
+      if (this.newColor.length >= 3) {
+         // console.log(this.newColor); //récupère la saisie dans l'input
+         // console.log(this.colorNameJson); //affiche le tableau json de tous les noms
+         for (let elementCol of this.colorNameJson) {
+            if (elementCol.LIBEL_COUL === this.newColor) {
+               console.log("Ce nom de couleur existe déjà");
+               this.colorNameExists = true;
+            }
+         }
+      }
+   }
+
+   fctFeatureNameExists() {
+      if (this.newFeature.length >= 3) {
+         // console.log(this.newFeature); //récupère la saisie dans l'input
+         // console.log(this.featureNameJson); //affiche le tableau json de tous les noms
+         for (let elementFeat of this.featureNameJson) {
+            if (elementFeat.LIBEL_CARACT === this.newFeature) {
+               console.log("Ce nom de caractéristique existe déjà");
+               this.featureNameExists = true;
+            }
+         }
+      }
+   }
+
+   fctOccasionNameExists() {
+      if (this.newOccasion.length >= 3) {
+         // console.log(this.newOccasion); //récupère la saisie dans l'input
+         // console.log(this.occasionNameJson); //affiche le tableau json de tous les noms
+         for (let elementOccas of this.occasionNameJson) {
+            if (elementOccas.LIBEL_OCCAS === this.newOccasion) {
+               console.log("Ce nom d'occasion existe déjà");
+               this.occasionNameExists = true;
             }
          }
       }

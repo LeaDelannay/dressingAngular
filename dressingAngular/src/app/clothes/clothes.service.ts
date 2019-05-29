@@ -90,6 +90,11 @@ export class ClothesService {
       return this.http.get<any[]>(`${this.baseUrl}/${selectedFilter}/${selectedOption}`, {observe: 'response'});
    }
 
+   //liste des noms de marques en base de données
+   public getAllBrandsName(): Observable<HttpResponse<Clothe[]>> {
+      return this.http.get<Clothe[]>(`${this.baseUrl}/brands/brandname`, {observe: 'response'});
+   }
+
    //liste des noms de catégories en base de données
    public getAllCategoriesName(): Observable<HttpResponse<Clothe[]>> {
       return this.http.get<Clothe[]>(`${this.baseUrl}/categories/categoryname`, {observe: 'response'});
@@ -98,5 +103,20 @@ export class ClothesService {
    //liste des noms de vêtements en base de données
    public getAllClothesName(): Observable<HttpResponse<Clothe[]>> {
       return this.http.get<Clothe[]>(`${this.baseUrl}/clothes/clothename`, {observe: 'response'});
+   }
+
+   //liste des noms de couleurs en base de données
+   public getAllColorsName(): Observable<HttpResponse<Clothe[]>> {
+      return this.http.get<Clothe[]>(`${this.baseUrl}/colors/colorname`, {observe: 'response'});
+   }
+
+   //liste des noms de caractéristiques en base de données
+   public getAllFeaturesName(): Observable<HttpResponse<Clothe[]>> {
+      return this.http.get<Clothe[]>(`${this.baseUrl}/features/featurename`, {observe: 'response'});
+   }
+
+   //liste des noms de occasions en base de données
+   public getAllOccasionsName(): Observable<HttpResponse<Clothe[]>> {
+      return this.http.get<Clothe[]>(`${this.baseUrl}/occasions/occasionname`, {observe: 'response'});
    }
 }

@@ -25,6 +25,21 @@ module.exports.readBrands = function (fct) {
    });
 }
 
+//LISTE DE TOUS LES NOMS DE MARQUES EN BASE DE DONNEES - ALL
+module.exports.readBrandsNames = function (fct) {
+   connection.query('SELECT NOM_MARQUE FROM marque ORDER BY NOM_MARQUE ASC', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
+
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE MARQUE SPECIFIQUE
 module.exports.readSpecificBrand = function (idBrand, fct) {
    var sql = "SELECT * FROM vetement inner join marque on vetement.FK_ID_MARQUE = marque.ID_MARQUE WHERE marque.ID_MARQUE = ? ORDER BY NOM_VET ASC";
@@ -229,6 +244,20 @@ module.exports.readColors = function (fct) {
    });
 }
 
+//LISTE DE TOUS LES NOMS DE COULEURS EN BASE DE DONNEES - ALL
+module.exports.readColorsNames = function (fct) {
+   connection.query('SELECT LIBEL_COUL FROM couleur ORDER BY LIBEL_COUL ASC', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
 //LISTE DE TOUS LES VETEMENTS POSSEDANT UNE COULEUR SPECIFIQUE
 module.exports.readSpecificColor = function (idColor, fct) {
    var sql = "SELECT * FROM vetement inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.ID_COUL = vet_coul_assoc.ID_COUL WHERE couleur.ID_COUL = ? ORDER BY NOM_VET ASC";
@@ -267,6 +296,20 @@ module.exports.createColor = function (obj, fct) {
 //LISTE DE TOUTES LES CARACTERISTIQUES EN BASE DE DONNEES - ALL
 module.exports.readFeatures = function (fct) {
    connection.query('SELECT * FROM caracteristique ORDER BY LIBEL_CARACT ASC', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
+//LISTE DE TOUS LES NOMS DE CATEGORIES EN BASE DE DONNEES - ALL
+module.exports.readFeaturesNames = function (fct) {
+   connection.query('SELECT LIBEL_CARACT FROM caracteristique ORDER BY LIBEL_CARACT ASC', (err, results) => {
       if (err) {
          console.error(err);
          fct(err, null);
@@ -348,6 +391,20 @@ module.exports.readSpecificNote = function (idNote, fct) {
 //LISTE DE TOUTES LES OCCASIONS EN BASE DE DONNEES - ALL
 module.exports.readOccasions = function (fct) {
    connection.query('SELECT * FROM occasion ORDER BY LIBEL_OCCAS ASC', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
+//LISTE DE TOUS LES NOMS D'OCCASIONS EN BASE DE DONNEES - ALL
+module.exports.readOccasionsNames = function (fct) {
+   connection.query('SELECT LIBEL_OCCAS FROM occasion ORDER BY LIBEL_OCCAS ASC', (err, results) => {
       if (err) {
          console.error(err);
          fct(err, null);

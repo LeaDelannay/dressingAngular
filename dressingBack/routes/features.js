@@ -3,15 +3,31 @@ var router = express.Router();
 
 var dbacc = require('../dbaccess');
 
- //READ ALL FEATURES
- router.get('/', function(req, res, next) {
-   console.log("----> call read all features");
-   dbacc.readFeatures(function(err, data){
-      if (err){
+//READ ALL FEATURE NAME
+router.get('/featurename/', function (req, res, next) {
+   console.log("----> call read all features name");
+   dbacc.readFeaturesNames(function (err, data) {
+      if (err) {
          res.sendStatus(500);
          return;
       }
-      if(data == 0 || data == null || data == undefined || data == ""){
+      if (data == 0 || data == null || data == undefined || data == "") {
+         res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data);
+   })
+});
+
+//READ ALL FEATURES
+router.get('/', function (req, res, next) {
+   console.log("----> call read all features");
+   dbacc.readFeatures(function (err, data) {
+      if (err) {
+         res.sendStatus(500);
+         return;
+      }
+      if (data == 0 || data == null || data == undefined || data == "") {
          res.sendStatus(204);
          return;
       }
@@ -20,15 +36,15 @@ var dbacc = require('../dbaccess');
 });
 
 //READ TOUS LES VETEMENTS POSSEDANT UNE CARACTERISTIQUE SPECIFIQUE
-router.get('/:idFeature', function(req, res, next) {
+router.get('/:idFeature', function (req, res, next) {
    console.log("----> call read clothes with idFeature");
-   dbacc.readSpecificFeature(req.params.idFeature, function(err, data){
+   dbacc.readSpecificFeature(req.params.idFeature, function (err, data) {
       console.log(data);
-      if (err){
+      if (err) {
          res.sendStatus(500);
          return;
       }
-      if(data == 0 || data == null || data == undefined || data == ""){
+      if (data == 0 || data == null || data == undefined || data == "") {
          res.sendStatus(204); //no content
          return;
       }

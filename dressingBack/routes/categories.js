@@ -5,7 +5,7 @@ var dbacc = require('../dbaccess');
 
 //READ ALL CATEGORIES NAME
 router.get('/categoryname/', function (req, res, next) {
-   console.log("----> call read all category name");
+   console.log("----> call read all categories name");
    dbacc.readCategoriesNames(function (err, data) {
       if (err) {
          res.sendStatus(500);
@@ -20,15 +20,15 @@ router.get('/categoryname/', function (req, res, next) {
 });
 
 //READ TOUS LES VETEMENTS POSSEDANT UNE CATEGORIE SPECIFIQUE
-router.get('/:idCategory', function(req, res, next) {
+router.get('/:idCategory', function (req, res, next) {
    console.log("----> call read clothes with idCategory");
-   dbacc.readSpecificCategory(req.params.idCategory, function(err, data){
+   dbacc.readSpecificCategory(req.params.idCategory, function (err, data) {
       console.log(data);
-      if (err){
+      if (err) {
          res.sendStatus(500);
          return;
       }
-      if(data == 0 || data == null || data == undefined || data == ""){
+      if (data == 0 || data == null || data == undefined || data == "") {
          res.sendStatus(204); //no content
          return;
       }
@@ -36,15 +36,15 @@ router.get('/:idCategory', function(req, res, next) {
    })
 });
 
- //READ ALL CATEGORIES
- router.get('/', function(req, res, next) {
+//READ ALL CATEGORIES
+router.get('/', function (req, res, next) {
    console.log("----> call read all categories");
-   dbacc.readCategories(function(err, data){
-      if (err){
+   dbacc.readCategories(function (err, data) {
+      if (err) {
          res.sendStatus(500);
          return;
       }
-      if(data == 0 || data == null || data == undefined || data == ""){
+      if (data == 0 || data == null || data == undefined || data == "") {
          res.sendStatus(204);
          return;
       }
