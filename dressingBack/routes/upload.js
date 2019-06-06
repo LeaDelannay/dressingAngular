@@ -10,7 +10,7 @@ router.post('/', function (req, res) {
    if (Object.keys(req.files).length == 0) { //vérifie si je n'ai pas envoyé un fichier ?
       return res.status(400).send("Pas de fichier envoyé"); //alors erreur
    }
-   let sampleFile = req.files.file; //fichier file qui est dnas un objet files dans mon req
+   let sampleFile = req.files.file; //fichier file qui est dans un objet files dans mon req
    let pth = path.join(rootPath, '..', 'down', sampleFile.name); //down = nom du dossier contenant toutes les images. Rootpath = le local. .. = répertoire parent. Samplefile.name = nom de mon fichier
    sampleFile.mv(pth, function(err){ //mv est une méthode d'upload
       if(err){
