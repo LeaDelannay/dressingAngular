@@ -188,7 +188,7 @@ export class ClotheCreateComponent implements OnInit {
       this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
       this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
          console.log('ImageUpload:uploaded:', item, status, response);
-         this.urlImage = this.URL + "/" + this.clotheImg.replace(/^.*(\\|\/|\:)/, '');
+         this.urlImage = this.URL + "/" + this.clotheImg.replace(/^.*(\\|\/|\:)/, ''); //récupère le nom du fichier (tout ce qui vient après le dernier / du path) pour l'afficher dans la div du front
          alert("Fichier bien téléchargé"); //fichier bien téléchargé
       }
    }

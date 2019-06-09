@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Clothe } from '../clothe';
 import { ClothesService } from '../clothes.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClotheDetailComponent } from '../clothe-detail/clothe-detail.component';
 
 @Component({
    selector: 'app-clothes-list',
@@ -29,7 +31,7 @@ export class ClothesListComponent implements OnInit {
    selectedOccas: string = "";
 
    //injection de dépendance de mon service ClothesService
-   constructor(private service: ClothesService) { }
+   constructor(private service: ClothesService, private modalService: NgbModal) { }
 
    get selectedFilter(): string {
       return this._selectedFilter;
@@ -37,7 +39,7 @@ export class ClothesListComponent implements OnInit {
    set selectedFilter(selectedFilter: string) {
       this._selectedOption = "";
       this._selectedFilter = selectedFilter;
-      
+
       this.service.getSpecificFilter().subscribe(response => {
          this.clothes = response.body;
          // console.log(JSON.stringify(specificFeatureFromService));
@@ -57,7 +59,7 @@ export class ClothesListComponent implements OnInit {
    set selectedOption(selectedOption: string) {
       this._selectedOption = selectedOption;
       console.log(this._selectedOption);
-      if(this._selectedOption){
+      if (this._selectedOption) {
          this.service.getSpecificFilterOpt(this._selectedFilter, this._selectedOption).subscribe(response => {
             this.clothes = response.body;
             // console.log(JSON.stringify(specificFeatureFromService));
@@ -143,16 +145,10 @@ export class ClothesListComponent implements OnInit {
 
    }
 
-   /* afficherVetements() {
-      this.service.getAllClothes().subscribe(response => {
-         this.clothes = response.body;
-         this.erreur = response.status;
-      },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
-         });
-   } */
-
-
+   //gestion de la modale
+   //ouvre une modale dont le contenu est ClotheDetailComponent
+   open() {
+      const modalRef = this.modalService.open(ClotheDetailComponent);
+      // modalRef.componentInstance.name = 'COUCOU';
+   }
 }

@@ -49,11 +49,10 @@
 
   <div *ngIf="[erreur] == 204" id="filterDontExists" class="text-muted">Il n'y a pas de vêtement
     correspondant à cette recherche.</div>
-
   <div class="flexpap" *ngIf="[erreur] == 304 || [erreur] == 200">
-    <div class="flexenf" *ngFor="let clothe of this.clothes">
+    <div class="flexenf" *ngFor="let clothe of this.clothes" (click)="open()">
       <div class="titre"> {{clothe.NOM_VET}} </div>
-      <img *ngIf="clothe.IMG_VET" [src]="clothe.IMG_VET" [style.width.px]="100" />
+      <img *ngIf="clothe.IMG_VET" [src]="clothe.IMG_VET" [style.width.px]="150"  [style.height.px]="95"/>
       <img *ngIf="!clothe.IMG_VET" src="assets/pictures/tshirt.png" [style.width.px]="100" />
     </div>
   </div>
