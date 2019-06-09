@@ -1,0 +1,23 @@
+.btn-outline-light{
+   color: #4DE8BE !important;
+   border-color: #4DE8BE !important;
+}
+.modal-body img{
+   display: block;
+   margin: 0px auto 20px;
+}
+h4{
+   font-weight: bold;
+   color:#4DE8BE !important;
+}
+span.gs{
+   font-weight: bold;
+   text-decoration: underline;
+}
+.modal-footer{
+   text-align: center!important;
+}
+
+.modal-footer button{
+   margin-top: 10px;
+}
