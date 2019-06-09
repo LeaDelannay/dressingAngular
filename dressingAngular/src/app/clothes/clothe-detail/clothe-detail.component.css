@@ -1,6 +1,14 @@
-.btn-outline-light{
-   color: #4DE8BE !important;
-   border-color: #4DE8BE !important;
+.btn-outline-info{
+   color: #4DE8BE;
+   border-color: #4DE8BE;
+}
+.btn-outline-info:hover{
+   color: #fff!important;
+   background-color: #4DE8BE;
+   border-color: #4DE8BE;
+}
+.btn-outline-warning:hover{
+   color: #fff;
 }
 .modal-body img{
    display: block;
@@ -8,16 +16,12 @@
 }
 h4{
    font-weight: bold;
-   color:#4DE8BE !important;
+   color:#4DE8BE;
 }
 span.gs{
    font-weight: bold;
    text-decoration: underline;
 }
-.modal-footer{
-   text-align: center!important;
-}
-
 .modal-footer button{
    margin-top: 10px;
 }
