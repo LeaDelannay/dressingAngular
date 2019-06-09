@@ -80,6 +80,11 @@ export class ClothesService {
       return this.http.get<any[]>(`${this.baseUrl}/occasions`, {observe: 'response'});
    }
 
+   //récupère un vêtement spécifique grâce à l'id
+   public getSpecificClothe(idClothe:number): Observable<HttpResponse<any[]>> {
+      return this.http.get<any[]>(`${this.baseUrl}/clothes/${idClothe}`, {observe: 'response'});
+   }
+
    //récupère la liste des vetements contenant un filtre précis en base de données
    public getSpecificFilter(): Observable<HttpResponse<any[]>> {
       return this.http.get<any[]>(`${this.baseUrl}/clothes`, {observe: 'response'});

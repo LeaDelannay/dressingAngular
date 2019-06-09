@@ -147,8 +147,8 @@ export class ClothesListComponent implements OnInit {
 
    //gestion de la modale
    //ouvre une modale dont le contenu est ClotheDetailComponent
-   open() {
+   open(id) {
       const modalRef = this.modalService.open(ClotheDetailComponent);
-      // modalRef.componentInstance.name = 'COUCOU';
+      modalRef.componentInstance.idClothe = id; //récupère l'id du vêtement cliqué et le passe au component modale
    }
 }

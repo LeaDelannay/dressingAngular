@@ -165,6 +165,22 @@ module.exports.readClothesNames = function (fct) {
    });
 }
 
+//RECUPERE UN DE VETEMENT EN BASE DE DONNEES - UNITAIRE
+module.exports.readSpecificClothe = function (idClothe, fct) {
+   var sql = 'SELECT vetement.NOM_VET, vetement.ID_VET, vetement.DESCRIPT_VET, vetement.IMG_VET, categorie.LIBEL_CAT, note.NUM_NOTE, marque.NOM_MARQUE, GROUP_CONCAT(DISTINCT(couleur.LIBEL_COUL) SEPARATOR ", ") as couleurs, GROUP_CONCAT(DISTINCT(caracteristique.LIBEL_CARACT) SEPARATOR ", ") as caracteristiques, GROUP_CONCAT(DISTINCT(occasion.LIBEL_OCCAS) SEPARATOR ", ") as occasions FROM vetement inner join categorie on vetement.FK_ID_CAT = categorie.ID_CAT inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.ID_COUL = vet_coul_assoc.ID_COUL inner join marque on vetement.FK_ID_MARQUE = marque.ID_MARQUE inner join vet_caract_assoc on vetement.id_vet = vet_caract_assoc.id_vet inner join caracteristique on caracteristique.ID_CARACT = vet_caract_assoc.ID_CARACT inner join vet_occas_assoc on vetement.id_vet = vet_occas_assoc.id_vet inner join occasion on occasion.ID_OCCAS = vet_occas_assoc.ID_OCCAS inner join note on vetement.FK_ID_NOTE = note.ID_NOTE WHERE vetement.ID_VET = ? ';
+   var insert = [idClothe];
+   connection.query(mysql.format(sql, insert), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+}
+
 //CREATION D'UN VETEMENT EN BASE DE DONNEES
 module.exports.createClothe = function (obj, fct) {
    var idVet;

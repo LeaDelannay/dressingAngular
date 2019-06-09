@@ -35,6 +35,22 @@ router.get('/clothename/', function (req, res, next) {
    })
 });
 
+//READ CLOTHE BY ID - UNITAIRE
+router.get('/:idClothe', function (req, res, next) {
+   console.log("----> call read one clothe");
+   dbacc.readSpecificClothe(req.params.idClothe, function (err, data) {
+      if (err || data.length != 1) {
+         res.sendStatus(500);
+         return;
+      }
+      if (data == 0 || data == null || data == undefined || data == "") {
+         res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data[0]);
+   })
+});
+
 
 //CREATE CLOTHE
 router.post('/', function (req, res, next) {
