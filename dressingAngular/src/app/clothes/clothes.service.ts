@@ -81,7 +81,7 @@ export class ClothesService {
    }
 
    //récupère un vêtement spécifique grâce à l'id
-   public getSpecificClothe(idClothe:number): Observable<HttpResponse<any[]>> {
+   public getSpecificClothe(idClothe:number): Observable<HttpResponse<Clothe[]>> {
       return this.http.get<any[]>(`${this.baseUrl}/clothes/${idClothe}`, {observe: 'response'});
    }
 
@@ -124,4 +124,10 @@ export class ClothesService {
    public getAllOccasionsName(): Observable<HttpResponse<Clothe[]>> {
       return this.http.get<Clothe[]>(`${this.baseUrl}/occasions/occasionname`, {observe: 'response'});
    }
+
+   //supression 
+   //supression d'un vêtement + tables associatives en base de données
+   public deleteClothe(idClothe: number):Observable<HttpResponse<Clothe[]>>{
+      return this.http.delete<Clothe[]>(`${this.baseUrl}/clothes/${idClothe}`, {observe: 'response'});
+     }
 }

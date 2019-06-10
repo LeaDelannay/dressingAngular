@@ -93,15 +93,7 @@ export class ClothesListComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
          });
 
-      this.service.getAllClothes().subscribe(response => {
-         this.clothes = response.body;
-         // console.log(JSON.stringify(clothesFromService));
-         this.erreur = response.status;
-      },
-         error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
-         });
+      this.callGetAllClothes(); //appelle la fonction qui permet de récupérer tous les vêtements en bdd
 
       this.service.getAllColors().subscribe(response => {
          this.colors = response.body;
@@ -146,9 +138,31 @@ export class ClothesListComponent implements OnInit {
    }
 
    //gestion de la modale
-   //ouvre une modale dont le contenu est ClotheDetailComponent
-   open(id) {
-      const modalRef = this.modalService.open(ClotheDetailComponent);
-      modalRef.componentInstance.idClothe = id; //récupère l'id du vêtement cliqué et le passe au component modale
+   //ouvre la modale en lui passant l'id du vêtement cliqué
+   open(idClthe) {
+      const modalRef = this.modalService.open(ClotheDetailComponent); //ouvre une modale dont le contenu est ClotheDetailComponent
+      modalRef.componentInstance.idClothe = idClthe; //récupère l'id du vêtement cliqué et le passe au component modale
+
+      //permet de recharger la liste des vêtements lorsque la modale est fermée
+      //utilise la classe NgbModalRef
+      modalRef.result.then((result) => {
+         //quand on clique sur supprimer dans la modale, cette fonction rafraichit la liste des vêtements. Result : promesse résolue quand la modale est fermée.
+         this.callGetAllClothes();
+      }, (reason) => {
+         //quand on ferme la modale d'une manière différente (par ex click à coté), cette fonction rafraichit la liste des vêtements. reason : Promesse rejetée quand modale dismiss.
+         this.callGetAllClothes();
+      });
+   }
+
+   //fonction permettant d'aller chercher dans le service la liste de tous les vêtements.
+   private callGetAllClothes(){
+      this.service.getAllClothes().subscribe(response => {
+         this.clothes = response.body;
+         this.erreur = response.status;
+      },
+         error => {
+            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
+         });
    }
 }

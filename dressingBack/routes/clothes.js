@@ -73,6 +73,21 @@ router.post('/', function (req, res, next) {
 //UPDATE
 
 //DELETE
-
+//DEL CLOTHE BY ID - UNITAIRE
+router.delete('/:idClothe', function (req, res, next) {
+   console.log("----> call delete one clothe");
+   if (!req.params.idClothe) {
+      res.sendStatus(418); //I'm a teapot - sinon, erreur 400 : la syntaxe de la requête est erronnée
+      return;
+   }
+   dbacc.deleteClothe(req.params.idClothe, function (err, data) {
+      if (err) {
+         res.sendStatus(500);
+         return;
+      }
+      res.sendStatus(204);
+      return;
+   })
+});
 
 module.exports = router;

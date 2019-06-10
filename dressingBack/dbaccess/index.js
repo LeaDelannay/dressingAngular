@@ -165,7 +165,7 @@ module.exports.readClothesNames = function (fct) {
    });
 }
 
-//RECUPERE UN DE VETEMENT EN BASE DE DONNEES - UNITAIRE
+//RECUPERE UN VETEMENT EN BASE DE DONNEES - UNITAIRE
 module.exports.readSpecificClothe = function (idClothe, fct) {
    var sql = 'SELECT vetement.NOM_VET, vetement.ID_VET, vetement.DESCRIPT_VET, vetement.IMG_VET, categorie.LIBEL_CAT, note.NUM_NOTE, marque.NOM_MARQUE, GROUP_CONCAT(DISTINCT(couleur.LIBEL_COUL) SEPARATOR ", ") as couleurs, GROUP_CONCAT(DISTINCT(caracteristique.LIBEL_CARACT) SEPARATOR ", ") as caracteristiques, GROUP_CONCAT(DISTINCT(occasion.LIBEL_OCCAS) SEPARATOR ", ") as occasions FROM vetement inner join categorie on vetement.FK_ID_CAT = categorie.ID_CAT inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.ID_COUL = vet_coul_assoc.ID_COUL inner join marque on vetement.FK_ID_MARQUE = marque.ID_MARQUE inner join vet_caract_assoc on vetement.id_vet = vet_caract_assoc.id_vet inner join caracteristique on caracteristique.ID_CARACT = vet_caract_assoc.ID_CARACT inner join vet_occas_assoc on vetement.id_vet = vet_occas_assoc.id_vet inner join occasion on occasion.ID_OCCAS = vet_occas_assoc.ID_OCCAS inner join note on vetement.FK_ID_NOTE = note.ID_NOTE WHERE vetement.ID_VET = ? ';
    var insert = [idClothe];
@@ -241,6 +241,59 @@ module.exports.createClothe = function (obj, fct) {
          })
       });
       fct(null, results);
+   });
+}
+
+//SUPPRESSION D'UN VETEMENT EN BASE DE DONNEES
+// d'abord, supression des tables associatives : vet coul assoc
+module.exports.deleteClothe = function (idClothe, fct) {
+   var sql1 = "DELETE FROM vet_coul_assoc WHERE vet_coul_assoc.ID_VET = ?";
+   var insert1 = [idClothe];
+   connection.query(mysql.format(sql1, insert1), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      console.log("Nb de couleurs supprimées : " + results.affectedRows);
+
+      //si ça s'est bien passé, supprimer la table associative : vet caract assoc
+      var sql2 = "DELETE FROM vet_caract_assoc WHERE vet_caract_assoc.ID_VET = ?";
+      var insert2 = [idClothe];
+      connection.query(mysql.format(sql2, insert2), (err, results) => {
+         if (err) {
+            console.error(err);
+            fct(err, null);
+            return;
+         }
+         console.log("Nb de caractéristiques supprimées : " + results.affectedRows);
+
+         //si ça s'est bien passé, supprimer la table associative : vet occas assoc
+         var sql3 = "DELETE FROM vet_occas_assoc WHERE vet_occas_assoc.ID_VET = ?";
+         var insert3 = [idClothe];
+         connection.query(mysql.format(sql3, insert3), (err, results) => {
+            if (err) {
+               console.error(err);
+               fct(err, null);
+               return;
+            }
+            console.log("Nb d'occasions supprimées : " + results.affectedRows);
+
+            //si ça s'est bien passé, supprimer le vetement concerné
+            var sql4 = "DELETE FROM vetement WHERE vetement.ID_VET = ?";
+            var insert4 = [idClothe];
+            connection.query(mysql.format(sql4, insert4), (err, results) => {
+               if (err) {
+                  console.error(err);
+                  fct(err, null);
+                  return;
+               }
+
+               console.log("Vetement supprimé OK " + results.affectedRows);
+               fct(null, results.affectedRows);
+            });
+         });
+      });
    });
 }
 //FIN CLOTHES\\
