@@ -296,6 +296,105 @@ module.exports.deleteClothe = function (idClothe, fct) {
       });
    });
 }
+
+//MODIFICATION D'UN VETEMENT EN BASE DE DONNEES
+//d'abord, modification du vêtement concerné
+module.exports.updateClothe = function (obj, fct) {
+   var sql1 = "UPDATE vetement SET FK_ID_CAT = ?, FK_ID_MARQUE = ?, FK_ID_NOTE = ?, NOM_VET = ?, IMG_VET = ?, DESCRIPT_VET = ? WHERE vetement.ID_VET = ?";
+   var insert1 = [obj.FK_ID_CAT, obj.FK_ID_MARQUE, obj.FK_ID_NOTE, obj.NOM_VET, obj.IMG_VET, obj.DESCRIPT_VET, obj.ID_VET];
+   connection.query(mysql.format(sql1, insert1), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      console.log("Nb de lignes affectées pour la modification du vêtement : " + results.affectedRows);
+      var idVet = obj.ID_VET;
+
+      //si ça s'est bien passé, supprimer puis recréer les éléments dans les tables associatives
+      //dans la table associative : vet caract assoc
+      //suppression
+      var sql2 = "DELETE FROM vet_caract_assoc WHERE vet_caract_assoc.ID_VET = ?";
+      var insert2 = [idVet];
+      connection.query(mysql.format(sql2, insert2), (err, results) => {
+         if (err) {
+            console.error(err);
+            fct(err, null);
+            return;
+         }
+         console.log("Nb de caractéristiques supprimées : " + results.affectedRows);
+      });
+      //ajout
+      var featureArray = obj.ID_CARACT;
+      featureArray.forEach(function (item) {
+         var sql3 = "INSERT INTO vet_caract_assoc (ID_VET, ID_CARACT) VALUES(" + idVet + ", ?)";
+         var inserts3 = [item];
+         console.log("CARACTERISTIQUE =>" + inserts3);
+         connection.query(mysql.format(sql3, inserts3), (err) => {
+            if (err) {
+               console.error(err);
+               fct(err, null);
+               return;
+            }
+         })
+      });
+
+      //dans la table associative : vet occas assoc
+      //suppression
+      var sql4 = "DELETE FROM vet_occas_assoc WHERE vet_occas_assoc.ID_VET = ?";
+      var insert4 = [idVet];
+      connection.query(mysql.format(sql4, insert4), (err, results) => {
+         if (err) {
+            console.error(err);
+            fct(err, null);
+            return;
+         }
+         console.log("Nb d'occasions supprimées : " + results.affectedRows);
+      });
+      //ajout
+      var occasionsArray = obj.ID_OCCAS;
+      occasionsArray.forEach(function (item) {
+         var sql5 = "INSERT INTO vet_occas_assoc (ID_VET, ID_OCCAS) VALUES(" + idVet + ", ?)";
+         var inserts5 = [item];
+         console.log("OCCASION =>" + inserts5);
+         connection.query(mysql.format(sql5, inserts5), (err) => {
+            if (err) {
+               console.error(err);
+               fct(err, null);
+               return;
+            }
+         })
+      });
+
+      //dans la table associative : vet coul assoc
+      //suppression
+      var sql6 = "DELETE FROM vet_coul_assoc WHERE vet_coul_assoc.ID_VET = ?";
+      var insert6 = [idVet];
+      connection.query(mysql.format(sql6, insert6), (err, results) => {
+         if (err) {
+            console.error(err);
+            fct(err, null);
+            return;
+         }
+         console.log("Nb de couleurs supprimées : " + results.affectedRows);
+      });
+      //ajout
+      var colorArray = obj.ID_COUL;
+      colorArray.forEach(function (item) {
+         var sql7 = "INSERT INTO vet_coul_assoc (ID_VET, ID_COUL) VALUES(" + idVet + ", ?)";
+         var inserts7 = [item];
+         console.log("COULEUR =>" + inserts7);
+         connection.query(mysql.format(sql7, inserts7), (err) => {
+            if (err) {
+               console.error(err);
+               fct(err, null);
+               return;
+            }
+         })
+      });
+      fct(null, results.affectedRows);
+   });
+}
 //FIN CLOTHES\\
 
 //DEBUT COLORS/COULEURS\\

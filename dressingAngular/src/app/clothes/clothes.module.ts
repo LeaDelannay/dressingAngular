@@ -2,16 +2,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from '../app-routing.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
+
 import { ClothesListComponent } from './clothes-list/clothes-list.component';
 import { ClotheDetailComponent } from './clothe-detail/clothe-detail.component';
 import { ClotheCreateComponent } from './clothe-create/clothe-create.component';
-import { FileUploadModule } from 'ng2-file-upload';
+import { ClotheUpdateComponent } from './clothe-update/clothe-update.component';
 
 @NgModule({
   declarations: [
      ClothesListComponent,
      ClotheDetailComponent,
-     ClotheCreateComponent
+     ClotheCreateComponent,
+     ClotheUpdateComponent
    ],
   imports: [
     CommonModule,

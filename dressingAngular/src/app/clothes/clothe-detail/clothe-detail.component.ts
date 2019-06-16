@@ -31,6 +31,8 @@ export class ClotheDetailComponent implements OnInit {
 
    onEdit() {
       console.log(this.idClothe);
+      this.activeModal.close();
+      this.router.navigate(['clothe-update']);
    }
 
    onDelete() {

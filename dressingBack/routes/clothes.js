@@ -70,9 +70,28 @@ router.post('/', function (req, res, next) {
    })
 });
 
-//UPDATE
+//UPDATE CLOTHE
+router.put('/', function (req, res, next) {
+   console.log("----> call update one clothe : " + JSON.stringify(req.body));
+   if (!req.body.ID_VET) {
+      res.sendStatus(400);
+      return;
+   }
+   dbacc.updateClothe(req.body, function (err, data) {
+      if (err) {
+         res.sendStatus(500);
+         return;
+      }
+      if (data != true) {
+         res.sendStatus(401);
+         return;
+      }
+      res.sendStatus(204); //renvoie 204 car la requête ne renvoie rien. 204 est pour le front. 
+      return;
+   })
+});
 
-//DELETE
+//DELETE CLOTHE
 //DEL CLOTHE BY ID - UNITAIRE
 router.delete('/:idClothe', function (req, res, next) {
    console.log("----> call delete one clothe");
@@ -85,7 +104,7 @@ router.delete('/:idClothe', function (req, res, next) {
          res.sendStatus(500);
          return;
       }
-      res.sendStatus(204);
+      res.sendStatus(204); //renvoie 204 car la requête ne renvoie rien. 204 est pour le front. 
       return;
    })
 });
