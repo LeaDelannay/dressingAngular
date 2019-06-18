@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClothesService } from '../clothes.service';
 import { Clothe } from '../clothe';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class ClotheDetailComponent implements OnInit {
    onEdit() {
       console.log(this.idClothe);
       this.activeModal.close();
-      this.router.navigate(['clothe-update']);
+      this.router.navigate(['clothe-update', this.idClothe]);
    }
 
    onDelete() {

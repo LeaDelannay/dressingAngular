@@ -8,7 +8,7 @@ const routes: Routes = [
    { path: 'homepage', component: HomepageComponent },
    { path: 'clothes-list', component: ClothesListComponent },
    { path: 'clothe-create', component: ClotheCreateComponent },
-   { path: 'clothe-update', component: ClotheUpdateComponent }
+   { path: 'clothe-update/:idClothe', component: ClotheUpdateComponent }
 ];
 
 @NgModule({

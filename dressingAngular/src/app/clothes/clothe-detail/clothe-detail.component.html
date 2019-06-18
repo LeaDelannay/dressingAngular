@@ -1,15 +1,3 @@
-<!-- <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <p>Hello, {{name}}!</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-</div> -->
 <div class="modal-header">
   <h4 class="modal-title">{{clotheDetail.NOM_VET}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -20,9 +8,6 @@
   <img src="assets/pictures/tshirt.png" alt="" class="d-flex align-items-center" [style.max-width.px]="200"
     [style.max-height.px]="125">
 
-    <!-- <option *ngFor="let brand of this.brands" value="{{brand.ID_MARQUE}}"> {{brand.NOM_MARQUE}} </option> -->
-    
-  <!-- <p><span class="gs" *ngFor="let color of this.clotheDetail.couleurs">Couleur(s) :</span><br>{{color}}</p> -->
   <p><span class="gs">Couleur(s) :</span><br>{{clotheDetail.couleurs}}</p>
   <p><span class="gs">Marque :</span><br>{{clotheDetail.NOM_MARQUE}}</p>
   <p><span class="gs">Caractéristique(s) :</span><br>{{clotheDetail.caracteristiques}}</p>
