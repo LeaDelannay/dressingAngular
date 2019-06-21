@@ -1,0 +1,87 @@
+/*global jQuery:true, window:true, document:true, isMobile:true, animateScrollTo:true */
+/*jslint node: true */
+
+// Décommenter pendant les modifications pour tester le code en mode strict
+// "use strict";
+
+jQuery(function($) {
+
+    /* ================ SET FOCUS for anchor link in url  ==================== */
+    /* If there is a '#' in the URL (someone linking directly to a page with an anchor), highlight that section and set focus to it.
+    The tabindex attribute is removed AFTER the user navigates away from the element to help address a nasty VoiceOver bug.
+
+    source : http://webaim.org/
+    */
+
+    if (document.location.hash) {
+        var myAnchor = document.location.hash;
+        var heightHeader = $('header').height();
+
+        if ($('.sub-nav').length && $('.sub-nav').css('position') == 'fixed') {
+            var heightSub = $('.sub-nav').height() + 39;
+            var heightHeader = heightHeader + heightSub;
+        }
+        //console.log( ' heightHeader : ' +$('header').height() + ' + heightSub : ' + heightSub);
+
+        if (myAnchor != "#this" && myAnchor != "#more-link") { // évite de réaliser les actions si ce hash particulier est présent
+            $(myAnchor).attr('tabindex', -1).on('blur focusout', function() {
+                $(this).removeAttr('tabindex');
+            }).focus();
+            if ($(myAnchor).length) {
+                animateScrollTo($(myAnchor).offset().top - heightHeader, 700);
+            }
+        }
+    }
+
+    /* ================ SET FOCUS for skip link  ==================== */
+    /* This function looks for a change in the hash (activation of an in-page link) and sets focus to and
+    highlights the target element. This is necessary because webkit does not set focus as it should. If
+    the hash is empty (the user hit the back button after activating an in-page link) focus is set to body.
+
+    source : http://webaim.org/
+    */
+    $(window).bind('hashchange', function() {
+        var hash = "#" + window.location.hash.replace(/^#/, '');
+        if (hash != "#") {
+            $(hash).attr('tabindex', -1).on('blur focusout', function() {
+                $(this).removeAttr('tabindex');
+            }).focus();
+        }
+    });
+
+
+    /** ====================== HEADER : POPINS ET DROPDOWN ============================
+     * Gestion de l'ouverture/fermeture des boutons principaux du header :
+     * - Menu burger
+     * - Menu utilisateur
+     * - Menu de recherche
+     * On s'appuie sur les événements Bootstrap déclenchés par les data-toggle à l'ouverture et à la fermeture
+     *
+     **/
+
+    var $body = $('body'); // On commence par stocker l'objet jQuery pour le body
+
+    // On attache un listener aux événements "show" et "hide" pour modal et "show pour dropdown" et on délégue au parent le plus proche
+    // Note: Alors que les modales diffusent l'événement depuis la popin, les dropdown diffusent à partir du premier parent dans le DOM
+    $body.on('show.bs.modal hide.bs.modal show.bs.dropdown', '#PopinMenu, #PopinRecherche, #PopinChoixAcces, #PopinInfosArticle, .header .dropdown', function(e) {
+        // On récupère l'objet jQuery pour la cible de l'événement déclenché
+        var eventType = e.type, // Type d'événement "show" ou "hide" pour future référence
+            $target = $(e.target), // La cible de l'événement (modal, dropdown)
+            $modalOpened = $('.modal.in'); // Selection des modales actuellement ouvertes
+
+        if (eventType == "show" && $modalOpened) {
+            $modalOpened.modal("hide"); // On cache toute les autres
+        }
+
+        // S'il s'agit d'un événement déclenché par l'ouverture / fermeture d'une modale
+        if ($target.data('bs.modal')) {
+            var isMenu = $target.attr('id') == "PopinMenu", // On verifie si c'est l'ouverture du menu burger
+                toggleTitle = eventType == "show" ? "Fermer le menu" : "Ouvrir le menu",
+                modalBodyClass = isMenu ? "modal-menu-open" : "modal-search-open"; // On définie la classe à mettre/enlever sur le body
+
+            $body.toggleClass(modalBodyClass);
+            if (isMenu) { $(".btn-menu").attr('title', toggleTitle); }
+        }
+    });
+});
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJtb2R1bGVzL3BlLXJlZm9udGUtanMvaGVhZGVyLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qZ2xvYmFsIGpRdWVyeTp0cnVlLCB3aW5kb3c6dHJ1ZSwgZG9jdW1lbnQ6dHJ1ZSwgaXNNb2JpbGU6dHJ1ZSwgYW5pbWF0ZVNjcm9sbFRvOnRydWUgKi9cbi8qanNsaW50IG5vZGU6IHRydWUgKi9cblxuLy8gRMOpY29tbWVudGVyIHBlbmRhbnQgbGVzIG1vZGlmaWNhdGlvbnMgcG91ciB0ZXN0ZXIgbGUgY29kZSBlbiBtb2RlIHN0cmljdFxuLy8gXCJ1c2Ugc3RyaWN0XCI7XG5cbmpRdWVyeShmdW5jdGlvbigkKSB7XG5cbiAgICAvKiA9PT09PT09PT09PT09PT09IFNFVCBGT0NVUyBmb3IgYW5jaG9yIGxpbmsgaW4gdXJsICA9PT09PT09PT09PT09PT09PT09PSAqL1xuICAgIC8qIElmIHRoZXJlIGlzIGEgJyMnIGluIHRoZSBVUkwgKHNvbWVvbmUgbGlua2luZyBkaXJlY3RseSB0byBhIHBhZ2Ugd2l0aCBhbiBhbmNob3IpLCBoaWdobGlnaHQgdGhhdCBzZWN0aW9uIGFuZCBzZXQgZm9jdXMgdG8gaXQuXG4gICAgVGhlIHRhYmluZGV4IGF0dHJpYnV0ZSBpcyByZW1vdmVkIEFGVEVSIHRoZSB1c2VyIG5hdmlnYXRlcyBhd2F5IGZyb20gdGhlIGVsZW1lbnQgdG8gaGVscCBhZGRyZXNzIGEgbmFzdHkgVm9pY2VPdmVyIGJ1Zy5cblxuICAgIHNvdXJjZSA6IGh0dHA6Ly93ZWJhaW0ub3JnL1xuICAgICovXG5cbiAgICBpZiAoZG9jdW1lbnQubG9jYXRpb24uaGFzaCkge1xuICAgICAgICB2YXIgbXlBbmNob3IgPSBkb2N1bWVudC5sb2NhdGlvbi5oYXNoO1xuICAgICAgICB2YXIgaGVpZ2h0SGVhZGVyID0gJCgnaGVhZGVyJykuaGVpZ2h0KCk7XG5cbiAgICAgICAgaWYgKCQoJy5zdWItbmF2JykubGVuZ3RoICYmICQoJy5zdWItbmF2JykuY3NzKCdwb3NpdGlvbicpID09ICdmaXhlZCcpIHtcbiAgICAgICAgICAgIHZhciBoZWlnaHRTdWIgPSAkKCcuc3ViLW5hdicpLmhlaWdodCgpICsgMzk7XG4gICAgICAgICAgICB2YXIgaGVpZ2h0SGVhZGVyID0gaGVpZ2h0SGVhZGVyICsgaGVpZ2h0U3ViO1xuICAgICAgICB9XG4gICAgICAgIC8vY29uc29sZS5sb2coICcgaGVpZ2h0SGVhZGVyIDogJyArJCgnaGVhZGVyJykuaGVpZ2h0KCkgKyAnICsgaGVpZ2h0U3ViIDogJyArIGhlaWdodFN1Yik7XG5cbiAgICAgICAgaWYgKG15QW5jaG9yICE9IFwiI3RoaXNcIiAmJiBteUFuY2hvciAhPSBcIiNtb3JlLWxpbmtcIikgeyAvLyDDqXZpdGUgZGUgcsOpYWxpc2VyIGxlcyBhY3Rpb25zIHNpIGNlIGhhc2ggcGFydGljdWxpZXIgZXN0IHByw6lzZW50XG4gICAgICAgICAgICAkKG15QW5jaG9yKS5hdHRyKCd0YWJpbmRleCcsIC0xKS5vbignYmx1ciBmb2N1c291dCcsIGZ1bmN0aW9uKCkge1xuICAgICAgICAgICAgICAgICQodGhpcykucmVtb3ZlQXR0cigndGFiaW5kZXgnKTtcbiAgICAgICAgICAgIH0pLmZvY3VzKCk7XG4gICAgICAgICAgICBpZiAoJChteUFuY2hvcikubGVuZ3RoKSB7XG4gICAgICAgICAgICAgICAgYW5pbWF0ZVNjcm9sbFRvKCQobXlBbmNob3IpLm9mZnNldCgpLnRvcCAtIGhlaWdodEhlYWRlciwgNzAwKTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgIH1cblxuICAgIC8qID09PT09PT09PT09PT09PT0gU0VUIEZPQ1VTIGZvciBza2lwIGxpbmsgID09PT09PT09PT09PT09PT09PT09ICovXG4gICAgLyogVGhpcyBmdW5jdGlvbiBsb29rcyBmb3IgYSBjaGFuZ2UgaW4gdGhlIGhhc2ggKGFjdGl2YXRpb24gb2YgYW4gaW4tcGFnZSBsaW5rKSBhbmQgc2V0cyBmb2N1cyB0byBhbmRcbiAgICBoaWdobGlnaHRzIHRoZSB0YXJnZXQgZWxlbWVudC4gVGhpcyBpcyBuZWNlc3NhcnkgYmVjYXVzZSB3ZWJraXQgZG9lcyBub3Qgc2V0IGZvY3VzIGFzIGl0IHNob3VsZC4gSWZcbiAgICB0aGUgaGFzaCBpcyBlbXB0eSAodGhlIHVzZXIgaGl0IHRoZSBiYWNrIGJ1dHRvbiBhZnRlciBhY3RpdmF0aW5nIGFuIGluLXBhZ2UgbGluaykgZm9jdXMgaXMgc2V0IHRvIGJvZHkuXG5cbiAgICBzb3VyY2UgOiBodHRwOi8vd2ViYWltLm9yZy9cbiAgICAqL1xuICAgICQod2luZG93KS5iaW5kKCdoYXNoY2hhbmdlJywgZnVuY3Rpb24oKSB7XG4gICAgICAgIHZhciBoYXNoID0gXCIjXCIgKyB3aW5kb3cubG9jYXRpb24uaGFzaC5yZXBsYWNlKC9eIy8sICcnKTtcbiAgICAgICAgaWYgKGhhc2ggIT0gXCIjXCIpIHtcbiAgICAgICAgICAgICQoaGFzaCkuYXR0cigndGFiaW5kZXgnLCAtMSkub24oJ2JsdXIgZm9jdXNvdXQnLCBmdW5jdGlvbigpIHtcbiAgICAgICAgICAgICAgICAkKHRoaXMpLnJlbW92ZUF0dHIoJ3RhYmluZGV4Jyk7XG4gICAgICAgICAgICB9KS5mb2N1cygpO1xuICAgICAgICB9XG4gICAgfSk7XG5cblxuICAgIC8qKiA9PT09PT09PT09PT09PT09PT09PT09IEhFQURFUiA6IFBPUElOUyBFVCBEUk9QRE9XTiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4gICAgICogR2VzdGlvbiBkZSBsJ291dmVydHVyZS9mZXJtZXR1cmUgZGVzIGJvdXRvbnMgcHJpbmNpcGF1eCBkdSBoZWFkZXIgOlxuICAgICAqIC0gTWVudSBidXJnZXJcbiAgICAgKiAtIE1lbnUgdXRpbGlzYXRldXJcbiAgICAgKiAtIE1lbnUgZGUgcmVjaGVyY2hlXG4gICAgICogT24gcydhcHB1aWUgc3VyIGxlcyDDqXbDqW5lbWVudHMgQm9vdHN0cmFwIGTDqWNsZW5jaMOpcyBwYXIgbGVzIGRhdGEtdG9nZ2xlIMOgIGwnb3V2ZXJ0dXJlIGV0IMOgIGxhIGZlcm1ldHVyZVxuICAgICAqXG4gICAgICoqL1xuXG4gICAgdmFyICRib2R5ID0gJCgnYm9keScpOyAvLyBPbiBjb21tZW5jZSBwYXIgc3RvY2tlciBsJ29iamV0IGpRdWVyeSBwb3VyIGxlIGJvZHlcblxuICAgIC8vIE9uIGF0dGFjaGUgdW4gbGlzdGVuZXIgYXV4IMOpdsOpbmVtZW50cyBcInNob3dcIiBldCBcImhpZGVcIiBwb3VyIG1vZGFsIGV0IFwic2hvdyBwb3VyIGRyb3Bkb3duXCIgZXQgb24gZMOpbMOpZ3VlIGF1IHBhcmVudCBsZSBwbHVzIHByb2NoZVxuICAgIC8vIE5vdGU6IEFsb3JzIHF1ZSBsZXMgbW9kYWxlcyBkaWZmdXNlbnQgbCfDqXbDqW5lbWVudCBkZXB1aXMgbGEgcG9waW4sIGxlcyBkcm9wZG93biBkaWZmdXNlbnQgw6AgcGFydGlyIGR1IHByZW1pZXIgcGFyZW50IGRhbnMgbGUgRE9NXG4gICAgJGJvZHkub24oJ3Nob3cuYnMubW9kYWwgaGlkZS5icy5tb2RhbCBzaG93LmJzLmRyb3Bkb3duJywgJyNQb3Bpbk1lbnUsICNQb3BpblJlY2hlcmNoZSwgI1BvcGluQ2hvaXhBY2NlcywgI1BvcGluSW5mb3NBcnRpY2xlLCAuaGVhZGVyIC5kcm9wZG93bicsIGZ1bmN0aW9uKGUpIHtcbiAgICAgICAgLy8gT24gcsOpY3Vww6hyZSBsJ29iamV0IGpRdWVyeSBwb3VyIGxhIGNpYmxlIGRlIGwnw6l2w6luZW1lbnQgZMOpY2xlbmNow6lcbiAgICAgICAgdmFyIGV2ZW50VHlwZSA9IGUudHlwZSwgLy8gVHlwZSBkJ8OpdsOpbmVtZW50IFwic2hvd1wiIG91IFwiaGlkZVwiIHBvdXIgZnV0dXJlIHLDqWbDqXJlbmNlXG4gICAgICAgICAgICAkdGFyZ2V0ID0gJChlLnRhcmdldCksIC8vIExhIGNpYmxlIGRlIGwnw6l2w6luZW1lbnQgKG1vZGFsLCBkcm9wZG93bilcbiAgICAgICAgICAgICRtb2RhbE9wZW5lZCA9ICQoJy5tb2RhbC5pbicpOyAvLyBTZWxlY3Rpb24gZGVzIG1vZGFsZXMgYWN0dWVsbGVtZW50IG91dmVydGVzXG5cbiAgICAgICAgaWYgKGV2ZW50VHlwZSA9PSBcInNob3dcIiAmJiAkbW9kYWxPcGVuZWQpIHtcbiAgICAgICAgICAgICRtb2RhbE9wZW5lZC5tb2RhbChcImhpZGVcIik7IC8vIE9uIGNhY2hlIHRvdXRlIGxlcyBhdXRyZXNcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFMnaWwgcydhZ2l0IGQndW4gw6l2w6luZW1lbnQgZMOpY2xlbmNow6kgcGFyIGwnb3V2ZXJ0dXJlIC8gZmVybWV0dXJlIGQndW5lIG1vZGFsZVxuICAgICAgICBpZiAoJHRhcmdldC5kYXRhKCdicy5tb2RhbCcpKSB7XG4gICAgICAgICAgICB2YXIgaXNNZW51ID0gJHRhcmdldC5hdHRyKCdpZCcpID09IFwiUG9waW5NZW51XCIsIC8vIE9uIHZlcmlmaWUgc2kgYydlc3QgbCdvdXZlcnR1cmUgZHUgbWVudSBidXJnZXJcbiAgICAgICAgICAgICAgICB0b2dnbGVUaXRsZSA9IGV2ZW50VHlwZSA9PSBcInNob3dcIiA/IFwiRmVybWVyIGxlIG1lbnVcIiA6IFwiT3V2cmlyIGxlIG1lbnVcIixcbiAgICAgICAgICAgICAgICBtb2RhbEJvZHlDbGFzcyA9IGlzTWVudSA/IFwibW9kYWwtbWVudS1vcGVuXCIgOiBcIm1vZGFsLXNlYXJjaC1vcGVuXCI7IC8vIE9uIGTDqWZpbmllIGxhIGNsYXNzZSDDoCBtZXR0cmUvZW5sZXZlciBzdXIgbGUgYm9keVxuXG4gICAgICAgICAgICAkYm9keS50b2dnbGVDbGFzcyhtb2RhbEJvZHlDbGFzcyk7XG4gICAgICAgICAgICBpZiAoaXNNZW51KSB7ICQoXCIuYnRuLW1lbnVcIikuYXR0cigndGl0bGUnLCB0b2dnbGVUaXRsZSk7IH1cbiAgICAgICAgfVxuICAgIH0pO1xufSk7Il0sImZpbGUiOiJtb2R1bGVzL3BlLXJlZm9udGUtanMvaGVhZGVyLmpzIn0=
