@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/shared.module';
 import { ClothesModule } from './clothes/clothes.module';
 import { HomepageComponent } from './home/homepage/homepage.component';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
    declarations: [
@@ -23,6 +24,7 @@ import { HomepageComponent } from './home/homepage/homepage.component';
       HttpClientModule, /* Pour se connecter au serveur */
       NgbModule,
       SharedModule,
+      AccountModule,
       ReactiveFormsModule,
       ClothesModule,
       AppRoutingModule /* Routes */

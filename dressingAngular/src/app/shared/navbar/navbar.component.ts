@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
    selector: 'app-navbar',
@@ -8,14 +8,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-   constructor(public router: Router) { }
+   constructor(public authService: AuthService) { }
 
    ngOnInit() {
-   }
-
-   signOut() {
-      console.log("signout clicked");
-      this.router.navigate(['login']);/* Route pour changer de page */
    }
 
 }

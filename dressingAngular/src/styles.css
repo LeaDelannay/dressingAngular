@@ -11,6 +11,11 @@ h1, h2, h3, h4, h5, h6{
    font-family: 'Cutive Mono', monospace;
 }
 
+.btn-outline-success{
+   color: #4DE8BE !important;
+   border-color: #4DE8BE !important;
+}
+
 /* ----- CSS splash screen [DEBUT]-----  */
 .cssload-loader {
 	position: relative;
