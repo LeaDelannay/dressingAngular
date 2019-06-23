@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ClotheDetailComponent implements OnInit {
 
-   @Input() idClothe; //contient l'id du vêtement cliqué dans clothe-list
-   clotheDetail: Clothe[] = []; //récupère le contenu renvoyé par le back
+   @Input() idClothe; //contient l'id du vêtement cliqué dans clothe-list, élément parent
+   clotheDetail: Clothe = new Clothe(); //récupère le contenu renvoyé par le back
    statusCode = null; //Création de la variable statusCode pour afficher message d'erruer dans le html
 
    constructor(public activeModal: NgbActiveModal, private service: ClothesService, public router: Router) { }
@@ -30,7 +30,6 @@ export class ClotheDetailComponent implements OnInit {
    }
 
    onEdit() {
-      console.log(this.idClothe);
       this.activeModal.close();
       this.router.navigate(['clothe-update', this.idClothe]);
    }

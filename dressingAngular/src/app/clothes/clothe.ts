@@ -17,4 +17,8 @@ export class Clothe {
    LIBEL_COUL: string;
    LIBEL_CARACT: string;
    LIBEL_OCCAS: string;
+
+   idCouleurs: string;
+   idCaracteristiques: string;
+   idOccasions: string;
 }

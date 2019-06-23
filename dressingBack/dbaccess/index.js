@@ -167,7 +167,7 @@ module.exports.readClothesNames = function (fct) {
 
 //RECUPERE UN VETEMENT EN BASE DE DONNEES - UNITAIRE
 module.exports.readSpecificClothe = function (idClothe, fct) {
-   var sql = 'SELECT vetement.NOM_VET, vetement.ID_VET, vetement.DESCRIPT_VET, vetement.IMG_VET, categorie.LIBEL_CAT, note.NUM_NOTE, marque.NOM_MARQUE, GROUP_CONCAT(DISTINCT(couleur.LIBEL_COUL) SEPARATOR ", ") as couleurs, GROUP_CONCAT(DISTINCT(caracteristique.LIBEL_CARACT) SEPARATOR ", ") as caracteristiques, GROUP_CONCAT(DISTINCT(occasion.LIBEL_OCCAS) SEPARATOR ", ") as occasions FROM vetement inner join categorie on vetement.FK_ID_CAT = categorie.ID_CAT inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.ID_COUL = vet_coul_assoc.ID_COUL inner join marque on vetement.FK_ID_MARQUE = marque.ID_MARQUE inner join vet_caract_assoc on vetement.id_vet = vet_caract_assoc.id_vet inner join caracteristique on caracteristique.ID_CARACT = vet_caract_assoc.ID_CARACT inner join vet_occas_assoc on vetement.id_vet = vet_occas_assoc.id_vet inner join occasion on occasion.ID_OCCAS = vet_occas_assoc.ID_OCCAS inner join note on vetement.FK_ID_NOTE = note.ID_NOTE WHERE vetement.ID_VET = ? ';
+   var sql = 'SELECT vetement.NOM_VET, vetement.ID_VET, vetement.DESCRIPT_VET, vetement.IMG_VET, categorie.LIBEL_CAT, vetement.FK_ID_CAT, note.NUM_NOTE, vetement.FK_ID_NOTE, marque.NOM_MARQUE, vetement.FK_ID_MARQUE, GROUP_CONCAT(DISTINCT(couleur.LIBEL_COUL) SEPARATOR ", ") as couleurs, GROUP_CONCAT(DISTINCT(couleur.ID_COUL) SEPARATOR ", ") as idCouleurs, GROUP_CONCAT(DISTINCT(caracteristique.LIBEL_CARACT) SEPARATOR ", ") as caracteristiques, GROUP_CONCAT(DISTINCT(caracteristique.ID_CARACT) SEPARATOR ", ") as idCaracteristiques, GROUP_CONCAT(DISTINCT(occasion.LIBEL_OCCAS) SEPARATOR ", ") as occasions, GROUP_CONCAT(DISTINCT(occasion.ID_OCCAS) SEPARATOR ", ") as idOccasions FROM vetement inner join categorie on vetement.FK_ID_CAT = categorie.ID_CAT inner join vet_coul_assoc on vetement.id_vet = vet_coul_assoc.id_vet inner join couleur on couleur.ID_COUL = vet_coul_assoc.ID_COUL inner join marque on vetement.FK_ID_MARQUE = marque.ID_MARQUE inner join vet_caract_assoc on vetement.id_vet = vet_caract_assoc.id_vet inner join caracteristique on caracteristique.ID_CARACT = vet_caract_assoc.ID_CARACT inner join vet_occas_assoc on vetement.id_vet = vet_occas_assoc.id_vet inner join occasion on occasion.ID_OCCAS = vet_occas_assoc.ID_OCCAS inner join note on vetement.FK_ID_NOTE = note.ID_NOTE WHERE vetement.ID_VET = ? ';
    var insert = [idClothe];
    connection.query(mysql.format(sql, insert), (err, results) => {
       if (err) {
@@ -300,6 +300,7 @@ module.exports.deleteClothe = function (idClothe, fct) {
 //MODIFICATION D'UN VETEMENT EN BASE DE DONNEES
 //d'abord, modification du vêtement concerné
 module.exports.updateClothe = function (obj, fct) {
+   console.log(obj);
    var sql1 = "UPDATE vetement SET FK_ID_CAT = ?, FK_ID_MARQUE = ?, FK_ID_NOTE = ?, NOM_VET = ?, IMG_VET = ?, DESCRIPT_VET = ? WHERE vetement.ID_VET = ?";
    var insert1 = [obj.FK_ID_CAT, obj.FK_ID_MARQUE, obj.FK_ID_NOTE, obj.NOM_VET, obj.IMG_VET, obj.DESCRIPT_VET, obj.ID_VET];
    connection.query(mysql.format(sql1, insert1), (err, results) => {
@@ -325,7 +326,7 @@ module.exports.updateClothe = function (obj, fct) {
          console.log("Nb de caractéristiques supprimées : " + results.affectedRows);
       });
       //ajout
-      var featureArray = obj.ID_CARACT;
+      var featureArray = obj.idCaracteristiques.split(",");
       featureArray.forEach(function (item) {
          var sql3 = "INSERT INTO vet_caract_assoc (ID_VET, ID_CARACT) VALUES(" + idVet + ", ?)";
          var inserts3 = [item];
@@ -352,7 +353,7 @@ module.exports.updateClothe = function (obj, fct) {
          console.log("Nb d'occasions supprimées : " + results.affectedRows);
       });
       //ajout
-      var occasionsArray = obj.ID_OCCAS;
+      var occasionsArray = obj.idOccasions.split(",");
       occasionsArray.forEach(function (item) {
          var sql5 = "INSERT INTO vet_occas_assoc (ID_VET, ID_OCCAS) VALUES(" + idVet + ", ?)";
          var inserts5 = [item];
@@ -379,7 +380,7 @@ module.exports.updateClothe = function (obj, fct) {
          console.log("Nb de couleurs supprimées : " + results.affectedRows);
       });
       //ajout
-      var colorArray = obj.ID_COUL;
+      var colorArray = obj.idCouleurs.split(",");
       colorArray.forEach(function (item) {
          var sql7 = "INSERT INTO vet_coul_assoc (ID_VET, ID_COUL) VALUES(" + idVet + ", ?)";
          var inserts7 = [item];
