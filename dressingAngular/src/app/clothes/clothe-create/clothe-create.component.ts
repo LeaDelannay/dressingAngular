@@ -251,7 +251,7 @@ export class ClotheCreateComponent implements OnInit {
    }
    //au click sur le lien XX inexistant dans la liste/revenir à la liste des XX, permet d'afficher la liste des éléments OU l'input permettant un nouvel ajout
    onClickBrand() {
-      this.brandExists = this.brandExists ? false : true;
+      this.brandExists = !this.brandExists;
    }
    onClickCategory() {
       this.categoryExists = this.categoryExists ? false : true;
