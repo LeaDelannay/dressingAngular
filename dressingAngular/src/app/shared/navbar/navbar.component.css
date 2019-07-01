@@ -47,11 +47,12 @@ a{
    width: 30px;
    text-align: center;
 }
-.dropdown-item:hover{
+.dropdown-item:hover, .dropdown-item:active, .dropdown-item:focus{
    background-color: #8ff1d7;
    border-radius: 5px;
 }
-@media all and (min-width:692){
+
+@media all and (min-width:692px){
    #seConnecter{
       margin-left: 15px;
    }

@@ -1,0 +1,103 @@
+{
+    "editor.fontSize": 12,
+    "editor.fontWeight": "200",
+    "editor.formatOnPaste": false,
+    "editor.mouseWheelZoom": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.showSuggestionsAsSnippets": true,
+    "editor.snippetSuggestions": "top",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.autoSave": "onFocusChange",
+    "files.defaultLanguage": "html",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Brogrammer",
+    //"editor.fontFamily": "anonymous pro",
+    "editor.fontFamily":"consolas",
+    "editor.fontLigatures": true,
+
+
+"editor.suggest.snippetsPreventQuickSuggestions": true,
+
+    "auto-correct.dictionary": [
+        {
+            "languages": [
+                "*"
+            ],
+            "words": {
+                "ficheir": "fichier",
+                "ficheirs": "fichiers",
+                "totu":"tout",
+                "TOTU":"TOUT",
+                "opur":"pour",
+                
+               
+            }
+        },
+        {
+            "languages": [
+                "javascript",
+                "javascriptreact",
+                "typescript",
+                "typescriptreact"
+            ],
+            "words": {
+                "cosnt": "const",
+                "functoin": "function"
+            }
+        }
+    ],
+
+    //monofur, consolas, monaco, anonymous pro
+   "window.title": "${activeEditorLong}${separator}${rootName}",
+
+   "workbench.colorCustomizations": {
+
+       "[Monokai-Vivid]": {
+           "editor.selectionForeground": "#000000",
+           "list.focusBackground": "#25545f",
+           "editor.selectionBackground":"#9b8145"
+        }
+    },
+    "incrementor.enums": [
+        [
+            "oui", "true", "non", "peut-etre"
+        ],
+        [
+            "let",
+            "const"
+        ]
+    ],
+   
+     "emmet.variables": {
+        "lang": "fr",
+        "locale": "fr-FR",
+        "indentation": "\t",
+        "newline": "\n"
+    },
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "window.titleBarStyle": "custom",
+
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
+    "editor.renderControlCharacters": false,
+    "editor.renderWhitespace": "none",
+    "workbench.startupEditor": "newUntitledFile",
+    "open-in-browser.default": "chrome",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
+    "liveServer.settings.donotVerifyTags": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 3,
+   "diffEditor.renderSideBySide": false,
+   "breadcrumbs.enabled": true,
+   "typescript.updateImportsOnFileMove.enabled": "always",
+   "vsicons.projectDetection.autoReload": true,
+   "terminal.integrated.rendererType": "dom"
+}
+

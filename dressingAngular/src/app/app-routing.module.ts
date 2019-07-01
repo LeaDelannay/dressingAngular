@@ -4,6 +4,7 @@ import { ClothesListComponent, ClotheCreateComponent, ClotheUpdateComponent } fr
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { LoginComponent } from './account/login/login.component';
 import { AuthGuard } from './shared/auth.guard';
+import { RegisterComponent } from './account/register/register.component';
 
 const routes: Routes = [
    /* Toutes les routes des composants */
@@ -13,6 +14,7 @@ const routes: Routes = [
    { path: 'clothe-create', component: ClotheCreateComponent, canActivate: [AuthGuard] },
    { path: 'clothe-update/:idClothe', component: ClotheUpdateComponent, canActivate: [AuthGuard] },
    { path: 'login', component: LoginComponent },
+   { path: 'register', component: RegisterComponent },
 
    { path: "**", component: LoginComponent } //toujours le mettre en dernier, gestion d'une erreur de path, default
 ];

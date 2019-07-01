@@ -9,7 +9,7 @@
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
          <a *ngIf="!authService.isLoggedIn()" routerLink="login" class="dropdown-item" id="seConnecter">Se connecter</a>
-         <a *ngIf="!authService.isLoggedIn()" routerLink="login" class="dropdown-item">S'enregistrer</a>
+         <a *ngIf="!authService.isLoggedIn()" routerLink="register" class="dropdown-item">S'enregistrer</a>
          <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
@@ -37,5 +37,6 @@
          </li>
       </ul>
    </div>
-   <a class="navbar-brand" id="paw" *ngIf="authService.isLoggedIn()" (click)="authService.logout()"><i class="fas fa-paw"></i></a>
+   <a class="navbar-brand" id="paw" *ngIf="authService.isLoggedIn()" (click)="authService.logout()"><i class="fas fa-user-lock fa-1x"></i></a>
+   <!-- <a class="navbar-brand" id="paw" *ngIf="authService.isLoggedIn()" (click)="authService.logout()"><i class="fas fa-paw"></i></a> -->
 </nav>

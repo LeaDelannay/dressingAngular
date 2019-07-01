@@ -254,16 +254,16 @@ export class ClotheCreateComponent implements OnInit {
       this.brandExists = !this.brandExists;
    }
    onClickCategory() {
-      this.categoryExists = this.categoryExists ? false : true;
+      this.categoryExists = !this.categoryExists;
    }
    onClickColor() {
-      this.colorExists = this.colorExists ? false : true;
+      this.colorExists = !this.colorExists;
    }
    onClickFeature() {
-      this.featureExists = this.featureExists ? false : true;
+      this.featureExists = !this.featureExists;
    }
    onClickOccasion() {
-      this.occasionExists = this.occasionExists ? false : true;
+      this.occasionExists = !this.occasionExists;
    }
 
    //au click sur le plus, ajoute l'élément en bdd et recharge la page

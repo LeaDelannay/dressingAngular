@@ -1,3 +1,4 @@
+// CONNEXION A LA BASE DE DONNEES
 // importation du module mysql
 var mysql = require('mysql');
 console.log('Get connection ...');

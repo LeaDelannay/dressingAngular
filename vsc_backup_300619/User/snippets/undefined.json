@@ -1,0 +1,18 @@
+{
+	"undefined": {
+		"body": [
+			"<a class=\"superCode\">\r",
+			"\\t<a href=\"\">Lien bidon</a>\r",
+			"</div>"
+		]
+	},
+	"lnk": {
+		"prefix": "lnk",
+		"body": [
+			"<a class=\"superCode\">\r",
+			"\\t<a href=\"\">Lien bidon</a>\r",
+			"</div>"
+		],
+		"description": "descr"
+	}
+}
