@@ -8,7 +8,6 @@ var logger = require('morgan');
 const fileUpload = require('express-fileupload'); //upload
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var brandsRouter = require('./routes/brands');
 var categoriesRouter = require('./routes/categories');
@@ -18,6 +17,7 @@ var featuresRouter = require('./routes/features');
 var notesRouter = require('./routes/notes');
 var occasionsRouter = require('./routes/occasions');
 var uploadRouter = require('./routes/upload.js'); //upload images
+var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -42,7 +42,6 @@ app.use(function(req, res, next){
 });
 
 app.use('/', indexRouter);
-app.use('/api/users', usersRouter);
 app.use('/api/brands', brandsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/clothes', clothesRouter);
@@ -51,6 +50,7 @@ app.use('/api/features', featuresRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/occasions', occasionsRouter);
 app.use('/api/upload', uploadRouter); //upload
+app.use('/api/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

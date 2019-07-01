@@ -619,3 +619,23 @@ module.exports.createOccasion = function (obj, fct) {
    });
 }
 //FIN OCCASIONS\\
+
+
+//DEBUT USER\\
+//CREATION D'UN USER EN BASE DE DONNEES
+module.exports.createUser = function (obj, fct) {
+
+   var sql = "INSERT INTO user (PSEUDO_USER, LOGIN_USER, MDP_USER) VALUES(?, ?, SHA2(?, 256))";
+   var inserts = [obj.PSEUDO_USER, obj.LOGIN_USER, obj.MDP_USER];
+
+   // création du vêtement en base de données
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         return;
+      }
+      fct(null, results);
+   });
+}
+//FIN USER\\
