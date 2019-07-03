@@ -638,4 +638,67 @@ module.exports.createUser = function (obj, fct) {
       fct(null, results);
    });
 }
+
+//COMPARAISON USER MDP
+module.exports.readUser = function (obj, fct) {
+
+   var mdpFromBdd = '';
+   var mdpFromClt= '';
+
+   var sql = "SELECT LOGIN_USER FROM user WHERE LOGIN_USER = ?";
+   var inserts = [obj.LOGIN_USER];
+
+   connection.query(mysql.format(sql, inserts), (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+
+      var sql2 = "SELECT MDP_USER FROM user WHERE LOGIN_USER = ?";
+      var inserts2 = [obj.LOGIN_USER];
+
+      connection.query(mysql.format(sql2, inserts2), (err, results) => {
+         if (err) {
+            console.error(err);
+            fct(err, null);
+            connection.end();
+            return;
+         }
+         // fct(null, results);
+         results.forEach(element => {
+            mdpFromBdd = element.MDP_USER;
+         });
+         console.log("BDD retour : "+results);
+         console.log("BDD mdpfrombdd : "+mdpFromBdd);
+      });
+
+      var sql3 = "SELECT SHA2(?, 256) as mdp FROM DUAL ";
+      var inserts3 = [obj.MDP_USER];
+      connection.query(mysql.format(sql3, inserts3), (err, results) => {
+         if (err) {
+            console.error(err);
+            fct(err, null);
+            connection.end();
+            return;
+         }
+         results.forEach(element => {
+            mdpFromClt = element.mdp;
+         });
+
+         console.log("DUAL retour : "+results);
+         console.log("DUAL mdpfrombdd : "+mdpFromBdd);
+         console.log("DUAL mdpFromClt : "+mdpFromClt);
+         if(mdpFromClt === mdpFromBdd){
+            console.log("MDP OK");
+         }else{
+            return '';
+         }
+      });
+
+      fct(null, results);
+      console.log(results);
+   });
+}
 //FIN USER\\
