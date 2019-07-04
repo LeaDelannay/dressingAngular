@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
       }
       console.log(data);
       if (data == 0 || data == null || data == undefined || data == "") {
-         res.sendStatus(403); //no content
+         res.sendStatus(403); //forbidden
          return;
       }
       res.send(data);
