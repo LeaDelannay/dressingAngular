@@ -1,12 +1,16 @@
 <h2 class="text-center">CONNEXION</h2>
-<form class="container" [formGroup]="form" (ngSubmit)="login()" #loginForm="ngForm">
+<form class="container" (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
   <div class="row">
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-      <input type="email" formControlName="email" placeholder="Adresse email" class="form-control">
+      <input type="email" name="email" [(ngModel)]="pseudoToCompare" #email="ngModel" placeholder="Adresse email" class="form-control">
+      <small *ngIf="pseudoToCompare.invalid && pseudoToCompare.touched" class="text-muted alert-danger">Vous
+         n'avez pas rempli ce champ</small>
     </div>
     <br>
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-      <input type="password" formControlName="password" placeholder="Mot de passe" class="form-control">
+      <input type="password" name="password" [(ngModel)]="passwordToCompare" #password="ngModel" placeholder="Mot de passe" class="form-control">
+      <small *ngIf="passwordToCompare.invalid && passwordToCompare.touched" class="text-muted alert-danger">Vous
+         n'avez pas rempli ce champ</small>
     </div>
     <br>
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">

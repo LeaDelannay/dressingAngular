@@ -1,17 +1,23 @@
 <h3 *ngIf="registerOk" class="text-center">Votre compte a bien été créé. Merci de vous connecter.</h3>
 <h2 class="text-center">CREER UN COMPTE</h2>
-<form class="container" [formGroup]="form" (ngSubmit)="register()" #registerForm="ngForm">
+<form class="container" (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
   <div class="row">
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-      <input type="pseudo" formControlName="pseudo" placeholder="Pseudo" class="form-control">
+      <input type="text" name="pseudo" [(ngModel)]="newPseudo" #pseudo="ngModel" placeholder="Pseudo" class="form-control" required>
+      <small *ngIf="pseudo.invalid && pseudo.touched" class="text-muted alert-danger">Vous
+         n'avez pas rempli ce champ</small>
     </div>
     <br>
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-      <input type="email" formControlName="email" placeholder="Adresse email" class="form-control">
+      <input type="email" name="email" [(ngModel)]="newLogin" #email="ngModel" placeholder="Adresse email" class="form-control" required>
+      <small *ngIf="email.invalid && email.touched" class="text-muted alert-danger">Vous
+         n'avez pas rempli ce champ</small>
     </div>
     <br>
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-      <input type="password" formControlName="password" placeholder="Mot de passe" class="form-control">
+      <input type="password" name="password" [(ngModel)]="newMdp" #password="ngModel" placeholder="Mot de passe" class="form-control" required>
+      <small *ngIf="password.invalid && password.touched" class="text-muted alert-danger">Vous
+         n'avez pas rempli ce champ</small>
     </div>
     <br>
     <div class="col col-md-6 offset-md-3 col-lg-4 offset-lg-4">

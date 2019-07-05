@@ -104,7 +104,7 @@ router.delete('/:idClothe', function (req, res, next) {
          res.sendStatus(500);
          return;
       }
-      res.sendStatus(204); //renvoie 204 car la requête ne renvoie rien. 204 est pour le front. 
+      res.sendStatus(204); //renvoie 204 car la requête ne renvoie rien, mais requete correctement traitée. 204 est pour le front. 
       return;
    })
 });

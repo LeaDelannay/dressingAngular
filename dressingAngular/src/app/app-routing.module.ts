@@ -13,8 +13,8 @@ const routes: Routes = [
    { path: 'clothes-list', component: ClothesListComponent, canActivate: [AuthGuard] },
    { path: 'clothe-create', component: ClotheCreateComponent, canActivate: [AuthGuard] },
    { path: 'clothe-update/:idClothe', component: ClotheUpdateComponent, canActivate: [AuthGuard] },
-   { path: 'login', component: LoginComponent },
    { path: 'register', component: RegisterComponent },
+   { path: 'login', component: LoginComponent },
 
    { path: "**", component: LoginComponent } //toujours le mettre en dernier, gestion d'une erreur de path, default
 ];

@@ -211,7 +211,7 @@ export class ClotheCreateComponent implements OnInit {
    }
 
    onSubmit(form: NgForm) {
-      if (form.valid == true) { //Si tous les champs du formulaire sont remplis
+      if (form.valid) { //Si tous les champs du formulaire sont remplis
          let clotheArray = new Clothe; //création d'un tableau Json contenant les données attendues par le serveur
          clotheArray.NOM_VET = form.value["clotheName"]; //met le nom du vetement saisi dans le formulaire, dans le tableau clotheArray
          clotheArray.FK_ID_CAT = form.value["clotheCategory"];
