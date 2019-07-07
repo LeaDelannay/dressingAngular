@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
    onLogin(form: NgForm) {
       let user = new Account;//création d'un objet Json contenant les données attendues par le serveur
-      user.LOGIN_USER = form.value["email"].trim();
-      user.MDP_USER = form.value["password"].trim();
+      user.LOGIN_USER = form.value["email"].trim().replace(/;/g, "");
+      user.MDP_USER = form.value["password"].trim().replace(/;/g, "");
 
       if (form.valid) {
          this.authService.sendUserToCompare(user).subscribe( response =>{
