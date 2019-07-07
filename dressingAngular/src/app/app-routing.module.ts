@@ -5,6 +5,7 @@ import { HomepageComponent } from './home/homepage/homepage.component';
 import { LoginComponent } from './account/login/login.component';
 import { AuthGuard } from './shared/auth.guard';
 import { RegisterComponent } from './account/register/register.component';
+import { WeatherComponent } from './weather/weather.component';
 
 const routes: Routes = [
    /* Toutes les routes des composants */
@@ -15,6 +16,7 @@ const routes: Routes = [
    { path: 'clothe-update/:idClothe', component: ClotheUpdateComponent, canActivate: [AuthGuard] },
    { path: 'register', component: RegisterComponent },
    { path: 'login', component: LoginComponent },
+   { path: 'weather', component: WeatherComponent },
 
    { path: "**", component: LoginComponent } //toujours le mettre en dernier, gestion d'une erreur de path, default
 ];

@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { ClothesModule } from './clothes/clothes.module';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { AccountModule } from './account/account.module';
+import { WeatherModule } from './weather/weather.module';
 
 @NgModule({
    declarations: [
@@ -27,6 +28,7 @@ import { AccountModule } from './account/account.module';
       AccountModule,
       ReactiveFormsModule,
       ClothesModule,
+      WeatherModule,
       AppRoutingModule /* Routes */
    ],
    providers: [],
