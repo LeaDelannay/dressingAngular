@@ -12,7 +12,7 @@ import { ClotheDetailComponent } from '../clothe-detail/clothe-detail.component'
 export class ClothesListComponent implements OnInit {
 
    clothes: Clothe[] = [];
-   erreur = null; //Création de la variable erreur pour afficher message d'erreur dans le html
+   codeHttp = null; //Création de la variable codeHttp pour afficher message du codeHttp dans le html
 
    brands: any[] = [];
    categories: any[] = [];
@@ -43,10 +43,10 @@ export class ClothesListComponent implements OnInit {
       this.service.getSpecificFilter().subscribe(response => {
          this.clothes = response.body;
          // console.log(JSON.stringify(specificFeatureFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - specificFilter -- " + error);
          });
 
@@ -63,10 +63,10 @@ export class ClothesListComponent implements OnInit {
          this.service.getSpecificFilterOpt(this._selectedFilter, this._selectedOption).subscribe(response => {
             this.clothes = response.body;
             // console.log(JSON.stringify(specificFeatureFromService));
-            this.erreur = response.status;
+            this.codeHttp = response.status;
          },
             error => {
-               this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
                console.log("Erreur lors de l'appel au service clothes.service - specificFilterOpt -- " + error);
             });
       }
@@ -76,20 +76,20 @@ export class ClothesListComponent implements OnInit {
       this.service.getAllBrands().subscribe(response => {
          this.brands = response.body;
          // console.log(JSON.stringify(brandFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (codeHttp) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - brands -- " + error);
          });
 
       this.service.getAllCategories().subscribe(response => {
          this.categories = response.body;
          // console.log(JSON.stringify(categoryFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
          });
 
@@ -98,40 +98,40 @@ export class ClothesListComponent implements OnInit {
       this.service.getAllColors().subscribe(response => {
          this.colors = response.body;
          // console.log(JSON.stringify(colorFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - colors -- " + error);
          });
 
       this.service.getAllFeatures().subscribe(response => {
          this.features = response.body;
          // console.log(JSON.stringify(featFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
          });
 
       this.service.getAllNotes().subscribe(response => {
          this.notes = response.body;
          // console.log(JSON.stringify(occasFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - notes -- " + error);
          });
 
       this.service.getAllOccasions().subscribe(response => {
          this.occasions = response.body;
          // console.log(JSON.stringify(occasFromService));
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
          });
 
@@ -158,10 +158,10 @@ export class ClothesListComponent implements OnInit {
    private callGetAllClothes(){
       this.service.getAllClothes().subscribe(response => {
          this.clothes = response.body;
-         this.erreur = response.status;
+         this.codeHttp = response.status;
       },
          error => {
-            this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            this.codeHttp = error.status; //Récupère la réponse du serveur (Erreur) et l'insère dans codeHttp
             console.log("Erreur lors de l'appel au service clothes.service - clothes -- " + error);
          });
    }

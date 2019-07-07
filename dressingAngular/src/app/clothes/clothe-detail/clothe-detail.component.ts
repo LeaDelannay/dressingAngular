@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClothesService } from '../clothes.service';
 import { Clothe } from '../clothe';
 import { Router } from '@angular/router';
+import { ClotheDeleteComponent } from '../clothe-delete/clothe-delete.component';
 
 @Component({
    selector: 'app-clothe-detail',
@@ -13,11 +14,12 @@ export class ClotheDetailComponent implements OnInit {
 
    @Input() idClothe; //contient l'id du vêtement cliqué dans clothe-list, élément parent
    clotheDetail: Clothe = new Clothe(); //récupère le contenu renvoyé par le back
-   statusCode = null; //Création de la variable statusCode pour afficher message d'erruer dans le html
+   statusCode = null; //Création de la variable statusCode pour afficher message d'erreur dans le html
 
-   constructor(public activeModal: NgbActiveModal, private service: ClothesService, public router: Router) { }
+   constructor(public activeModal: NgbActiveModal, private service: ClothesService, public router: Router, private modalService: NgbModal) { }
 
    ngOnInit() {
+
       this.service.getSpecificClothe(this.idClothe).subscribe(response => {
          this.clotheDetail = response.body;
          // console.log(JSON.stringify(specificFeatureFromService));
@@ -34,17 +36,18 @@ export class ClotheDetailComponent implements OnInit {
       this.router.navigate(['clothe-update', this.idClothe]);
    }
 
-   onDelete() {
-      this.service.deleteClothe(this.idClothe).subscribe(response => { //Supprime la classe dans la BDD selon l'id
-         this.statusCode = response.status;
-         console.log("Le vêtement a bien été supprimé");
-         this.activeModal.close();
-      },
-         error => {
-            this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans statusCode
-            console.log(error);
-            console.log("Le vêtement n'a pas été supprimé - Erreur lors de l'appel au service" + this.statusCode);
-         })
+   //gestion de la modale
+   //ouvre la modale en lui passant l'id du vêtement cliqué
+   onDelete(idClthe) {
+
+      console.log("idClothe dans detail : " + this.idClothe);
+         const modalRef = this.modalService.open(ClotheDeleteComponent); //ouvre une modale dont le contenu est ClotheDeleteComponent
+         modalRef.componentInstance.idClothe = idClthe; //récupère l'id du vêtement cliqué et le passe au component modale
+
+         modalRef.result.then((result) => {
+            //quand on clique sur supprimer dans la modale de confirmation, ferme cette modale.
+            this.activeModal.close();
+         });
    }
 
 }
