@@ -116,7 +116,7 @@ create table MARQUE
 create table NOTE
 (
    ID_NOTE              Int  Auto_increment  NOT NULL ,
-   NUM_NOTE             float(2),
+   NUM_NOTE             Int(11) NOT NULL,
    primary key (ID_NOTE)
 );
 
