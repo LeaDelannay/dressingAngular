@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
    codeHttp = null;
 
    public form;
-   public registerOk = false;
+   public registerOk;
 
    // récupère la valeur saisie dans l'input pour ensuite le passer à la bdd via une fonction
    newPseudo: string = "";
@@ -34,7 +34,12 @@ export class RegisterComponent implements OnInit {
 
    onRegister(form: NgForm) {
       if (form.valid) {
-         this.registerOk = true;
+         if(form.value["email"].search('@') === -1){
+            this.registerOk = false;
+            console.log('FALSE');
+         }else{
+            console.log('TRUE');
+         
          let user = new Account;//création d'un objet Json contenant les données attendues par le serveur
          user.PSEUDO_USER = form.value["pseudo"].trim().replace(/;/g, "");
          user.LOGIN_USER = form.value["email"].trim().replace(/;/g, "");
@@ -42,15 +47,18 @@ export class RegisterComponent implements OnInit {
 
          this.service.addNewUser(user).subscribe(response => { //envoie le tableau au back
             this.codeHttp = response.status;
+            this.registerOk = true;
             console.log("Le user a bien été enregistré");
             setTimeout(()=>this.router.navigate(['login']),3000);
          },
-            error => {
-               this.codeHttp = error.status; //Récupère la réponse du serveur (codeHttp) et l'insère dans codeHttp
+         error => {
+            this.codeHttp = error.status; //Récupère la réponse du serveur (codeHttp) et l'insère dans codeHttp
+            this.registerOk = false;
                console.log(error); //Affiche le retour du serveur
                console.log(this.codeHttp); //Affiche la variable codeHttp qui a été injectée par error.status
                console.log(" Les requêtes n'ont pas été enregistrées / erreur lors de l'appel au service account.service - register -- " + error);
             });
+         }
       }
    }
 
