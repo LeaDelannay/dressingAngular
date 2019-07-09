@@ -36,10 +36,7 @@ export class RegisterComponent implements OnInit {
       if (form.valid) {
          if(form.value["email"].search('@') === -1){
             this.registerOk = false;
-            console.log('FALSE');
          }else{
-            console.log('TRUE');
-         
          let user = new Account;//création d'un objet Json contenant les données attendues par le serveur
          user.PSEUDO_USER = form.value["pseudo"].trim().replace(/;/g, "");
          user.LOGIN_USER = form.value["email"].trim().replace(/;/g, "");

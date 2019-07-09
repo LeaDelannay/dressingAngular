@@ -1,3 +1,4 @@
+<h3 *ngIf="erreurLogin" class="text-center">Une erreur est survenue. Merci de réessayer.</h3>
 <h2 class="text-center">CONNEXION</h2>
 <form class="container" (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
   <div class="row">

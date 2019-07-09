@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
    pseudoToCompare: string = "";
    passwordToCompare: string = "";
+   public erreurLogin;
 
    constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
       //gestion guards
@@ -36,7 +37,12 @@ export class LoginComponent implements OnInit {
             console.log(response.body.token);
             this.authService.sendToken(response.body.token);
             this.router.navigate(["homepage"]);
-         });
+         },
+         error => {
+            this.erreurLogin = true;
+               console.log(error); //Affiche le retour du serveur
+               console.log(" Les requêtes n'ont pas été enregistrées / erreur lors de l'appel au service account.service - login -- " + error);
+            });
 
       }
     }
