@@ -16,6 +16,17 @@ h1, h2, h3, h4, h5, h6{
    border-color: #4DE8BE !important;
 }
 
+btn-outline-success:not(:disabled):not(.disabled):hover, .btn-outline-success:not(:disabled):not(.disabled):hover{
+   color: #fff!important;
+   background-color: #4DE8BE!important;
+   border-color: #4DE8BE!important;
+}
+
+.btn-outline-success:focus, .btn-outline-success.focus{
+   box-shadow: 0 0 0 0.2rem rgba(77, 232, 190, 0.5)!important;
+}
+
+
 /* ----- CSS splash screen [DEBUT]-----  */
 .cssload-loader {
 	position: relative;

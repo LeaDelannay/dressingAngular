@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light navbar-default">
-   <a class="navbar-brand, srisakdi" href="#">MonDressing</a>
+   <a class="navbar-brand, srisakdi" routerLink="homepage">MonDressing</a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
          <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-plus-circle"></i> Creation
+            <i class="fas fa-plus-circle"></i> Création
          </a>
          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" routerLink="clothe-create"><i class="fas fa-tshirt menuIcon"></i> Ajouter un vêtement</a>

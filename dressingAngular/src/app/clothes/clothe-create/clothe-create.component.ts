@@ -232,7 +232,7 @@ export class ClotheCreateComponent implements OnInit {
 
          // clotheArray.FK_ID_USER = form.value["idUser"]; // a implémenter en fonction d'une session
          // console.log(clotheArray.FK_ID_USER); // a implémenter en fonction d'une session
-         clotheArray.FK_ID_USER = 1; // a implémenter en fonction d'une session - en attendant par défaut : 1
+         clotheArray.FK_ID_USER = 1; // y mettre le JWT que le back décryptera - en attendant par défaut : 1
 
          console.log(clotheArray);
 

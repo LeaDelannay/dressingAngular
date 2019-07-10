@@ -643,6 +643,7 @@ module.exports.createUser = function (obj, fct) {
 module.exports.readUser = function (obj, fct) {
 
    var mdpFromBdd = '';
+   var idFromBdd = '';
    var mdpFromClt = '';
 
    var sql = "SELECT LOGIN_USER FROM user WHERE LOGIN_USER = ?";
@@ -656,7 +657,7 @@ module.exports.readUser = function (obj, fct) {
          return;
       }
 
-      var sql2 = "SELECT MDP_USER FROM user WHERE LOGIN_USER = ?";
+      var sql2 = "SELECT ID_USER, MDP_USER FROM user WHERE LOGIN_USER = ?";
       var inserts2 = [obj.LOGIN_USER];
 
       connection.query(mysql.format(sql2, inserts2), (err, results) => {
@@ -669,6 +670,7 @@ module.exports.readUser = function (obj, fct) {
          // fct(null, results);
          results.forEach(element => {
             mdpFromBdd = element.MDP_USER;
+            idFromBdd = element.ID_USER;
          });
 
          var sql3 = "SELECT SHA2(?, 256) as mdp FROM DUAL ";
@@ -685,7 +687,8 @@ module.exports.readUser = function (obj, fct) {
             });
             
             if (mdpFromClt === mdpFromBdd) {
-               fct(null, 'MDP OK');
+               console.log(idFromBdd);
+               fct(null, idFromBdd);
             } else {
                fct(null, '');
                console.log(results);

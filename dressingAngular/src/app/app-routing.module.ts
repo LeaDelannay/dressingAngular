@@ -18,7 +18,7 @@ const routes: Routes = [
    { path: 'login', component: LoginComponent },
    { path: 'weather', component: WeatherComponent },
 
-   { path: "**", component: LoginComponent } //toujours le mettre en dernier, gestion d'une erreur de path, default
+   { path: "**", component: HomepageComponent, canActivate: [AuthGuard]} //toujours le mettre en dernier, gestion d'une erreur de path, default
 ];
 
 @NgModule({
