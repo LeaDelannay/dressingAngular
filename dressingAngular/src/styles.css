@@ -2,6 +2,7 @@
 
 /* import du CSS bootstrap sur toutes mes pages */
 @import'~bootstrap/dist/css/bootstrap.min.css';
+
 *{
    font-family: 'Roboto', sans-serif;
    box-sizing: border-box;
