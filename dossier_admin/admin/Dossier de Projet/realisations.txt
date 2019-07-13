@@ -1,0 +1,10 @@
+//Code concernant le ts qui fait lappel a mon back – 
+dire que donnees du formulaires bindées sur cette variable
+Mettre la variable ts
+Bindé grace à la propriété ngmodel
+Bout de code du formulaire avec ngmodel
+Envoyé au back grace a ce bout de code avec le bout de code qui fait appel au service
+Ensuite mettre le service
+Code du routeur dans app.js qui crée le point d’entrée
+Bout de code du back qui recoit donc la ressource
+Bout de code qui exécute donc index.js

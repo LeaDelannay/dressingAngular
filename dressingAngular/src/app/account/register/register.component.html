@@ -1,5 +1,5 @@
-<h3 *ngIf="registerOk" class="text-center">Votre compte a bien été créé. Merci de vous connecter.</h3>
-<h3 *ngIf="registerOk === false" class="text-center">Une erreur est survenue. Merci de réessayer.</h3>
+<h3 *ngIf="codeHttp === 200" class="text-center">Votre compte a bien été créé. Merci de vous connecter.</h3>
+<h3 *ngIf="codeHttp === 400 || codeHttp === 500 || registerNotOk" class="text-center">Une erreur est survenue. Merci de réessayer.</h3>
 <h2 class="text-center">CREER UN COMPTE</h2>
 <form class="container" (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
   <div class="row">

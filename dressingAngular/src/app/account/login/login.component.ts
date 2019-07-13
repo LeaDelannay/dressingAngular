@@ -11,10 +11,11 @@ import { Account } from '../account';
 })
 export class LoginComponent implements OnInit {
    public form;
+   codeHttp = null;
 
+   //récupère les valeurs contenues dans les champs du formulaire
    pseudoToCompare: string = "";
    passwordToCompare: string = "";
-   public erreurLogin;
 
    constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
       //gestion guards
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["homepage"]);
          },
          error => {
-            this.erreurLogin = true;
+            this.codeHttp = error.status;
                console.log(error); //Affiche le retour du serveur
                console.log(" Les requêtes n'ont pas été enregistrées / erreur lors de l'appel au service account.service - login -- " + error);
             });

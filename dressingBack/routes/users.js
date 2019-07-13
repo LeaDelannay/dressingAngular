@@ -35,7 +35,6 @@ router.post('/login/', function (req, res, next) {
       res.status(200).send({
          token: token
       }); //renvoie 200 ok + token
-
    });
 });
 

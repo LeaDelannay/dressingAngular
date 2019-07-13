@@ -641,14 +641,12 @@ module.exports.createUser = function (obj, fct) {
 
 //COMPARAISON USER MDP
 module.exports.readUser = function (obj, fct) {
-
    var mdpFromBdd = '';
    var idFromBdd = '';
    var mdpFromClt = '';
 
    var sql = "SELECT LOGIN_USER FROM user WHERE LOGIN_USER = ?";
    var inserts = [obj.LOGIN_USER];
-
    connection.query(mysql.format(sql, inserts), (err, results) => {
       if (err) {
          console.error(err);
@@ -659,7 +657,6 @@ module.exports.readUser = function (obj, fct) {
 
       var sql2 = "SELECT ID_USER, MDP_USER FROM user WHERE LOGIN_USER = ?";
       var inserts2 = [obj.LOGIN_USER];
-
       connection.query(mysql.format(sql2, inserts2), (err, results) => {
          if (err) {
             console.error(err);
