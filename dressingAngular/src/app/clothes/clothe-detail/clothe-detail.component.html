@@ -5,7 +5,9 @@
   </button>
 </div>
 <div class="modal-body">
-  <img src="assets/pictures/tshirt.png" alt="" class="d-flex align-items-center" [style.max-width.px]="200"
+  <img *ngIf="clotheDetail.IMG_VET === null" src="assets/pictures/tshirt.png" alt="" class="d-flex align-items-center" [style.max-width.px]="200"
+    [style.max-height.px]="125">
+  <img *ngIf="clotheDetail.IMG_VET !== null" src="{{clotheDetail.IMG_VET}}" alt="" class="d-flex align-items-center" [style.max-width.px]="200"
     [style.max-height.px]="125">
 
   <p><span class="gs">Couleur(s) :</span><br>{{clotheDetail.couleurs}}</p>

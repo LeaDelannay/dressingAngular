@@ -7,33 +7,19 @@ CREATE DATABASE IF NOT EXISTS dressing;
 USE dressing;
 
 drop table if exists CARACTERISTIQUE;
-
 drop table if exists CARACT_ASSOC;
-
 drop table if exists CATEGORIE;
-
 drop table if exists COULEUR;
-
 drop table if exists COUL_ASSOC;
-
 drop table if exists MARQUE;
-
 drop table if exists NOTE;
-
 drop table if exists OCCASION;
-
 drop table if exists TENUE;
-
 drop table if exists USER;
-
 drop table if exists VET_TEN_ASSOC;
-
 drop table if exists VETEMENT;
-
 drop table if exists VET_CARACT_ASSOC;
-
 drop table if exists VET_COUL_ASSOC;
-
 drop table if exists VET_OCCAS_ASSOC;
 
 /*==============================================================*/

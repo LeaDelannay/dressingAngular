@@ -188,7 +188,6 @@ module.exports.createClothe = function (obj, fct) {
 
    var sql1 = "INSERT INTO vetement (FK_ID_CAT, FK_ID_MARQUE, FK_ID_NOTE, FK_ID_USER, NOM_VET, IMG_VET, DESCRIPT_VET) VALUES(?, ?, ?, ?, ?, ?, ?)";
    var inserts1 = [obj.FK_ID_CAT, obj.FK_ID_MARQUE, obj.FK_ID_NOTE, obj.FK_ID_USER, obj.NOM_VET, obj.IMG_VET, obj.DESCRIPT_VET];
-
    // création du vêtement en base de données
    connection.query(mysql.format(sql1, inserts1), (err, results) => {
       if (err) {
@@ -198,7 +197,6 @@ module.exports.createClothe = function (obj, fct) {
       }
       //récupération de l'id du vêtement créé
       idVet = results.insertId;
-
       //création des associations
       var featureArray = obj.ID_CARACT;
       featureArray.forEach(function (item) {
@@ -213,7 +211,6 @@ module.exports.createClothe = function (obj, fct) {
             }
          })
       });
-
       var colorArray = obj.ID_COUL;
       colorArray.forEach(function (item) {
          var sql3 = "INSERT INTO vet_coul_assoc (ID_VET, ID_COUL) VALUES(" + idVet + ", ?)";
@@ -227,7 +224,6 @@ module.exports.createClothe = function (obj, fct) {
             }
          })
       });
-
       var occasArray = obj.ID_OCCAS;
       occasArray.forEach(function (item) {
          var sql4 = "INSERT INTO vet_occas_assoc (ID_VET, ID_OCCAS) VALUES(" + idVet + ", ?)";

@@ -15,7 +15,7 @@ export class ClotheCreateComponent implements OnInit {
 
    erreur = null;
 
-   //servent à l'ajout des éléments manquants en base de données
+   //variables permettant de passer au html le contenu des listes déroulantes et cb
    brands: any[] = [];
    categories: any[] = [];
    colors: any[] = [];
@@ -226,15 +226,11 @@ export class ClotheCreateComponent implements OnInit {
          } else {
             // let nomFichier = this.clotheImg.match('[a-zA-Z0-9_-]*\..*$');
             let nomFichier = this.clotheImg.replace(/^.*(\\|\/|\:)/, '');
-            console.log(nomFichier);
             clotheArray.IMG_VET = this.URL + '/' + nomFichier;
          }
-
          // clotheArray.FK_ID_USER = form.value["idUser"]; // a implémenter en fonction d'une session
          // console.log(clotheArray.FK_ID_USER); // a implémenter en fonction d'une session
          clotheArray.FK_ID_USER = 1; // y mettre le JWT que le back décryptera - en attendant par défaut : 1
-
-         console.log(clotheArray);
 
          this.service.addNewClothe(clotheArray).subscribe(response => { //envoie le tableau au back
             this.erreur = response.status;
