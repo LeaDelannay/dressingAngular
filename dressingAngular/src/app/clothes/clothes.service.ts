@@ -125,13 +125,13 @@ export class ClothesService {
       return this.http.get<Clothe[]>(`${this.baseUrl}/occasions/occasionname`, { observe: 'response' });
    }
 
-   //supression 
+   //supression
    //supression d'un vêtement + tables associatives en base de données
    public deleteClothe(idClothe: number): Observable<HttpResponse<Clothe[]>> {
       return this.http.delete<Clothe[]>(`${this.baseUrl}/clothes/${idClothe}`, { observe: 'response' });
    }
 
-   //modification 
+   //modification
    //modification d'un vêtement + tables associatives en base de données
    public updateClothe(clothe: Clothe): Observable<HttpResponse<Clothe>> {
       return this.http.put<Clothe>(`${this.baseUrl}/clothes`, clothe, { observe: 'response' });

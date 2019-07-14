@@ -297,7 +297,6 @@ module.exports.deleteClothe = function (idClothe, fct) {
 //MODIFICATION D'UN VETEMENT EN BASE DE DONNEES
 //d'abord, modification du vêtement concerné
 module.exports.updateClothe = function (obj, fct) {
-   console.log(obj);
    var sql1 = "UPDATE vetement SET FK_ID_CAT = ?, FK_ID_MARQUE = ?, FK_ID_NOTE = ?, NOM_VET = ?, IMG_VET = ?, DESCRIPT_VET = ? WHERE vetement.ID_VET = ?";
    var insert1 = [obj.FK_ID_CAT, obj.FK_ID_MARQUE, obj.FK_ID_NOTE, obj.NOM_VET, obj.IMG_VET, obj.DESCRIPT_VET, obj.ID_VET];
    connection.query(mysql.format(sql1, insert1), (err, results) => {
@@ -336,7 +335,6 @@ module.exports.updateClothe = function (obj, fct) {
             }
          })
       });
-
       //dans la table associative : vet occas assoc
       //suppression
       var sql4 = "DELETE FROM vet_occas_assoc WHERE vet_occas_assoc.ID_VET = ?";

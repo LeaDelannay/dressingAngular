@@ -75,6 +75,68 @@ export class ClotheUpdateComponent implements OnInit {
          //récupère le chemin de l'image
          this.urlImage = this.clotheDetail.IMG_VET; 
 
+
+         //getAllColors est appelé ici car sinon pas possible d'affecter checked aux couleurs du tableau colors, ça n'a pas fini de s'initialiser
+      this.service.getAllColors().subscribe(response => {
+         this.colors = response.body;
+         // console.log(JSON.stringify(colorFromService));
+         this.statusCode = response.status;
+         //dans la callback de getAllColors car a besoin qu'elle ait fini de s'initialiser pour fonctionner
+         //affecte true à chaque couleur présente dans clotheDetail ce qui signifie qu'elles sont sélectionnées par défaut pour ce vêtement
+         console.log(this.clotheDetail);
+         console.log(this.clotheDetail.idCouleurs);
+         this.clotheDetail.idCouleurs.split(",").forEach(idColor => {
+            this.colors.forEach(color => {
+               if (idColor == color.ID_COUL) {
+                  color.checked = true;
+               }
+            });
+         });
+      },
+         error => {
+            this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+            console.log("Erreur lors de l'appel au service clothes.service - colors -- " + error);
+         });
+
+         this.service.getAllFeatures().subscribe(response => {
+            this.features = response.body;
+            // console.log(JSON.stringify(featFromService));
+            this.statusCode = response.status;
+             //dans la callback de getAllFeatures car a besoin qu'elle ait fini de s'initialiser pour fonctionner
+            //affecte true à chaque caractéristique présente dans clotheDetail ce qui signifie qu'elles sont sélectionnées par défaut pour ce vêtement
+            this.clotheDetail.idCaracteristiques.split(",").forEach(idFeature => {
+               this.features.forEach(feature => {
+                  if (idFeature == feature.ID_CARACT) {
+                     feature.checked = true;
+                  }
+               });
+            });
+         },
+            error => {
+               this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+               console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
+            });
+
+            this.service.getAllOccasions().subscribe(response => {
+               this.occasions = response.body;
+               // console.log(JSON.stringify(occasFromService));
+               this.statusCode = response.status;
+               //dans la callback de getAllOccasions car a besoin qu'elle ait fini de s'initialiser pour fonctionner
+               //affecte true à chaque occasion présente dans clotheDetail ce qui signifie qu'elles sont sélectionnées par défaut pour ce vêtement
+               this.clotheDetail.idOccasions.split(",").forEach(idOccasion => {
+                  this.occasions.forEach(occasion => {
+                     if (idOccasion == occasion.ID_OCCAS) {
+                        occasion.checked = true;
+                     }
+                  });
+               });
+            },
+               error => {
+                  this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
+                  console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
+               });
+
+
       },
          error => {
             this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans statusCode
@@ -101,46 +163,6 @@ export class ClotheUpdateComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - categories -- " + error);
          });
 
-      //getAllColors est appelé ici car sinon pas possible d'affecter checked aux couleurs du tableau colors, ça n'a pas fini de s'initialiser
-      this.service.getAllColors().subscribe(response => {
-         this.colors = response.body;
-         // console.log(JSON.stringify(colorFromService));
-         this.statusCode = response.status;
-         //dans la callback de getAllColors car a besoin qu'elle ait fini de s'initialiser pour fonctionner
-         //affecte true à chaque couleur présente dans clotheDetail ce qui signifie qu'elles sont sélectionnées par défaut pour ce vêtement
-         this.clotheDetail.idCouleurs.split(",").forEach(idColor => {
-            this.colors.forEach(color => {
-               if (idColor == color.ID_COUL) {
-                  color.checked = true;
-               }
-            });
-         });
-      },
-         error => {
-            this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - colors -- " + error);
-         });
-
-
-      this.service.getAllFeatures().subscribe(response => {
-         this.features = response.body;
-         // console.log(JSON.stringify(featFromService));
-         this.statusCode = response.status;
-          //dans la callback de getAllFeatures car a besoin qu'elle ait fini de s'initialiser pour fonctionner
-         //affecte true à chaque caractéristique présente dans clotheDetail ce qui signifie qu'elles sont sélectionnées par défaut pour ce vêtement
-         this.clotheDetail.idCaracteristiques.split(",").forEach(idFeature => {
-            this.features.forEach(feature => {
-               if (idFeature == feature.ID_CARACT) {
-                  feature.checked = true;
-               }
-            });
-         });
-      },
-         error => {
-            this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - features -- " + error);
-         });
-
       this.service.getAllNotes().subscribe(response => {
          this.notes = response.body;
          // console.log(JSON.stringify(occasFromService));
@@ -150,27 +172,7 @@ export class ClotheUpdateComponent implements OnInit {
             this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
             console.log("Erreur lors de l'appel au service clothes.service - notes -- " + error);
          });
-
-      this.service.getAllOccasions().subscribe(response => {
-         this.occasions = response.body;
-         // console.log(JSON.stringify(occasFromService));
-         this.statusCode = response.status;
-         //dans la callback de getAllOccasions car a besoin qu'elle ait fini de s'initialiser pour fonctionner
-         //affecte true à chaque occasion présente dans clotheDetail ce qui signifie qu'elles sont sélectionnées par défaut pour ce vêtement
-         this.clotheDetail.idOccasions.split(",").forEach(idOccasion => {
-            this.occasions.forEach(occasion => {
-               if (idOccasion == occasion.ID_OCCAS) {
-                  occasion.checked = true;
-               }
-            });
-         });
-      },
-         error => {
-            this.statusCode = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
-            console.log("Erreur lors de l'appel au service clothes.service - occasions -- " + error);
-         });
-
-
+      
       //récupère tous les noms des marques (objet Json)
       this.service.getAllBrandsName().subscribe(response => {
          this.brandNameJson = response.body;
@@ -264,6 +266,11 @@ export class ClotheUpdateComponent implements OnInit {
 
    onSubmit(form: NgForm) {
       if (form.valid == true) { //Si tous les champs du formulaire sont remplis
+
+         this.clotheDetail.idOccasions = this.selectedOccasions.join(',');
+         this.clotheDetail.idCouleurs = this.selectedColors.join(',');
+         this.clotheDetail.idCaracteristiques = this.selectedFeatures.join(',');
+
          this.service.updateClothe(this.clotheDetail).subscribe(response => { //envoie le tableau au back
             this.statusCode = response.status;
             console.log("Les requêtes ont bien été enregistrées");
@@ -301,7 +308,6 @@ export class ClotheUpdateComponent implements OnInit {
 
    //au click sur le plus, ajoute l'élément en bdd et recharge la page
    onSubmitBrand() {
-      console.log(this.newBrand);
       let brandArray = new Clothe;
       brandArray.NOM_MARQUE = this.newBrand;
       //ajoute la marque en BDD
@@ -329,7 +335,6 @@ export class ClotheUpdateComponent implements OnInit {
    }
 
    onSubmitCategorie() {
-      console.log(this.newCategory);
       let categoryArray = new Clothe;
       categoryArray.LIBEL_CAT = this.newCategory;
       //ajoute la catégorie en BDD
@@ -357,7 +362,6 @@ export class ClotheUpdateComponent implements OnInit {
    }
 
    onSubmitColor() {
-      console.log(this.newColor);
       let coloryArray = new Clothe;
       coloryArray.LIBEL_COUL = this.newColor;
       //ajoute la couleur en BDD
@@ -385,7 +389,6 @@ export class ClotheUpdateComponent implements OnInit {
    }
 
    onSubmitFeature() {
-      console.log(this.newFeature);
       let featureArray = new Clothe;
       featureArray.LIBEL_CARACT = this.newFeature;
       //ajoute la caractéristique en BDD
@@ -413,7 +416,6 @@ export class ClotheUpdateComponent implements OnInit {
    }
 
    onSubmitOccasion() {
-      console.log(this.newOccasion);
       let occasionArray = new Clothe;
       occasionArray.LIBEL_OCCAS = this.newOccasion;
       //ajoute l'occasion en BDD
