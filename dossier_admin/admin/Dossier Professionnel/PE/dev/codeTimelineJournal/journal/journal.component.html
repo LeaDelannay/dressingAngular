@@ -1,0 +1,51 @@
+<div class="container-fluid gabarit-full-page with-large-right-column">
+    <div class="panel-group row">
+      <div class="panel-center col-md-8">
+        <div class="panel-container">
+          <div class="journal">
+            <cl-fil-ariane [linkItems]="navigationLinks" [openModal]="openModalAide.bind(this)"></cl-fil-ariane>
+            <h1 class="t3 text-primary">Bienvenue dans votre journal de recherche d'emploi</h1>
+            <hr>
+            <div class="block-intro"><p class="t4">Bienvenue dans votre journal de recherche d'emploi</p>
+              <p style="text-align: justify">
+								Cet outil  vous permet de planifier les étapes de votre parcours de retour à l'emploi, seul(e) ou avec l'aide de votre conseiller. Il vous aide à organiser votre activité de chercheur(seuse) d'emploi et vous propose de nouvelles démarches ainsi que des conseils personnalisés.
+								<a href="#" class="text-link" title="Voir le tutoriel du journal de recherche d'emploi">Voir le tutoriel</a>
+							</p>
+              <p class="btn-container"><a routerLink="ajouter" class="btn btn-primary">Ajouter une démarche</a></p></div>
+
+            <!-- <div class="ajax-update" *ngIf="!isPageReady()" style="min-height:200px"> -->
+            <div class="ajax-update" *ngIf="pageReady === false" style="min-height:200px">
+              <div class="loader-container">
+                <div class="loader">
+                  <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- <ng-container *ngIf="isPageReady()"> -->
+            <ng-container *ngIf="pageReady">
+              <app-echeance-passee></app-echeance-passee>
+
+              <app-timeline></app-timeline>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="panel-right col-md-4" id="panel-right">
+        <div class="panel-container">
+          <div class="infos infos-journal">
+            <div class="infos-header"><h2 class="t4">Catalogue des démarches</h2></div>
+            <div class="infos-body">
+              <div class="block-catalogue">
+                <div class="illustration"><a href="#" class="btn btn-default"
+                                             title="Télécharger le catalogue des démarches (format PDF, 250ko)"><span
+                  class="icon-download" aria-hidden="true"></span>Télécharger</a></div>
+                <p>Vous pourrez naviguer et consulter les démarches que Pôle emploi vous propose</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
