@@ -1,0 +1,164 @@
+<div class="modal-header">
+  <div class="btn-actions-details">
+    <div class="modal-details-pager"><span class="pagination-number">1/3</span>
+      <div class="btn-group" role="group">
+        <button type="button" disabled="disabled" class="btn btn-default btn-nav prev" title="Démarche précédente"><span
+          class="icon-chevron-left" aria-hidden="true"></span><span class="sr-only">Démarche précédente</span></button>
+        <button type="button" class="btn btn-default btn-nav next" title="Démarche suivante"><span
+          class="icon-chevron-right" aria-hidden="true"></span><span class="sr-only">Démarche suivante</span></button>
+      </div>
+    </div>
+    <button (click)="handleOnHide()" type="button" class="btn btn-default btn-nav modal-details-close" data-dismiss="modal"
+            aria-label="Fermer le détail">Fermer
+    </button>
+  </div>
+</div>
+<div class="modal-body">
+  <div class="modal-detail-date">Date de création : 28 mars 2019 par mon conseiller | Dernière modification le
+    12/03/2019 par mon conseiller
+  </div>
+  <div class="modal-detail-origine">Déclaré lors de mon actualisation</div>
+  <h2 class="modal-detail-title t3" id="labelPopinAction">Identifier mes points forts et mes compétences avec un
+    bilan de compétences</h2>
+  <div class="modal-detail-theme competences">
+    <div class="img-container"><img
+      src="assets/img/ico-competences.svg" alt="">
+    </div>
+    Mon (nouveau) métier / mes compétences
+  </div>
+  <hr>
+  <div class="modal-detail-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel
+    gravida leo. In dui magna, posuere vel lectus nec, aliquam interdum urna. Curabitur ultrices finibus urna id
+    pellentesque. Fusce aliquet eleifend nisi. Integer purus eros, suscipit vel vestibulum eu, bibendum non
+    nibh.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel gravida leo. In dui magna, posuere vel
+      lectus nec, aliquam interdum urna. Curabitur ultrices finibus urna id pellentesque. Fusce aliquet eleifend
+      nisi. Integer purus eros, suscipit vel vestibulum eu, bibendum non nibh.</p>
+    <p>Phasellus suscipit nisl vitae odio malesuada tempor. Fusce vel gravida leo. In dui magna, posuere vel
+      lectus nec, donec vitae odio fermentum eget in justo. <a href="#" class="text-link">Ut volutpat
+        volutpat</a>.</p></div>
+  <div class="block-form write">
+    <div class="block-form-hd"><h3 class="t4">Modifier les données de la démarche</h3>
+      <div class="intro-absolute"><span class="italic">* Données obligatoires</span></div>
+    </div>
+    <div class="block-form-bd">
+      <fieldset>
+        <legend class="control-label">* Sélectionnez une date, échéance, ou période</legend>
+        <div class="form-group"><label for="bf-1" class="sr-only">Choix du type d'échéance</label> <select
+          class="form-control" id="bf-1" aria-required="true">
+          <option selected="selected">Date</option>
+          <option>Échéance</option>
+          <option>Période</option>
+        </select></div>
+        <div class="block-border fadeIn">
+          <div class="form-group"><label for="bf-2-1">Date <span class="sr-only">Format: JJ/MM/AAAA</span><span
+            class="outdated">Échéance dépassée</span></label> <input class="form-control" type="text" id="bf-2-1"
+                                                                     placeholder="Format: JJ/MM/AAAA"
+                                                                     aria-required="true"></div>
+          <div class="form-group"><label for="bf-2-2">Avant le <span class="sr-only">Format: JJ/MM/AAAA</span></label>
+            <input class="form-control" type="text" id="bf-2-2" placeholder="Format: JJ/MM/AAAA" aria-required="true">
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group"><label for="bf-2-2-1">Entre le <span
+                class="sr-only">Format: JJ/MM/AAAA</span></label> <input class="form-control" type="text" id="bf-2-2-1"
+                                                                         placeholder="Format: JJ/MM/AAAA"
+                                                                         aria-required="true"></div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group"><label for="bf-2-2-2">Et le <span
+                class="sr-only">Format: JJ/MM/AAAA</span></label> <input class="form-control" type="text" id="bf-2-2-2"
+                                                                         placeholder="Format: JJ/MM/AAAA"
+                                                                         aria-required="true"></div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group"><label for="bf-3">Comment ?</label> <select class="form-control" id="bf-3">
+        <option selected="selected">Sélectionnez le mode de réalisation</option>
+        <option>Avec un bilan de compétences</option>
+        <option>...</option>
+        <option>...</option>
+      </select></div>
+      <div class="form-group"><label for="bf-4">Choissisez le nom de la structure</label> <select class="form-control"
+                                                                                                  id="bf-4">
+        <option selected="selected">Sélectionner une structure</option>
+        <option>...</option>
+        <option>...</option>
+        <option>...</option>
+      </select></div>
+      <div class="form-group"><label for="bf-5">Choissisez un métier ou un projet auquel associer la démarche</label>
+        <select class="form-control" id="bf-5">
+          <option selected="selected">Sélectionner un métier ou projet</option>
+          <option>...</option>
+          <option>...</option>
+          <option>...</option>
+        </select></div>
+      <hr>
+      <div class="btn-container text-right"><a role="button" href="#"
+                                               title="Valider les modifications de la démarche 'Identifier mes points forts et mes compétences avec un bilan de compétences'"
+                                               class="btn btn-primary">Valider les modifications</a></div>
+    </div>
+  </div>
+  <div class="block-form read">
+    <div class="block-form-hd"><h3 class="t4">Données de la démarche</h3>
+      <div class="intro-absolute">
+        <div class="badge">Convenu avec mon conseiller</div>
+      </div>
+    </div>
+    <div class="block-form-bd">
+      <dl>
+        <dt>Date&nbsp;:&nbsp;</dt>
+        <dd>31/03/2019</dd>
+        <dt>Échéance&nbsp;:&nbsp;</dt>
+        <dd>Avant le 31/03/2019</dd>
+        <dt>Période&nbsp;:&nbsp;</dt>
+        <dd>Entre le 31/03/2019 et le 05/04/2019</dd>
+        <dt>Nom de la structure&nbsp;:&nbsp;</dt>
+        <dd>Aucune structure selectionnée</dd>
+        <dt>Métier ou projet associé à la démarche&nbsp;:&nbsp;</dt>
+        <dd>Aucun projet / métier associé</dd>
+      </dl>
+      <hr>
+      <div class="btn-container text-right"><a role="button" href="#"
+                                               title="Modifier les données de la démarche 'Identifier mes points forts et mes compétences avec un bilan de compétences'"
+                                               class="btn btn-default">Modifier les données</a></div>
+    </div>
+  </div>
+  <div class="alert alert-warning"><p>Vous avez déclaré dans votre actualisation ne pas être d'accord avec tout
+    ou partie de cette démarche</p></div>
+  <div class="block-done"><span class="control-label">L'avez-vous fait ?</span>
+    <button type="button" class="btn btn-default btn-xs"
+            title="Oui, j'ai réalisé l'action 'Identifier mes points forts et mes compétences avec un bilan de compétences'">
+      Oui
+    </button>
+    <button type="button" class="btn btn-default btn-xs"
+            title="Non, je ne veux plus réaliser l'action 'Identifier mes points forts et mes compétences avec un bilan de compétences'">
+      Non
+    </button>
+  </div>
+  <div class="block-done done">
+    <div class="state">
+      <div class="state-icon"><span class="icon-check" aria-hidden="true"></span></div>
+      <span class="sr-only">Démarche </span><strong>Fait<span class="sr-only">e</span></strong></div>
+  </div>
+  <div class="block-done cancelled">
+    <div class="state">
+      <div class="state-icon"><span class="icon-close" aria-hidden="true"></span></div>
+      <span class="sr-only">Démarche </span><strong>Annulé<span class="sr-only">e</span></strong></div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="modal-details-pager"><span class="pagination-number">1/3</span>
+    <div class="btn-group" role="group">
+      <button type="button" disabled="disabled" class="btn btn-default btn-nav prev" aria-label="Précédent"
+              title="Précédent"><span class="icon-chevron-left" aria-hidden="true"></span><span class="sr-only">Précédent</span>
+      </button>
+      <button type="button" class="btn btn-default btn-nav next" aria-label="Suivant" title="Suivant"><span
+        class="icon-chevron-right" aria-hidden="true"></span><span class="sr-only">Suivant</span></button>
+    </div>
+  </div>
+  <button type="button" class="btn btn-default btn-nav modal-details-close" data-dismiss="modal"
+          aria-label="Fermer le détail" (click)="handleOnHide()">Fermer
+  </button>
+</div>
