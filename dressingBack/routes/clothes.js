@@ -109,4 +109,11 @@ router.delete('/:idClothe', function (req, res, next) {
    })
 });
 
+//autre façon d'écrire : chainage
+// router.route('/jeans')
+//    .get((req, res, next) => {
+//       //
+//    })
+//    .post()
+
 module.exports = router;

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Clothe } from './clothe';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
    providedIn: 'root'
 })
 export class ClothesService {
 
-   private baseUrl: string = "http://localhost:3000/api";
+   private baseUrl: string = environment.backEndUrl;
 
    constructor(public http: HttpClient) { }
 
