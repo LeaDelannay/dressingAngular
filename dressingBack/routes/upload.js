@@ -2,8 +2,6 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 
-var dbacc = require('../dbaccess');
-
 var rootPath = __dirname; //sert pour l'upload  d'images
 
 router.post('/', function (req, res) {

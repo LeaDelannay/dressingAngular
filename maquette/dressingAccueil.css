@@ -1,0 +1,159 @@
+*{
+   font-family: 'Roboto', sans-serif;
+   box-sizing: border-box;
+   font-size: 20px;
+}
+h1, h2, h3, h4, h5, h6{
+   font-family: 'Cutive Mono', monospace;
+}
+
+.btn-outline-success{
+   color: #4DE8BE !important;
+   border-color: #4DE8BE !important;
+}
+
+btn-outline-success:not(:disabled):not(.disabled):hover, .btn-outline-success:not(:disabled):not(.disabled):hover{
+   color: #fff!important;
+   background-color: #4DE8BE!important;
+   border-color: #4DE8BE!important;
+}
+
+.btn-outline-success:focus, .btn-outline-success.focus{
+   box-shadow: 0 0 0 0.2rem rgba(77, 232, 190, 0.5)!important;
+}
+
+nav {
+   min-height: 65px;
+ }
+ 
+ .bg-light {
+   /* Couleur de fond de la barre de navigation */
+   background-color: #4DE8BE !important;
+   font-weight: bold;
+   padding: 3px 15px;
+ }
+ 
+ .navbar-brand {
+   color: #FFF !important;
+ }
+ 
+ .srisakdi {
+   font-family: 'Srisakdi', cursive;
+   color: #FFF !important;
+   font-size: 150%;
+   text-decoration:none; 
+ }
+ 
+ .navbar-toggler {
+   border-color: #fff !important;
+ }
+ 
+ .fa-female {
+   font-size: 25px;
+ }
+ 
+ .fa-paw {
+   font-size: 40px;
+ }
+ 
+ nav li {
+   margin-left: 25px;
+   ;
+ }
+ 
+ nav a:nth-child(2) {
+   margin-left: auto;
+ }
+ a{
+    font-family: 'Cutive Mono', monospace;
+ }
+ .menuIcon{
+    width: 30px;
+    text-align: center;
+ }
+ .dropdown-item:hover, .dropdown-item:active, .dropdown-item:focus{
+    background-color: #8ff1d7;
+    border-radius: 5px;
+ }
+ 
+ @media all and (min-width:692px){
+    #seConnecter{
+       margin-left: 15px;
+    }
+ }
+
+ h2{
+   text-align: center;
+   margin-top: 30px;
+}
+
+input, p, select, option, textarea{
+   font-size: 15px;
+}
+input[type="checkbox"]{
+   display: inline;
+   font-size: 62px;
+   outline: none;
+ }
+ div.col>.fa-plus-circle{
+   color: #4DE8BE !important;
+}
+img{
+   width: 200px;
+   height: 200px;
+   display: block;
+   margin: 0 auto;
+   padding: 5px;
+   border-radius: 5px;
+}
+.row{
+   margin: 40px auto;
+}
+
+.caracteristiques .row{
+   margin: 0px auto;
+}
+.caracteristiques input[type="checkbox"]{
+   margin-top: 8px;
+}
+
+.ajouterTenue button{
+   border-color: #FFF!important;
+}
+.row.tenue{
+   margin-bottom: 10px;
+}
+.row.ajouterTenue{
+   margin-top: 0px;
+}
+.ajouterVetement{
+   margin-top: 60px;
+}
+
+@media (max-width: 575.98px) {
+   main.container{
+      padding: 3px;
+   }
+  div.col-6.occasion, div.col-6.occasion select{
+      padding: 0px;
+   }
+   .meteo{
+      margin-bottom: 0px;
+   }
+   main.container>div.row:nth-child(3){
+      margin: 0px auto;
+   }
+   main.container>div.row:nth-child(4){
+      margin-top: 0px;
+   }
+   .tenue img{
+      width: 125px;
+      height: 125px;
+   }
+   .caracteristiques label{
+      padding: 0px;
+   }
+   .caracteristiques div{
+      padding-left: 5px;
+   }
+}

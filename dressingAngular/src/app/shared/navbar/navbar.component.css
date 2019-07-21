@@ -27,9 +27,8 @@ nav {
 .fa-female {
   font-size: 25px;
 }
-
-.fa-paw {
-  font-size: 40px;
+.fa-user-lock{
+   font-size: 35px;
 }
 
 nav li {
@@ -50,6 +49,16 @@ a{
 .dropdown-item:hover, .dropdown-item:active, .dropdown-item:focus{
    background-color: #8ff1d7;
    border-radius: 5px;
+}
+
+@media all and (max-width:691px){
+   .dropdown-item{
+      max-width: 100px;
+      font-size: 15px;
+   }
+   .fa-user-lock{
+      font-size: 25px;
+   }
 }
 
 @media all and (min-width:692px){

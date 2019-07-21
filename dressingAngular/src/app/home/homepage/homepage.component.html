@@ -1,22 +1,83 @@
-<p>HOMEPAGE WORKS</p>
-
-<!-- <div class="container-fluid"> -->
-<!-- Paysage -->
-<!-- <div class="row">
-    <div class="col d-none d-md-inline-block">
-      <script charset='UTF-8'
-        src='http://www.meteofrance.com/mf3-rpc-portlet/rest/vignettepartenaire/332810/type/VILLE_FRANCE/size/PAYSAGE_VIGNETTE'
-        type='text/javascript'></script>
+<main class="container">
+  <h2 class="text-center">Bienvenue PSEUDO</h2>
+  <div class="row meteo">
+    <button class="col-4 offset-4 col-md-2 offset-md-5 btn btn-outline-success" routerLink="weather">Météo</button>
+  </div>
+  <div class="row form-group">
+    <div class="col-6 occasion">
+      <div class="row">
+        <select name="occasion" class="col-8 offset-2 form-control d-none d-xl-block">
+          <option value="" selected> --- Sélectionnez une occasion --- </option>
+          <option value="travail"> Travail </option>
+          <option value="dimanche"> Dimanche </option>
+          <option value="sport"> Sport </option>
+          <option value="soiree"> Soirée </option>
+        </select>
+        <select name="occasion"
+          class="col col-md-10 offset-md-1 col-lg-8 offset-lg-2 form-control d-none d-block d-xl-none">
+          <option value="" selected>--- Occasion ---</option>
+          <option value="travail"> Travail </option>
+          <option value="dimanche"> Dimanche </option>
+          <option value="sport"> Sport </option>
+          <option value="soiree"> Soirée </option>
+        </select>
+      </div>
     </div>
-  </div> -->
-
-<!-- Portrait -->
-<!-- <div class="row">
-    <div class="col d-inline-block d-md-none">
-      <script charset='UTF-8'
-        src='http://www.meteofrance.com/mf3-rpc-portlet/rest/vignettepartenaire/332810/type/VILLE_FRANCE/size/PORTRAIT_VIGNETTE'
-        type='text/javascript'></script>
+    <div class="col-6">
+      <div class="row caracteristiques">
+        <label class="col-12 col-xl-4">Caractéristiques&nbsp;:</label>
+        <div class="col-12 col-xl-8">
+          <div class="row ml-2 ml-lg-0">
+            <div class="col-md-6 col-lg-4">
+              <input type="checkbox" name="caract1" id="caract1" class="form-check-input"><label
+                class="form-check-label" for="caract1">Caract1</label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <input type="checkbox" name="caract2" id="caract2" class="form-check-input"><label
+                class="form-check-label" for="caract2">Caract2</label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <input type="checkbox" name="caract3" id="caract3" class="form-check-input"><label
+                class="form-check-label" for="caract3">Caract3</label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <input type="checkbox" name="caract4" id="caract4" class="form-check-input"><label
+                class="form-check-label" for="caract7">Caract4</label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <input type="checkbox" name="caract5" id="caract5" class="form-check-input"><label
+                class="form-check-label" for="caract5">Caract5</label>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <input type="checkbox" name="caract6" id="caract6" class="form-check-input"><label
+                class="form-check-label" for="caract6">Caract6</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div> -->
-
+  <div class="row">
+    <button class="col-4 offset-4 col-lg-2 offset-lg-5 btn btn-outline-success">Ma tenue</button>
+  </div>
+  <div class="row tenue">
+    <div class="col-6 col-lg-2 offset-lg-3">
+      <div class="text-center">T-shirt</div>
+      <img src="assets/pictures/tshirt2.png" alt="">
+    </div>
+    <div class="col-6 col-lg-2 offset-lg-2">
+      <div class="text-center">Pantalon</div>
+      <img src="assets/pictures/pantalon.jpg" alt="">
+    </div>
+  </div>
+  <div class="row ajouterTenue">
+    <div class="col">
+      <button class="col-2 offset-5 btn btn-outline-success">
+        <i class="fas fa-plus-circle fa-2x"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row ajouterVetement">
+    <button routerLink="clothe-create" class="col-6 offset-3 col-lg-4 offset-lg-4 btn btn-outline-success">Ajouter un vêtement</button>
+  </div>
+</main>

@@ -616,6 +616,20 @@ module.exports.createOccasion = function (obj, fct) {
 
 
 //DEBUT USER\\
+/* //PSEUDO DU USER
+module.exports.readUserPseudo = function (fct) {
+   connection.query('SELECT PSEUDO_USER FROM user where ID_USER = ?', (err, results) => {
+      if (err) {
+         console.error(err);
+         fct(err, null);
+         connection.end();
+         return;
+      }
+      fct(null, results);
+      console.log(results);
+   });
+} */
+
 //CREATION D'UN USER EN BASE DE DONNEES
 module.exports.createUser = function (obj, fct) {
 

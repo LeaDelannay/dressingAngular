@@ -7,7 +7,24 @@ var dbacc = require('../dbaccess');
 //Pour besoins de dev, mise en dur (possibilité d'oubli de la conf, et en plus sinon il faut recréer la variable d'environnement à chaque fois que je change de poste)
 var secretKeyForJwt = 'secretKeyForJwtYop';
 
-//READ USER
+/* //READ USER PSEUDO
+router.get('/', function (req, res, next) {
+   console.log("----> call read user pseudo");
+   dbacc.readUserPseudo(function (err, data) {
+      if (err) {
+         res.sendStatus(500);
+         return;
+      }
+      if (data == 0 || data == null || data == undefined || data == "") {
+         res.sendStatus(204); //no content
+         return;
+      }
+      res.send(data);
+   })
+}); */
+
+
+//COMPARE USER
 router.post('/login/', function (req, res, next) {
    console.log("----> call read user");
    if (!req.body.LOGIN_USER || !req.body.MDP_USER) {

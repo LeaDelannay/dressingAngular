@@ -43,6 +43,7 @@ router.get('/:idClothe', function (req, res, next) {
          res.sendStatus(500);
          return;
       }
+      console.log(data);
       if (data == 0 || data == null || data == undefined || data == "") {
          res.sendStatus(204); //no content
          return;

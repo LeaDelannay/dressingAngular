@@ -52,7 +52,7 @@
   <div class="flexpap" *ngIf="[codeHttp] == 304 || [codeHttp] == 200">
     <div class="flexenf" *ngFor="let clothe of this.clothes" (click)="open(clothe.ID_VET)">
       <div class="titre"> {{clothe.NOM_VET}} </div>
-      <img *ngIf="clothe.IMG_VET" [src]="clothe.IMG_VET" [style.width.px]="150"  [style.height.px]="95"/>
+      <img class="imgExist" *ngIf="clothe.IMG_VET" [src]="clothe.IMG_VET"/>
       <img *ngIf="!clothe.IMG_VET" src="assets/pictures/tshirt.png" [style.width.px]="100" />
     </div>
   </div>

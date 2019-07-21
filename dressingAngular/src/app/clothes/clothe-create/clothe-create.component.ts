@@ -235,7 +235,7 @@ export class ClotheCreateComponent implements OnInit {
          this.service.addNewClothe(clotheArray).subscribe(response => { //envoie le tableau au back
             this.erreur = response.status;
             console.log("Les requêtes ont bien été enregistrées");
-            this.router.navigate(['homepage']);
+            this.router.navigate(['clothes-list']);
          },
             error => {
                this.erreur = error.status; //Récupère la réponse du serveur (erreur) et l'insère dans erreur
