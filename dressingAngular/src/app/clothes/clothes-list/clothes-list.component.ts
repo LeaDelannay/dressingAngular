@@ -21,8 +21,8 @@ export class ClothesListComponent implements OnInit {
    notes: any[] = [];
    occasions: any[] = [];
 
-   _selectedFilter: string = "clothes"; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
-   _selectedOption: string = ""; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
+   tempSelectedFilter: string = "clothes"; // _obligatoire pour éviter boucle infinie
+   tempSelectedOption: string = ""; // _obligatoire pour éviter boucle infinie
 
    selectedBrand: string = "";
    selectedCateg: string = "";
@@ -33,12 +33,12 @@ export class ClothesListComponent implements OnInit {
    //injection de dépendance de mon service ClothesService
    constructor(private service: ClothesService, private modalService: NgbModal) { }
 
-   get selectedFilter(): string {
-      return this._selectedFilter;
+   get selectedFilter(): string { //correspond au ngModel du html
+      return this.tempSelectedFilter;
    }
    set selectedFilter(selectedFilter: string) {
-      this._selectedOption = "";
-      this._selectedFilter = selectedFilter;
+      this.tempSelectedOption = "";
+      this.tempSelectedFilter = selectedFilter;
 
       this.service.getSpecificFilter().subscribe(response => {
          this.clothes = response.body;
@@ -50,17 +50,17 @@ export class ClothesListComponent implements OnInit {
             console.log("Erreur lors de l'appel au service clothes.service - specificFilter -- " + error);
          });
 
-      console.log(this._selectedFilter);
+      console.log(this.tempSelectedFilter);
    }
 
    get selectedOption(): string {
-      return this._selectedOption;
+      return this.tempSelectedOption;
    }
    set selectedOption(selectedOption: string) {
-      this._selectedOption = selectedOption;
-      console.log(this._selectedOption);
-      if (this._selectedOption) {
-         this.service.getSpecificFilterOpt(this._selectedFilter, this._selectedOption).subscribe(response => {
+      this.tempSelectedOption = selectedOption;
+      console.log(this.tempSelectedOption);
+      if (this.tempSelectedOption) {
+         this.service.getSpecificFilterOpt(this.tempSelectedFilter, this.tempSelectedOption).subscribe(response => {
             this.clothes = response.body;
             // console.log(JSON.stringify(specificFeatureFromService));
             this.codeHttp = response.status;
