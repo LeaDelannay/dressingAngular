@@ -21,8 +21,8 @@ export class ClothesListComponent implements OnInit {
    notes: any[] = [];
    occasions: any[] = [];
 
-   tempSelectedFilter: string = "clothes"; // _obligatoire pour éviter boucle infinie
-   tempSelectedOption: string = ""; // _obligatoire pour éviter boucle infinie
+   tempSelectedFilter: string = "clothes"; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
+   tempSelectedOption: string = ""; //correspond au [(ngModel)] du html. _obligatoire pour éviter boucle infinie
 
    selectedBrand: string = "";
    selectedCateg: string = "";
@@ -33,7 +33,7 @@ export class ClothesListComponent implements OnInit {
    //injection de dépendance de mon service ClothesService
    constructor(private service: ClothesService, private modalService: NgbModal) { }
 
-   get selectedFilter(): string { //correspond au ngModel du html
+   get selectedFilter(): string {
       return this.tempSelectedFilter;
    }
    set selectedFilter(selectedFilter: string) {

@@ -1,5 +1,5 @@
 var request = require("request");
-var baseUrl = "http://localhost:3000/api/clothes";
+var baseUrl = "http://localhost:3000/api/clothes"; //mettre ici l'url de jasmine ? Jasmine doit être appelée a l'initialisation
 
 describe('teste le fichier clothes.js - ', function() {
    describe("GET /", function() {
