@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
       if (form.valid) {
          this.authService.sendUserToCompare(user).subscribe( response =>{
-            console.log(response.body.token);
             this.authService.sendToken(response.body.token);
             this.router.navigate(["homepage"]);
          },

@@ -39,11 +39,8 @@ export class ClotheDetailComponent implements OnInit {
    //gestion de la modale
    //ouvre la modale en lui passant l'id du vêtement cliqué
    onDelete(idClthe) {
-
-      console.log("idClothe dans detail : " + this.idClothe);
          const modalRef = this.modalService.open(ClotheDeleteComponent); //ouvre une modale dont le contenu est ClotheDeleteComponent
          modalRef.componentInstance.idClothe = idClthe; //récupère l'id du vêtement cliqué et le passe au component modale
-
          modalRef.result.then((result) => {
             //quand on clique sur supprimer dans la modale de confirmation, ferme cette modale.
             this.activeModal.close();

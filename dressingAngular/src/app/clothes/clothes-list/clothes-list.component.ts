@@ -58,11 +58,9 @@ export class ClothesListComponent implements OnInit {
    }
    set selectedOption(selectedOption: string) {
       this.tempSelectedOption = selectedOption;
-      console.log(this.tempSelectedOption);
       if (this.tempSelectedOption) {
          this.service.getSpecificFilterOpt(this.tempSelectedFilter, this.tempSelectedOption).subscribe(response => {
             this.clothes = response.body;
-            // console.log(JSON.stringify(specificFeatureFromService));
             this.codeHttp = response.status;
          },
             error => {
